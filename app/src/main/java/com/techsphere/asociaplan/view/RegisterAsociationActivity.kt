@@ -1,6 +1,5 @@
 package com.techsphere.asociaplan.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,10 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.techsphere.asociaplan.controller.registerAsocInBD
-import java.sql.Date
-import java.util.*
 
-class registrar_asociacion : AppCompatActivity() {
+class RegisterAsociationActivity : AppCompatActivity() {
     private lateinit var txtNombre : EditText
     private lateinit var txtContacto : EditText
     private lateinit var txtCod : EditText
@@ -73,7 +70,7 @@ class registrar_asociacion : AppCompatActivity() {
                 // Se le muestra el dialogo al usuario
                 withContext(Dispatchers.Main){
                     // El withContext se usa para llamar funciones que solo se pueden llamar
-                    Toast.makeText(this@registrar_asociacion,"No se registro la asociación.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegisterAsociationActivity,"No se registro la asociación.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
