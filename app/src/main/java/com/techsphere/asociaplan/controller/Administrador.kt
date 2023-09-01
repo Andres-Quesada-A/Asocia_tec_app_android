@@ -39,4 +39,33 @@ class Administrador {
             return arrayOf<Int>()
         }
     }
+
+    suspend fun registerStudent(name:String, email: String, carne: String, area: String,
+                                pass: String): Int{
+        var connection : Connection? = null
+        try {
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            connection = DriverManager.getConnection(connectionString)
+            var sp = connection.prepareCall("{call RegistrarEstudiante @inNombre=?, @inCorreo=?, " +
+                    "@inCarne=?, @inArea=?, @inContrasena=@, @outCodeResult=?}")
+            sp.setString(1, name)
+            sp.setString(2, email)
+            sp.setString(3, carne)
+            sp.setString(4, area)
+            sp.setString(5, pass)
+            sp.registerOutParameter(6, Types.INTEGER)
+            sp.execute()
+            Log.i("Resultado Register", "${sp.getInt(6)}")
+            return sp.getInt(6)
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return 0
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return 0
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return 0
+        }
+    }
 }

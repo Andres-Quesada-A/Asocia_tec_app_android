@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.techsphere.asociaplan.R
-import com.techsphere.asociaplan.controller.LoginController
+import com.techsphere.asociaplan.controller.AuthController
 
 class SplashActivity : AppCompatActivity() {
 
@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
             startActivity(loginIntent)
             finish()
              */
-            val login = LoginController(this)
+            val login = AuthController(this)
             login.loginUser("dylanmoya70@gmail.com","1")
         }, 1000)
     }
