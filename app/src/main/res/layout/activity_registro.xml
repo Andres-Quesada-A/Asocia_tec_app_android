@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".view.inicio_sesion">
+    tools:context=".view.registro">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,11 +36,36 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="20sp"
-            android:text="Iniciar sesión en tu cuenta"
+            android:text="Registrarse"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             />
+
+        <TextView
+            android:id="@+id/label_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="10sp"
+            android:text="Tu nombre"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/input_nombre"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border_input"
+            android:ems="10"
+            android:hint="Nombre"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/label_correo"
@@ -49,13 +74,14 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
             android:text="Tu correo"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txt_correo"
+            android:id="@+id/input_correo"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
@@ -68,7 +94,59 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/label_contrasena"
+            android:id="@+id/label_carnet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:text="Carné institucional"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/input_Carne"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border_input"
+            android:ems="10"
+            android:hint="Carné"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/label_area_estudio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:text="Área de estudio"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/input_area_estudio"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border_input"
+            android:ems="10"
+            android:hint="Área de estudio"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/label_constrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -81,27 +159,53 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txt_contrasena"
+            android:id="@+id/input_contrasena"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/border_input"
             android:ems="10"
-            android:hint="*******"
+            android:hint="********"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/label_confirmacion_constrasena"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:text="Contraseña"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/input_confirmacion_contrasena"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border_input"
+            android:ems="10"
+            android:hint="********"
             android:inputType="text"
             android:padding="2dp"
             android:textColor="@color/black" />
 
         <Button
-            android:id="@+id/button_iniciar_sesion"
+            android:id="@+id/button_registrar"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginTop="36dp"
             android:background="@color/blue"
-            android:text="Iniciar Sesión"
+            android:text="Registrarse"
             android:textColor="@color/white"
             android:backgroundTint="@color/blue"/>
 
@@ -111,18 +215,18 @@
             android:orientation="horizontal"
             android:layout_marginTop="20sp">
             <TextView
-                android:id="@+id/label_registrar"
+                android:id="@+id/label_iniciar_sesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="10sp"
-                android:text="¿No tienes una cuenta? "
+                android:text="¿Ya tienes una cuenta? "
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:textStyle="bold" />
             <Button
-                android:id="@+id/button_registrarse"
+                android:id="@+id/button_iniciarsesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
