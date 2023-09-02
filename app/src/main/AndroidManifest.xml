@@ -16,6 +16,12 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
+            android:name=".estudiante"
+            android:exported="false" />
+        <activity
+            android:name=".agregar_miembros"
+            android:exported="false" />
+        <activity
             android:name=".editar_asociacion"
             android:exported="false" />
         <activity

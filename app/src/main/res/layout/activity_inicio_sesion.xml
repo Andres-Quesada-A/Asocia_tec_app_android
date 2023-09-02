@@ -100,10 +100,9 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginTop="36dp"
-            android:background="@color/blue"
             android:text="Iniciar Sesión"
             android:textColor="@color/white"
-            android:backgroundTint="@color/blue"/>
+            android:backgroundTint="@color/blue" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -125,9 +124,8 @@
                 android:id="@+id/button_registrarse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/blue"
                 android:text="Iniciar Sesión"
-                android:textColor="@color/white"/>
+                android:textColor="@color/blue"/>
 
         </LinearLayout>
     </LinearLayout>
