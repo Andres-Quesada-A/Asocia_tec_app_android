@@ -11,8 +11,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
-//import com.techsphere.asociaplan.controller.eliminarApartadoBD
+import com.techsphere.asociaplan.controller.AgregarEstudianteBD
 import com.techsphere.asociaplan.models.Asociacion
+import com.techsphere.asociaplan.models.Estudiantes
 import com.techsphere.asociaplan.view.RegisterAsociationActivity
 import com.techsphere.asociaplan.view.agregar_miembros
 import com.techsphere.asociaplan.view.asociaciones
@@ -23,53 +24,36 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
-    RecyclerView.Adapter<Asociaciones_Adapter.ViewHolder>() {
+
+class Agregar_Miembros_Adapter (private val dataSet: MutableList<Estudiantes>) :
+    RecyclerView.Adapter<Agregar_Miembros_Adapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val txtNombreAsociacion: TextView
+        val txtNombre: TextView
         val txtCodigo: TextView
         val txtContacto: TextView
-        val btnMiembros: Button
         val btnAgregar: Button
-        val btnEliminar: Button
-        val btnEditar: Button
         val vista: Context
-        var correo = ""
 
         init {
-            txtNombreAsociacion = view.findViewById(R.id.txt_nombre)
+            txtNombre = view.findViewById(R.id.txt_nombre)
             txtCodigo = view.findViewById(R.id.txt_cod_carrera)
             txtContacto = view.findViewById(R.id.txt_contacto)
             btnAgregar = view.findViewById(R.id.button_agregar_miembro)
-            btnEditar = view.findViewById(R.id.button_editar)
-            btnEliminar = view.findViewById(R.id.button_eliminar)
-            btnMiembros = view.findViewById(R.id.button_ver_miembros)
             this.vista = view.context
-            btnEditar.setOnClickListener {
-                val intent = Intent(view.context,editar_asociacion::class.java)
-                intent.putExtra("nombre", txtNombreAsociacion.toString())
-                this.vista.startActivity(intent)
-            }
-            btnEliminar.setOnClickListener {
-                eliminarAsociacion()
-            }
-            btnMiembros.setOnClickListener {
-                VerMiembros()
-            }
+
             btnAgregar.setOnClickListener {
-                val intent = Intent(view.context,agregar_miembros::class.java)
-                intent.putExtra("correo", correo.toString())
-                this.vista.startActivity(intent)
+                val context = this.vista
+                val codigo = txtCodigo
+                CoroutineScope(IO).launch {
+                    // Como no encontre alguna manera de actualizar los datos
+                    // decidi que seria mejor volver a iniciar la actividad
+                    AgregarEstudianteBD(codigo.toString())
+                    val intent = Intent(context, asociaciones::class.java)
+                    context.startActivity(intent)
+                    (context as Activity).finish()
+                }
             }
-        }
-
-        fun eliminarAsociacion() {
-            ///
-        }
-
-        fun VerMiembros() {
-            ///
         }
     }
 
@@ -84,11 +68,10 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var asoc: Asociacion = dataSet.get(position)
+        var asoc: Estudiantes = dataSet.get(position)
         holder.txtCodigo.text = asoc.getCodigo()
-        holder.txtNombreAsociacion.text = asoc.getNombre()
+        holder.txtNombre.text = asoc.getNombre()
         holder.txtContacto.text = asoc.getContacto()
-        holder.correo = asoc.getCorreo()
     }
 
     override fun getItemCount(): Int {

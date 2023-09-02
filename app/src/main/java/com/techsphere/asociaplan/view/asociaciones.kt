@@ -40,8 +40,8 @@ class asociaciones : AppCompatActivity() {
             BuscarAsociacion(this)
         }
         registerButton.setOnClickListener {
-            val asignacionesIntent = Intent(this,RegisterAsociationActivity::class.java)
-            startActivity(asignacionesIntent)
+            val intent = Intent(this,RegisterAsociationActivity::class.java)
+            startActivity(intent)
         }
     }
     private fun cargarAsociaciones(view: Context){

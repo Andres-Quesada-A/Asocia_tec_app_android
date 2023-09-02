@@ -12,27 +12,21 @@ suspend fun getAllAsociacionesBD() : MutableList<Asociacion>{
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
-        var cs = conn.prepareCall("{call BuscarAsociacion @outCodeResult=?}")
+        var cs = conn.prepareCall("{call BuscarAsociacion @inNombre=?, @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
         cs.setNull(1, Types.VARCHAR)
-        cs.setNull(2, Types.VARCHAR)
-        cs.setNull(3, Types.VARCHAR)
-        cs.setNull(4, Types.VARCHAR)
-        cs.registerOutParameter(4, Types.INTEGER)
+        cs.registerOutParameter(2, Types.INTEGER)
         var recordSets = cs.executeQuery()
-        // Creamos la lista que contendra los cubiculos
+        // Creamos la lista que contendra las asociaciones
         var asociaciones = mutableListOf<Asociacion>()
         while (recordSets.next()){
-            // Creamos un nuevo cubiculo
+            // Creamos una nueva asociacion
             var asociacion = Asociacion(recordSets.getString("Nombre"), recordSets.getString("Contacto"),
-                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"))
+                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"),recordSets.getString("Correo"))
             // Lo añadimos a la lista
             asociaciones.add(asociacion)
-            Log.i("SP Result", "El codigo del cubiculo es: "+recordSets.getString("Codigo"))
         }
-        /*
-        */
-        Log.i("SP OutCode", "Resultado: "+cs.getInt(4).toString())
+        Log.i("SP OutCode", "Resultado: "+cs.getInt(6).toString())
         return asociaciones
     }catch (ex: SQLException){
         Log.e("Error SQL Exception: ", ex.message.toString())
@@ -51,28 +45,21 @@ suspend fun getAsociacionesBusqueda(Nombre: String) : MutableList<Asociacion>{
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
-        var cs = conn.prepareCall("{call BuscarCubiculosEstudiante @inNombre=?, @outCodeResult=?}")
-        // Aqui revisamos si tenemos que pasarle un parametro nulo
-        if (Nombre.isBlank()){
-            cs.setNull(1, Types.VARCHAR)
-        } else{
-            cs.setString(1, Nombre)
-        }
-        // Le indicamos el parametro de salida y su tipo
+        var cs = conn.prepareCall("{call BuscarAsociacion @inNombre=?, @outCodeResult=?}")
+        // Asumimos que se nos pasan valores no nulos
+        cs.setString(1, Nombre)
         cs.registerOutParameter(2, Types.INTEGER)
-        // Se ejecuta la query
         var recordSets = cs.executeQuery()
-        // Creamos la lista que contendra los cubiculos
+        // Creamos la lista que contendra las asociaciones
         var asociaciones = mutableListOf<Asociacion>()
         while (recordSets.next()){
-            // Creamos un nuevo cubiculo
+            // Creamos una nueva asociacion
             var asociacion = Asociacion(recordSets.getString("Nombre"), recordSets.getString("Contacto"),
-                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"))
+                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"),recordSets.getString("Correo"))
             // Lo añadimos a la lista
             asociaciones.add(asociacion)
-            Log.i("SP Result", "El codigo del cubiculo es: "+recordSets.getString("Codigo"))
         }
-        Log.i("SP OutCode", "Resultado: "+cs.getInt(4).toString())
+        Log.i("SP OutCode", "Resultado: "+cs.getInt(6).toString())
         return asociaciones
     }catch (ex: SQLException){
         Log.e("Error SQL Exception: ", ex.message.toString())
