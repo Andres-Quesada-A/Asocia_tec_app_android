@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.RegisterAsociationActivity"
     android:background="@color/white">
 
     <LinearLayout
@@ -16,129 +15,120 @@
         tools:ignore="MissingConstraints">
 
         <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="20sp"
+            android:text="Asocia Plan"
+            android:textColor="@color/blue"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+
+        <TextView
             android:id="@+id/titleView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="20sp"
-            android:text="Registrar Asociación"
+            android:text="Iniciar sesión en tu cuenta"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             />
 
         <TextView
-            android:id="@+id/label_nombre_asociacion"
+            android:id="@+id/label_correo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="10sp"
-            android:text="Nombre de la asociación"
+            android:text="Tu correo"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/nombre_asociacion"
+            android:id="@+id/txt_correo"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/border_input"
             android:ems="10"
-            android:hint="Nombre"
+            android:hint="Email"
             android:inputType="text"
             android:padding="2dp"
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/label_contacto"
+            android:id="@+id/label_contrasena"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="10sp"
-            android:text="Contacto"
+            android:layout_marginTop="10sp"
+            android:text="Contraseña"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/contacto"
+            android:id="@+id/txt_contrasena"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:background="@drawable/border_input"
             android:ems="10"
-            android:hint="Contacto"
-            android:inputType="text"
-            android:padding="2dp"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/label_codigo_carrera"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="10sp"
-            android:text="Código de carrera"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/codigo_carrera"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
-            android:hint="cod"
-            android:inputType="text"
-            android:padding="2dp"
-            android:textColor="@color/black" />
-
-        <TextView
-            android:id="@+id/label_Descripción"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="10sp"
-            android:text="Descripción"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/descripcion"
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
-            android:hint="Descripción"
+            android:hint="*******"
             android:inputType="text"
             android:padding="2dp"
             android:textColor="@color/black" />
 
         <Button
-            android:id="@+id/button_registrar"
+            android:id="@+id/button_iniciar_sesion"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginTop="36dp"
-            android:backgroundTint="@color/blue"
-            android:text="Registrar aspcoaco+pm"
-            android:textColor="@color/white"/>
+            android:background="@color/blue"
+            android:text="Iniciar Sesión"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/blue"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20sp">
+            <TextView
+                android:id="@+id/label_registrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="10sp"
+                android:text="¿No tienes una cuenta? "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/button_registrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:text="Iniciar Sesión"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
