@@ -12,52 +12,13 @@ suspend fun AgregarEstudianteBD(Codigo: String) : MutableList<Estudiantes> {
     var conn: Connection? = null
     var estudiantes = mutableListOf<Estudiantes>()
     return estudiantes
-    /*
-
-        try {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver")
-            conn = DriverManager.getConnection(connectionString)
-            var cs = conn.prepareCall("{call BuscarCubiculosEstudiante @inNombre=?, @outCodeResult=?}")
-            // Aqui revisamos si tenemos que pasarle un parametro nulo
-            if (Nombre.isBlank()){
-                cs.setNull(1, Types.VARCHAR)
-            } else{
-                cs.setString(1, Nombre)
-            }
-            // Le indicamos el parametro de salida y su tipo
-            cs.registerOutParameter(2, Types.INTEGER)
-            // Se ejecuta la query
-            var recordSets = cs.executeQuery()
-            // Creamos la lista que contendra los cubiculos
-            var asociaciones = mutableListOf<Asociacion>()
-            while (recordSets.next()){
-                // Creamos un nuevo cubiculo
-                var asociacion = Asociacion(recordSets.getString("Nombre"), recordSets.getString("Contacto"),
-                    recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"))
-                // Lo añadimos a la lista
-                asociaciones.add(asociacion)
-                Log.i("SP Result", "El codigo del cubiculo es: "+recordSets.getString("Codigo"))
-            }
-            Log.i("SP OutCode", "Resultado: "+cs.getInt(4).toString())
-            return asociaciones
-        }catch (ex: SQLException){
-            Log.e("Error SQL Exception: ", ex.message.toString())
-            return mutableListOf()
-        }catch (ex1: ClassNotFoundException){
-            Log.e("Error Class Not Found: ", ex1.message.toString())
-            return mutableListOf()
-        }catch (ex2: Exception) {
-            Log.e("Error Exception: ", ex2.message.toString())
-            return mutableListOf()
-        }
-    */
 }
 suspend fun getAllEstudiantesBD(correo:String) : MutableList<Estudiantes>{
         var conn : Connection? = null
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             conn = DriverManager.getConnection(connectionString)
-            var cs = conn.prepareCall("{call BuscarAsociacion @outCodeResult=?}")
+            var cs = conn.prepareCall("{call BuscarEstudianteAsociacion @inCorreo=?, @inNombre=?, @outCodeResult=?}")
             // Asumimos que se nos pasan valores no nulos
             cs.setString(1, correo)
             cs.setNull(2, Types.VARCHAR)
@@ -93,7 +54,7 @@ suspend fun getAllEstudiantesBD(correo:String) : MutableList<Estudiantes>{
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             conn = DriverManager.getConnection(connectionString)
-            var cs = conn.prepareCall("{call BuscarCubiculosEstudiante @inNombre=?, @outCodeResult=?}")
+            var cs = conn.prepareCall("{call BuscarEstudianteAsociacion @inCorreo=?, @inNombre=?, @outCodeResult=?}")
             // Aqui revisamos si tenemos que pasarle un parametro nulo
             cs.setString(1, Correo)
             if (Nombre.isBlank()){

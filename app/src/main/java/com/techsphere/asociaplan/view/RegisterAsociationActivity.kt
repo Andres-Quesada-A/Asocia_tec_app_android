@@ -1,5 +1,6 @@
 package com.techsphere.asociaplan.view
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -9,15 +10,18 @@ import com.techsphere.asociaplan.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import android.content.Intent
 import kotlinx.coroutines.withContext
 import com.techsphere.asociaplan.controller.registerAsocInBD
 
 class RegisterAsociationActivity : AppCompatActivity() {
     private lateinit var txtNombre : EditText
+    private lateinit var txtCorreo : EditText
     private lateinit var txtContacto : EditText
     private lateinit var txtCod : EditText
     private lateinit var txtDescripcion : EditText
     private lateinit var btnRegis : Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,7 @@ class RegisterAsociationActivity : AppCompatActivity() {
         txtCod = findViewById(R.id.codigo_carrera)
         txtDescripcion = findViewById(R.id.descripcion)
         btnRegis = findViewById(R.id.button_registrar)
+
         btnRegis.setOnClickListener {
             Registrar()
         }
@@ -35,6 +40,7 @@ class RegisterAsociationActivity : AppCompatActivity() {
     fun Registrar() {
         val Nombre = txtNombre.text.toString()
         val Contacto = txtContacto.text.toString()
+        val Correo = txtCorreo.text.toString()
         val Codigo = txtCod.text.toString()
         val Descripcion = txtDescripcion.text.toString()
         txtCod.error=null
@@ -59,12 +65,14 @@ class RegisterAsociationActivity : AppCompatActivity() {
         }
 
         Toast.makeText(this, "Registrando la asociación", Toast.LENGTH_SHORT).show()
-        CoroutineScope(Dispatchers.IO).launch {
+        /*CoroutineScope(Dispatchers.IO).launch {
             val res = registerAsocInBD(Nombre, Contacto,
                 Codigo, Descripcion
             )
             if (res == 1){
-                //startActivity(Intent(this@registrar_asociacion,"Inserte menu"::class.java))
+                val intent = Intent(this@RegisterAsociationActivity,agregar_miembros::class.java)
+                intent.putExtra("correo", Correo.toString())
+                startActivity(intent)
                 finish()
             } else {
                 // Se le muestra el dialogo al usuario
@@ -73,6 +81,6 @@ class RegisterAsociationActivity : AppCompatActivity() {
                     Toast.makeText(this@RegisterAsociationActivity,"No se registro la asociación.", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+        }*/
     }
 }

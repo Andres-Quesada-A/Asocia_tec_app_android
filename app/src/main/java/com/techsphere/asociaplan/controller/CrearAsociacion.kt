@@ -12,7 +12,7 @@ suspend fun registerAsocInBD(Nombre : String, Contacto : String, Codigo : String
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
-        var cs = conn.prepareCall("{call ModificarTiempoUso @inCodigo=?, @inEstado=?, @inCantidadTiempo=?, @inFechaInicio=?, " +
+        var cs = conn.prepareCall("{call RegistrarAsociacion @inCodigo=?, @inEstado=?, @inCantidadTiempo=?, @inFechaInicio=?, " +
                 "@inFechaFin=?, @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
         cs.setString(1, Nombre)
