@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
+            android:name=".collaborator_list"
+            android:exported="false" />
+        <activity
             android:name=".register_collaborator"
             android:exported="false" />
         <activity
