@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
+            android:name=".register_event"
+            android:exported="false" />
+        <activity
             android:name=".menu"
             android:exported="false" />
         <activity
