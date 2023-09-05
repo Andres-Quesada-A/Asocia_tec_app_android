@@ -25,10 +25,10 @@
             android:name=".editar_asociacion"
             android:exported="false" />
         <activity
-            android:name=".registro"
+            android:name=".view.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".inicio_sesion"
+            android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".view.asociaciones"

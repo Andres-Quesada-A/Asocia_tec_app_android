@@ -37,6 +37,7 @@ class AuthController(context: Context) {
                     }
                     withContext(Main){
                         carga.dismiss()
+                        Toast.makeText(context, "Se inicio sesion", Toast.LENGTH_SHORT).show()
                     }
                     //context.startActivity(mainIntent)
                     //(context as Activity).finish()
