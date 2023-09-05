@@ -29,7 +29,7 @@
             />
 
         <TextView
-            android:id="@+id/label_nombre"
+            android:id="@+id/label_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -41,7 +41,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/nombre_colaborador"
+            android:id="@+id/collaborator_name"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
@@ -54,19 +54,19 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/label_contacto"
+            android:id="@+id/label_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="10sp"
+            android:layout_marginVertical="10sp"
             android:text="Contacto"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/contacto"
+            android:id="@+id/contact"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="32dp"
@@ -79,19 +79,19 @@
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/label_descripcion"
+            android:id="@+id/label_descripction"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="10sp"
+            android:layout_marginVertical="10sp"
             android:text="Descripción"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/descripcion"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginStart="32dp"
@@ -104,7 +104,7 @@
             android:textColor="@color/black" />
 
         <Button
-            android:id="@+id/button_registrar"
+            android:id="@+id/button_register"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_marginStart="32dp"
