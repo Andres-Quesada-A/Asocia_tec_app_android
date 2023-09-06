@@ -24,12 +24,14 @@ class asociaciones : AppCompatActivity() {
     private lateinit var adap : Asociaciones_Adapter
     private lateinit var progressBar : ProgressBar
     private lateinit var editTextNombre : EditText
+    private lateinit var BuscarButton : Button
+    private lateinit var registerButton : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asociaciones)
         editTextNombre = findViewById<EditText>(R.id.nombre_asociacion)
-        val BuscarButton = findViewById<Button>(R.id.button_buscar)
-        val registerButton = findViewById<Button>(R.id.button_registrar)
+        BuscarButton = findViewById<Button>(R.id.button_buscar)
+        registerButton = findViewById<Button>(R.id.button_registrar)
 
         rv = findViewById<RecyclerView>(R.id.rvAsociacion)
 
@@ -44,12 +46,12 @@ class asociaciones : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    private fun cargarAsociaciones(view: Context){
+    fun cargarAsociaciones(view: Context){
         progressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch{
-            val Asociaciones = getAllAsociacionesBD()
+            val asociaciones = getAllAsociacionesBD()
             withContext(Dispatchers.Main){
-                adap = Asociaciones_Adapter(Asociaciones)
+                adap = Asociaciones_Adapter(asociaciones)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE
@@ -60,9 +62,9 @@ class asociaciones : AppCompatActivity() {
     fun BuscarAsociacion(view: Context){
         progressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch{
-            val Asociaciones = getAsociacionesBusqueda(editTextNombre.text.toString())
+            val asociaciones = getAsociacionesBusqueda(editTextNombre.text.toString())
             withContext(Dispatchers.Main){
-                adap = Asociaciones_Adapter(Asociaciones)
+                adap = Asociaciones_Adapter(asociaciones)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE

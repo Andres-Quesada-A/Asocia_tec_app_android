@@ -20,11 +20,12 @@ class Administrador {
         try {
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             connection = DriverManager.getConnection(connectionString)
-            var sp = connection.prepareCall("{call LoginUser @inEmail=?, @inPassword=?, @outUserType=?, @outCodeResult=?}")
+            var sp = connection.prepareCall("{call LoginUser @inEmail=?, @inPassword=?, @outUserType=?, @outCodeResult=?, @outId=?}")
             sp.setString(1, email)
             sp.setString(2, pass)
             sp.registerOutParameter(3, Types.INTEGER)
             sp.registerOutParameter(4, Types.INTEGER)
+            sp.registerOutParameter(5, Types.INTEGER)
             sp.execute()
             Log.i("Resultado Login", "${sp.getInt(4)}")
             return arrayOf(sp.getInt(3), sp.getInt(4))

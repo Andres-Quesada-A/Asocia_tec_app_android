@@ -26,7 +26,6 @@ suspend fun getAllAsociacionesBD() : MutableList<Asociacion>{
             // Lo añadimos a la lista
             asociaciones.add(asociacion)
         }
-        Log.i("SP OutCode", "Resultado: "+cs.getInt(6).toString())
         return asociaciones
     }catch (ex: SQLException){
         Log.e("Error SQL Exception: ", ex.message.toString())
@@ -59,7 +58,6 @@ suspend fun getAsociacionesBusqueda(Nombre: String) : MutableList<Asociacion>{
             // Lo añadimos a la lista
             asociaciones.add(asociacion)
         }
-        Log.i("SP OutCode", "Resultado: "+cs.getInt(6).toString())
         return asociaciones
     }catch (ex: SQLException){
         Log.e("Error SQL Exception: ", ex.message.toString())
