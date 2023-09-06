@@ -27,7 +27,7 @@ class Administrador {
             sp.registerOutParameter(4, Types.INTEGER)
             sp.execute()
             Log.i("Resultado Login", "${sp.getInt(4)}")
-            return arrayOf<Int>()
+            return arrayOf(sp.getInt(3), sp.getInt(4))
         }catch (ex: SQLException){
             Log.e("Error SQL Exception: ", ex.message.toString())
             return arrayOf<Int>()
@@ -47,7 +47,7 @@ class Administrador {
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             connection = DriverManager.getConnection(connectionString)
             var sp = connection.prepareCall("{call RegistrarEstudiante @inNombre=?, @inCorreo=?, " +
-                    "@inCarne=?, @inArea=?, @inContrasena=@, @outCodeResult=?}")
+                    "@inCarne=?, @inArea=?, @inContrasena=?, @outCodeResult=?}")
             sp.setString(1, name)
             sp.setString(2, email)
             sp.setString(3, carne)

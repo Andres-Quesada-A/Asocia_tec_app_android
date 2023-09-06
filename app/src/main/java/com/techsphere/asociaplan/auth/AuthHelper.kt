@@ -24,19 +24,20 @@ class AuthHelper(context: Context) {
             val success = accMan.addAccountExplicitly(userAccount, pass, null)
             if (success){
                 var userRole: String
-                //TODO: Actualizar con los nuevos tipos de usuarios
                 //Revisamos el rol del usuario para almacenarlo
                 if (userType==1){
                     userRole="Admin"
-                } else{
+                } else if (userType==2){
                     userRole="Estudiante"
+                } else if (userType==3){
+                    userRole="Asociacion"
+                } else{
+                    userRole="Desconocido"
                 }
                 // Añadimos el rol a la cuenta
                 accMan.setUserData(userAccount, "Role", userRole)
-                Toast.makeText(cont, "Se añadio la cuenta", Toast.LENGTH_SHORT)
                 return true
             } else{
-                Toast.makeText(cont, "No se añadio la cuenta", Toast.LENGTH_SHORT)
                 return false
             }
         } else {
@@ -57,11 +58,14 @@ class AuthHelper(context: Context) {
             val userRole = accMan.getUserData(accounts[0], "Role")
             // Revisamos que no este vacio
             if (userRole.isNotEmpty()&&userRole.isNotBlank()){
-                //TODO: Actualizar con los nuevos tipos de usuarios
                 if (userRole=="Admin"){
                     return 1
-                } else{
+                }  else if (userRole=="Estudiante"){
                     return 2
+                } else if (userRole=="Asociacion"){
+                    return 3
+                } else{
+                    return 0
                 }
             }
         }

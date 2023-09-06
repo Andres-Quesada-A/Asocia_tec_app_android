@@ -6,6 +6,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
+import com.techsphere.asociaplan.view.menu
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -31,19 +32,18 @@ class AuthController(context: Context) {
                     val userType = authHelper.getAccountType()
                     var mainIntent : Intent
                     if(userType==1){
-                        //mainIntent = Intent(context, AdminActivity::class.java)
-                    } else {
-                        //mainIntent = Intent(context, UserActivity::class.java)
+                        mainIntent = Intent(context, menu::class.java)
+                    } else if (userType==2){
+                        mainIntent = Intent(context, menu::class.java)
+                    } else{
+                        mainIntent = Intent(context, menu::class.java)
                     }
                     withContext(Main){
                         carga.dismiss()
-                        Toast.makeText(context, "Se inicio sesion", Toast.LENGTH_SHORT).show()
                     }
-                    //context.startActivity(mainIntent)
-                    //(context as Activity).finish()
+                    context.startActivity(mainIntent)
+                    (context as Activity).finish()
                 }else{
-                    Toast.makeText(context, "No se registro", Toast.LENGTH_SHORT).show()
-
                     withContext(Main) {
                         carga.dismiss()
                         dialogs(context).shorErrorLogin(50001)
@@ -80,7 +80,9 @@ class AuthController(context: Context) {
                     carga.dismiss()
                     dialogs(context).shorErrorLogin(0)
                 }
+                //(context as Activity).finish()
             }
         }
     }
+
 }
