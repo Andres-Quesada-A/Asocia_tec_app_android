@@ -1,12 +1,13 @@
 package com.techsphere.asociaplan.models
 
-class Asociacion (id: Int, Nombre: String, Contacto: String, CodigoCarrera: String, Descripcion: String, Correo: String) {
+class Asociacion (id: Int, Nombre: String, Contacto: String, CodigoCarrera: String, Descripcion: String, Correo: String, Contrasena: String) {
     private var id : Int
     private var name : String
     private var contacto : String
     private var cod : String
     private var descripcion : String
     private var correo: String
+    private var contrasena: String
     init {
         this.id=id
         this.name=Nombre
@@ -14,6 +15,7 @@ class Asociacion (id: Int, Nombre: String, Contacto: String, CodigoCarrera: Stri
         this.cod=CodigoCarrera
         this.descripcion=Descripcion
         this.correo=Correo
+        this.contrasena=Contrasena
     }
     fun getId(): Int{
         return id
@@ -32,5 +34,8 @@ class Asociacion (id: Int, Nombre: String, Contacto: String, CodigoCarrera: Stri
     }
     fun getCorreo(): String{
         return correo
+    }
+    fun getContrasena(): String{
+        return contrasena
     }
 }

@@ -22,7 +22,7 @@ suspend fun getAllAsociacionesBD() : MutableList<Asociacion>{
         while (recordSets.next()){
             // Creamos una nueva asociacion
             var asociacion = Asociacion(recordSets.getInt("id"),recordSets.getString("Nombre"), recordSets.getString("Contacto"),
-                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"),recordSets.getString("Correo"))
+                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"),recordSets.getString("Correro"),recordSets.getString("Contrasena"))
             // Lo añadimos a la lista
             asociaciones.add(asociacion)
         }
@@ -54,7 +54,7 @@ suspend fun getAsociacionesBusqueda(Nombre: String) : MutableList<Asociacion>{
         while (recordSets.next()){
             // Creamos una nueva asociacion
             var asociacion = Asociacion(recordSets.getInt("id"),recordSets.getString("Nombre"), recordSets.getString("Contacto"),
-                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"),recordSets.getString("Correo"))
+                recordSets.getString("CodigoCarrera"), recordSets.getString("Descripcion"),recordSets.getString("Correro"),recordSets.getString("Contrasena"))
             // Lo añadimos a la lista
             asociaciones.add(asociacion)
         }
