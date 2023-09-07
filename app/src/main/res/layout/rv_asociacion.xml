@@ -44,11 +44,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="9dp"
                 android:text="Código de carrera"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="49dp" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_nombre" />
 
             <TextView
                 android:id="@+id/txt_contacto"
@@ -56,11 +57,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="10dp"
                 android:text="Contacto"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="83dp" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_cod_carrera" />
 
             <Button
                 android:id="@+id/button_agregar_miembro"

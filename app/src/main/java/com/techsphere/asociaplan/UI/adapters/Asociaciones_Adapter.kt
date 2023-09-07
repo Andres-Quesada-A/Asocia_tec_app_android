@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
+class Asociaciones_Adapter (private val dataSet: Array<Asociacion>) :
     RecyclerView.Adapter<Asociaciones_Adapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

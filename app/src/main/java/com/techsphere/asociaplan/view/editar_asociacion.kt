@@ -67,7 +67,7 @@ class editar_asociacion : AppCompatActivity() {
         }
 
         Toast.makeText(this, "Editando la asociación", Toast.LENGTH_SHORT).show()
-        CoroutineScope(Dispatchers.IO).launch {
+        /*CoroutineScope(Dispatchers.IO).launch {
             val res = registerAsocInBD(Nombre, Contacto,
                 Codigo, Descripcion
             )
@@ -81,7 +81,7 @@ class editar_asociacion : AppCompatActivity() {
                     Toast.makeText(this@editar_asociacion,"No se edito la asociación.", Toast.LENGTH_SHORT).show()
                 }
             }
-        }
+        }*/
     }
     fun cargarAsociacion(){
         val dialogo = dialogs(this).showLoadingDialog()

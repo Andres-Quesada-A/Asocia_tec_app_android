@@ -26,6 +26,7 @@ class agregar_miembros : AppCompatActivity() {
     private lateinit var adap : Agregar_Miembros_Adapter
     private lateinit var progressBar : ProgressBar
     private lateinit var editTextNombre : EditText
+    private var eventosArray = arrayOf<Estudiantes>()
     var correo = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,10 @@ class agregar_miembros : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progBarCubiEst)
 
+        val evento1 = Estudiantes("Evento 1", "Descripción 1", "Lugar 1")
+        val evento2 = Estudiantes("Evento 2", "Descripción 2", "Lugar 2")
+        eventosArray = arrayOf(evento1, evento2)
+
         cargarEstudiantes(this)
         BuscarButton.setOnClickListener {
             BuscarEstudiante(this)
@@ -49,7 +54,7 @@ class agregar_miembros : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch{
             val Estudiantes = getAllEstudiantesBD(correo)
             withContext(Dispatchers.Main){
-                adap = Agregar_Miembros_Adapter(Estudiantes)
+                adap = Agregar_Miembros_Adapter(eventosArray)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE
@@ -62,7 +67,7 @@ class agregar_miembros : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch{
             val Estudiantes = getEstudiantesBusqueda(correo, editTextNombre.text.toString())
             withContext(Dispatchers.Main){
-                adap = Agregar_Miembros_Adapter(Estudiantes)
+                adap = Agregar_Miembros_Adapter(eventosArray)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE

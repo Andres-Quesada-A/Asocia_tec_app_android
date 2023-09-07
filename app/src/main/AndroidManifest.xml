@@ -20,54 +20,54 @@
             android:exported="false" />
         <activity
             android:name=".search_collaborator"
-            android:exported="false" />
+            android:exported="false" />*/
         <activity
             android:name=".view.EventCalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".edit_event_activity"
+            android:name=".view.edit_event_activity"
             android:exported="false" />
         <activity
-            android:name=".activity_details"
+            android:name=".view.activity_details"
             android:exported="false" />
         <activity
-            android:name=".list_activities_by_event"
+            android:name=".view.list_activities_by_event"
             android:exported="false" />
         <activity
-            android:name=".edit_event"
+            android:name=".view.edit_event"
             android:exported="false" />
         <activity
-            android:name=".details_event"
+            android:name=".view.event_details"
             android:exported="false" />
         <activity
-            android:name=".events"
+            android:name=".view.events"
             android:exported="false" />
         <activity
-            android:name=".register_event"
+            android:name=".view.register_event"
             android:exported="false" />
         <activity
             android:name=".view.menu"
             android:exported="false" />
         <activity
-            android:name=".edit_collaborator"
+            android:name=".view.edit_collaborator"
             android:exported="false" />
         <activity
-            android:name=".collaborator_details"
+            android:name=".view.collaborator_details"
             android:exported="false" />
         <activity
-            android:name=".collaborator_list"
+            android:name=".view.collaborator_list"
             android:exported="false" />
         <activity
-            android:name=".register_collaborator"
+            android:name=".view.register_collaborator"
             android:exported="false" />
         <activity
             android:name=".estudiante"
             android:exported="false" />
         <activity
-            android:name=".agregar_miembros"
+            android:name=".view.agregar_miembros"
             android:exported="false" />
         <activity
-            android:name=".editar_asociacion"
+            android:name=".view.editar_asociacion"
             android:exported="false" />
         <activity
             android:name=".view.RegisterActivity"

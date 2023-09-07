@@ -6,24 +6,22 @@ import java.sql.*
 private const val connectionString : String = "jdbc:jtds:sqlserver://serverapp-ap.database.windows.net;databaseName=BDAppAP;"+
         "user=adminEvenAP;password=EventosAP1;ssl=require"
 
-/*suspend fun registerAsocInBD(Nombre : String, Contacto : String, Descripcion: String
+suspend fun registerCollabInBD(Descripcion: String, Contacto : String, Id: Int
 ) : Int{
     var conn : Connection? = null
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
-        var cs = conn.prepareCall("{call RegistrarAsociacion @inCodigo=?, @inEstado=?, @inCantidadTiempo=?, @inFechaInicio=?, " +
-                "@inFechaFin=?, @outCodeResult=?}")
+        var cs = conn.prepareCall("{call AgregarColaborador @inDescripcion=?, @inContacto=?, @inIdUsuario=?, @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
-        cs.setString(1, Nombre)
+        cs.setString(1, Descripcion)
         cs.setString(2, Contacto)
-        cs.setString(3, Codigo)
-        cs.setString(4, Descripcion)
+        cs.setInt(3, Id)
         // Le indicamos el parametro de salida y su tipo
-        cs.registerOutParameter(6, Types.INTEGER)
+        cs.registerOutParameter(4, Types.INTEGER)
         // Se ejecuta la query
         cs.execute()
-        var result = cs.getInt(6)
+        var result = cs.getInt(4)
         Log.i("SP OutCode", "Resultado: "+result.toString())
         return result
     }catch (ex: SQLException){
@@ -36,4 +34,4 @@ private const val connectionString : String = "jdbc:jtds:sqlserver://serverapp-a
         Log.e("Error Exception: ", ex2.message.toString())
         return 0
     }
-}*/
+}

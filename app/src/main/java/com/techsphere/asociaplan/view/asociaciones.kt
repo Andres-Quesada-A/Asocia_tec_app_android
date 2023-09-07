@@ -14,10 +14,12 @@ import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.UI.adapters.Asociaciones_Adapter
 import com.techsphere.asociaplan.controller.getAllAsociacionesBD
 import com.techsphere.asociaplan.controller.getAsociacionesBusqueda
+import com.techsphere.asociaplan.models.Asociacion
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDateTime
 
 class asociaciones : AppCompatActivity() {
     private lateinit var rv : RecyclerView
@@ -26,6 +28,7 @@ class asociaciones : AppCompatActivity() {
     private lateinit var editTextNombre : EditText
     private lateinit var BuscarButton : Button
     private lateinit var registerButton : Button
+    private var eventosArray = arrayOf<Asociacion>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asociaciones)
@@ -36,6 +39,10 @@ class asociaciones : AppCompatActivity() {
         rv = findViewById<RecyclerView>(R.id.rvAsociacion)
 
         progressBar = findViewById(R.id.progBarCubiEst)
+        val evento1 = Asociacion("Evento 1", "Descripción 1", "Lugar 1", "120", "a")
+        val evento2 = Asociacion("Evento 2", "Descripción 2", "Lugar 2", "90", "a")
+        eventosArray = arrayOf(evento1, evento2)
+
 
         cargarAsociaciones(this)
         BuscarButton.setOnClickListener {
@@ -51,7 +58,7 @@ class asociaciones : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch{
             val asociaciones = getAllAsociacionesBD()
             withContext(Dispatchers.Main){
-                adap = Asociaciones_Adapter(asociaciones)
+                adap = Asociaciones_Adapter(eventosArray)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE
@@ -64,7 +71,7 @@ class asociaciones : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch{
             val asociaciones = getAsociacionesBusqueda(editTextNombre.text.toString())
             withContext(Dispatchers.Main){
-                adap = Asociaciones_Adapter(asociaciones)
+                adap = Asociaciones_Adapter(eventosArray)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE

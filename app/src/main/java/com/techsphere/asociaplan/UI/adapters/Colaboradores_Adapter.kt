@@ -11,49 +11,52 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
-import com.techsphere.asociaplan.controller.AgregarEstudianteBD
+//import com.techsphere.asociaplan.controller.eliminarApartadoBD
 import com.techsphere.asociaplan.models.Asociacion
 import com.techsphere.asociaplan.models.Estudiantes
-import com.techsphere.asociaplan.view.RegisterAsociationActivity
-import com.techsphere.asociaplan.view.agregar_miembros
-import com.techsphere.asociaplan.view.asociaciones
-import com.techsphere.asociaplan.view.editar_asociacion
+import com.techsphere.asociaplan.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-
-class Agregar_Miembros_Adapter (private val dataSet: Array<Estudiantes>) :
-    RecyclerView.Adapter<Agregar_Miembros_Adapter.ViewHolder>() {
+class Colaboradores_Adapter (private val dataSet: Array<Estudiantes>) :
+    RecyclerView.Adapter<Colaboradores_Adapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtNombre: TextView
-        val txtCodigo: TextView
         val txtContacto: TextView
         val btnAgregar: Button
+        val btnEliminar: Button
+        val btnEditar: Button
         val vista: Context
+        var correo = ""
 
         init {
             txtNombre = view.findViewById(R.id.txt_nombre)
-            txtCodigo = view.findViewById(R.id.txt_cod_carrera)
             txtContacto = view.findViewById(R.id.txt_contacto)
             btnAgregar = view.findViewById(R.id.button_agregar_miembro)
+            btnEditar = view.findViewById(R.id.button_editar)
+            btnEliminar = view.findViewById(R.id.button_eliminar)
             this.vista = view.context
-
-            btnAgregar.setOnClickListener {
-                val context = this.vista
-                val codigo = txtCodigo
-                CoroutineScope(IO).launch {
-                    // Como no encontre alguna manera de actualizar los datos
-                    // decidi que seria mejor volver a iniciar la actividad
-                    AgregarEstudianteBD(codigo.toString())
-                    val intent = Intent(context, asociaciones::class.java)
-                    context.startActivity(intent)
-                    (context as Activity).finish()
-                }
+            btnEditar.setOnClickListener {
+                val intent = Intent(view.context,edit_collaborator::class.java)
+                intent.putExtra("nombre", txtNombre.toString())
+                this.vista.startActivity(intent)
             }
+            btnEliminar.setOnClickListener {
+                eliminarAsociacion()
+            }
+            btnAgregar.setOnClickListener {
+                //val intent = Intent(view.context,agregar_miembros::class.java)
+                //intent.putExtra("correo", correo.toString())
+                //this.vista.startActivity(intent)
+            }
+        }
+
+        fun eliminarAsociacion() {
+            ///
         }
     }
 
@@ -62,14 +65,13 @@ class Agregar_Miembros_Adapter (private val dataSet: Array<Estudiantes>) :
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_estudiante,
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_collaborator,
         parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var asoc: Estudiantes = dataSet.get(position)
-        holder.txtCodigo.text = asoc.getCodigo()
         holder.txtNombre.text = asoc.getNombre()
         holder.txtContacto.text = asoc.getContacto()
     }
