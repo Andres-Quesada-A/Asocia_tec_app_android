@@ -16,6 +16,21 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
+            android:name=".write_proposal"
+            android:exported="false" />
+        <activity
+            android:name=".message_forum"
+            android:exported="false" />
+        <activity
+            android:name=".forum_main_view"
+            android:exported="false" />
+        <activity
+            android:name=".create_reply"
+            android:exported="false" />
+        <activity
+            android:name=".create_forum"
+            android:exported="false" />
+        <activity
             android:name=".view.menu_admin"
             android:exported="false" />
         <activity
