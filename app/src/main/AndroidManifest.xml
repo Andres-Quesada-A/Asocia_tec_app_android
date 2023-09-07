@@ -16,13 +16,13 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
-            android:name=".menu_admin"
+            android:name=".view.menu_admin"
             android:exported="false" />
         <activity
-            android:name=".add_to_event_activity"
+            android:name=".view.add_to_event_activity"
             android:exported="false" />
         <activity
-            android:name=".search_collaborator"
+            android:name=".view.search_collaborator"
             android:exported="false" />
         <activity
             android:name=".view.EventCalendarActivity"
