@@ -11,9 +11,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
-import com.techsphere.asociaplan.controller.AgregarEstudianteBD
+import com.techsphere.asociaplan.controller.AgregarMiembroBD
 import com.techsphere.asociaplan.models.Asociacion
-import com.techsphere.asociaplan.models.Estudiantes
+import com.techsphere.asociaplan.models.Miembro
 import com.techsphere.asociaplan.view.RegisterAsociationActivity
 import com.techsphere.asociaplan.view.agregar_miembros
 import com.techsphere.asociaplan.view.asociaciones
@@ -25,30 +25,29 @@ import kotlinx.coroutines.withContext
 
 
 
-class Agregar_Miembros_Adapter (private val dataSet: Array<Estudiantes>) :
+class Agregar_Miembros_Adapter (private val dataSet: MutableList<Miembro>) :
     RecyclerView.Adapter<Agregar_Miembros_Adapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtNombre: TextView
-        val txtCodigo: TextView
-        val txtContacto: TextView
+        val txtCarne: TextView
+        var Id = 0
+        var IdAsociacion = 0
         val btnAgregar: Button
         val vista: Context
 
         init {
             txtNombre = view.findViewById(R.id.txt_nombre)
-            txtCodigo = view.findViewById(R.id.txt_cod_carrera)
-            txtContacto = view.findViewById(R.id.txt_contacto)
+            txtCarne = view.findViewById(R.id.txt_carne)
             btnAgregar = view.findViewById(R.id.button_agregar_miembro)
             this.vista = view.context
 
             btnAgregar.setOnClickListener {
                 val context = this.vista
-                val codigo = txtCodigo
                 CoroutineScope(IO).launch {
                     // Como no encontre alguna manera de actualizar los datos
                     // decidi que seria mejor volver a iniciar la actividad
-                    AgregarEstudianteBD(codigo.toString())
+                    AgregarMiembroBD(Id,IdAsociacion)
                     val intent = Intent(context, asociaciones::class.java)
                     context.startActivity(intent)
                     (context as Activity).finish()
@@ -68,10 +67,11 @@ class Agregar_Miembros_Adapter (private val dataSet: Array<Estudiantes>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var asoc: Estudiantes = dataSet.get(position)
-        holder.txtCodigo.text = asoc.getCodigo()
-        holder.txtNombre.text = asoc.getNombre()
-        holder.txtContacto.text = asoc.getContacto()
+        var Miem: Miembro = dataSet.get(position)
+        holder.txtCarne.text = Miem.getCarne()
+        holder.txtNombre.text = Miem.getNombre()
+        holder.Id = Miem.getid()
+        holder.IdAsociacion = Miem.getidAsociacion()
     }
 
     override fun getItemCount(): Int {

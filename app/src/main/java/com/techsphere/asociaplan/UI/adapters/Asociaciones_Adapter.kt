@@ -35,7 +35,7 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
         val btnEliminar: Button
         val btnEditar: Button
         val vista: Context
-        var correo = ""
+        var id = 0
 
         init {
             txtNombreAsociacion = view.findViewById(R.id.txt_nombre)
@@ -48,7 +48,7 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
             this.vista = view.context
             btnEditar.setOnClickListener {
                 val intent = Intent(view.context,editar_asociacion::class.java)
-                intent.putExtra("nombre", txtNombreAsociacion.toString())
+                intent.putExtra("id", id.toInt())
                 this.vista.startActivity(intent)
             }
             btnEliminar.setOnClickListener {
@@ -59,7 +59,7 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
             }
             btnAgregar.setOnClickListener {
                 val intent = Intent(view.context,agregar_miembros::class.java)
-                intent.putExtra("correo", correo.toString())
+                intent.putExtra("id", id.toInt())
                 this.vista.startActivity(intent)
             }
         }
@@ -88,7 +88,7 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
         holder.txtCodigo.text = asoc.getCodigo()
         holder.txtNombreAsociacion.text = asoc.getNombre()
         holder.txtContacto.text = asoc.getContacto()
-        holder.correo = asoc.getCorreo()
+        holder.id = asoc.getId()
     }
 
     override fun getItemCount(): Int {

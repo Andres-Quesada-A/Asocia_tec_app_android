@@ -26,23 +26,18 @@ class agregar_miembros : AppCompatActivity() {
     private lateinit var adap : Agregar_Miembros_Adapter
     private lateinit var progressBar : ProgressBar
     private lateinit var editTextNombre : EditText
-    private var eventosArray = arrayOf<Estudiantes>()
-    var correo = ""
+    var id = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_miembros)
 
-        correo = (intent?.extras?.getString("correo")) as String
+        id = (intent?.extras?.getInt("id")) as Int
         editTextNombre = findViewById<EditText>(R.id.nombre_asociacion)
         val BuscarButton = findViewById<Button>(R.id.button_buscar)
 
         rv = findViewById<RecyclerView>(R.id.rvMiembros)
 
         progressBar = findViewById(R.id.progBarCubiEst)
-
-        val evento1 = Estudiantes("Evento 1", "Descripción 1", "Lugar 1")
-        val evento2 = Estudiantes("Evento 2", "Descripción 2", "Lugar 2")
-        eventosArray = arrayOf(evento1, evento2)
 
         cargarEstudiantes(this)
         BuscarButton.setOnClickListener {
@@ -52,9 +47,9 @@ class agregar_miembros : AppCompatActivity() {
     private fun cargarEstudiantes(view: Context){
         progressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch{
-            val Estudiantes = getAllEstudiantesBD(correo)
+            val Estudiantes = getAllEstudiantesBD(id)
             withContext(Dispatchers.Main){
-                adap = Agregar_Miembros_Adapter(eventosArray)
+                adap = Agregar_Miembros_Adapter(Estudiantes)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE
@@ -65,9 +60,9 @@ class agregar_miembros : AppCompatActivity() {
     fun BuscarEstudiante(view: Context){
         progressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch{
-            val Estudiantes = getEstudiantesBusqueda(correo, editTextNombre.text.toString())
+            val Estudiantes = getEstudiantesBusqueda(id, editTextNombre.text.toString())
             withContext(Dispatchers.Main){
-                adap = Agregar_Miembros_Adapter(eventosArray)
+                adap = Agregar_Miembros_Adapter(Estudiantes)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE

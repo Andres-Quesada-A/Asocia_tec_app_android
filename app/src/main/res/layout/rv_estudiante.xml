@@ -39,29 +39,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txt_cod_carrera"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/txt_carne"
+                android:layout_width="285dp"
+                android:layout_height="27dp"
                 android:layout_alignParentStart="true"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="9dp"
-                android:text="Código de carrera"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Carne"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txt_nombre" />
-
-            <TextView
-                android:id="@+id/txt_contacto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginHorizontal="16dp"
-                android:text="Contacto"
-                android:textColor="@color/black"
-                android:textSize="18dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_cod_carrera" />
 
             <Button
                 android:id="@+id/button_agregar_miembro"
