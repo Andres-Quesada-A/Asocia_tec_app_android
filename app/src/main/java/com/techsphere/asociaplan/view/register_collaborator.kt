@@ -14,7 +14,6 @@ import kotlinx.coroutines.withContext
 import com.techsphere.asociaplan.controller.registerCollabInBD
 
 class register_collaborator : AppCompatActivity() {
-    private lateinit var txtNombre : EditText
     private lateinit var txtContacto : EditText
     private lateinit var txtDescripcion : EditText
     private lateinit var btnRegis : Button
@@ -26,7 +25,6 @@ class register_collaborator : AppCompatActivity() {
         setContentView(R.layout.activity_register_collaborator)
 
         Id = (intent?.extras?.getInt("Id")) as Int
-        txtNombre = findViewById(R.id.collaborator_name)
         txtContacto = findViewById(R.id.contact)
         txtDescripcion = findViewById(R.id.description)
         btnRegis = findViewById(R.id.button_register)
@@ -37,16 +35,10 @@ class register_collaborator : AppCompatActivity() {
     }
 
     fun Registrar() {
-        val Nombre = txtNombre.text.toString()
         val Contacto = txtContacto.text.toString()
         val Descripcion = txtDescripcion.text.toString()
         txtDescripcion.error=null
         txtContacto.error=null
-        txtNombre.error=null
-        if (Nombre.isEmpty()||Nombre.isBlank()){
-            txtNombre.error="Por favor introduzca el nombre"
-            return
-        }
         if (Contacto.isEmpty()||Contacto.isBlank()){
             txtContacto.error="Por favor introduzca el contacto"
             return

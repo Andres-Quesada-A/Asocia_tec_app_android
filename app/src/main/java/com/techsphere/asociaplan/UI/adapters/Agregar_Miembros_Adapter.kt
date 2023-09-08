@@ -48,7 +48,8 @@ class Agregar_Miembros_Adapter (private val dataSet: MutableList<Miembro>) :
                     // Como no encontre alguna manera de actualizar los datos
                     // decidi que seria mejor volver a iniciar la actividad
                     AgregarMiembroBD(Id,IdAsociacion)
-                    val intent = Intent(context, asociaciones::class.java)
+                    val intent = Intent(context, agregar_miembros::class.java)
+                    intent.putExtra("id", IdAsociacion.toInt())
                     context.startActivity(intent)
                     (context as Activity).finish()
                 }

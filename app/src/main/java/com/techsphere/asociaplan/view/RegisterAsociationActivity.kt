@@ -84,8 +84,7 @@ class RegisterAsociationActivity : AppCompatActivity() {
                 Codigo, Descripcion, Correo, Contrasena
             )
             if (res == 1){
-                val intent = Intent(this@RegisterAsociationActivity,agregar_miembros::class.java)
-                intent.putExtra("correo", Correo.toString())
+                val intent = Intent(this@RegisterAsociationActivity,asociaciones::class.java)
                 startActivity(intent)
                 finish()
             } else {
