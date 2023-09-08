@@ -4,13 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.models.Eventos
 
-class Eventos_Calendario_Adapter (private val eventos: Array<Eventos>):
+class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
         RecyclerView.Adapter<Eventos_Calendario_Adapter.ViewHolder>(){
             class ViewHolder(view: View): RecyclerView.ViewHolder(view){
                 val nombreText : TextView
@@ -18,13 +17,21 @@ class Eventos_Calendario_Adapter (private val eventos: Array<Eventos>):
                 val duracionText: TextView
                 val moreInfoButton: Button
                 val meInteresaButton: Button
+                //val evento: Eventos
                 init {
                     nombreText=view.findViewById(R.id.txt_title)
                     fechaText=view.findViewById(R.id.txt_date)
                     duracionText=view.findViewById(R.id.txt_category)
                     moreInfoButton=view.findViewById(R.id.button_details)
                     meInteresaButton=view.findViewById(R.id.button_interest)
+                    moreInfoButton.setOnClickListener {
+
+                    }
+                    meInteresaButton.setOnClickListener {
+
+                    }
                 }
+
             }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
