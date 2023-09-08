@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
 import com.techsphere.asociaplan.view.menu
+import com.techsphere.asociaplan.view.menu_estudiante
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -34,7 +35,7 @@ class AuthController(context: Context) {
                     if(userType==1){
                         mainIntent = Intent(context, menu::class.java)
                     } else if (userType==2){
-                        mainIntent = Intent(context, menu::class.java)
+                        mainIntent = Intent(context, menu_estudiante::class.java)
                     } else{
                         mainIntent = Intent(context, menu::class.java)
                     }

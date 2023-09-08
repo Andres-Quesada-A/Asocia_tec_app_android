@@ -79,9 +79,6 @@
             android:name=".view.register_collaborator"
             android:exported="false" />
         <activity
-            android:name=".estudiante"
-            android:exported="false" />
-        <activity
             android:name=".view.agregar_miembros"
             android:exported="false" />
         <activity
@@ -98,6 +95,9 @@
             android:exported="false" />
         <activity
             android:name=".view.RegisterAsociationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.menu_estudiante"
             android:exported="false" />
         <!--
         <activity
