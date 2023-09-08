@@ -30,7 +30,8 @@ class AuthController(context: Context) {
             val res = admin.loginUser(email, pass)
             if (res.isNotEmpty()){
                 val userType : Int = res[0]
-                var resultAccount = authHelper.registerAccount(email, pass, userType)
+                val userId: Int = res[2]
+                var resultAccount = authHelper.registerAccount(email, pass, userType, userId)
                 if (resultAccount) {
                     val userType = authHelper.getAccountType()
                     var mainIntent : Intent

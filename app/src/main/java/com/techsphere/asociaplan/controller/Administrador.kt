@@ -34,7 +34,7 @@ class Administrador {
             sp.registerOutParameter(5, Types.INTEGER)
             sp.execute()
             Log.i("Resultado Login", "${sp.getInt(4)}")
-            return arrayOf(sp.getInt(3), sp.getInt(4))
+            return arrayOf(sp.getInt(3), sp.getInt(4), sp.getInt(5))
         }catch (ex: SQLException){
             Log.e("Error SQL Exception: ", ex.message.toString())
             return arrayOf<Int>()

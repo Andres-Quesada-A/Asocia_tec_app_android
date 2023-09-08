@@ -25,15 +25,15 @@ class SplashActivity : AppCompatActivity() {
         if (authHelper.isLogged()){
             val userType = authHelper.getAccountType()
             if (userType==1){
-                val intent = Intent(this, menu::class.java)
+                val intent = Intent(this, menu_admin::class.java)
                 startActivity(intent)
                 finish()
             } else if (userType==2){
-                val intent = Intent(this, menu::class.java)
+                val intent = Intent(this, menu_estudiante::class.java)
                 startActivity(intent)
                 finish()
             } else if (userType==3){
-                val intent = Intent(this, menu::class.java)
+                val intent = Intent(this, menu_asociacion::class.java)
                 startActivity(intent)
                 finish()
             } else{

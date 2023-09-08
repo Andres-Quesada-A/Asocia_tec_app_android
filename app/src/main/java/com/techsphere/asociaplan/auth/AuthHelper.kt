@@ -13,7 +13,7 @@ class AuthHelper(context: Context) {
     private val accMan = AccountManager.get(context)
     // Unicamente lo usamos para los toast
     private val cont = context
-    fun registerAccount (email: String, pass: String, userType: Int): Boolean{
+    fun registerAccount (email: String, pass: String, userType: Int, userId: Int): Boolean{
         val numAcc = accMan.getAccountsByType("com.techsphere.asociaplan.account").size
         if (numAcc==0){
             // Creamos la cuenta con el correo
@@ -36,6 +36,8 @@ class AuthHelper(context: Context) {
                 }
                 // Añadimos el rol a la cuenta
                 accMan.setUserData(userAccount, "Role", userRole)
+                // Añadimos el id del usuario como un string
+                accMan.setUserData(userAccount, "id", userId.toString())
                 return true
             } else{
                 return false
@@ -86,6 +88,20 @@ class AuthHelper(context: Context) {
         return null
     }
 
+    fun getAccountId(): Int{
+        // Se obtienen las cuentas registradas
+        val accounts = accMan.getAccountsByType("com.techsphere.asociaplan.account")
+        // Si solo hay una
+        if (accounts.size==1){
+            // Obtenemos el id, y lo convertimos de nuevo en un int
+            val id = accMan.getUserData(accounts[0], "id") as Int
+            if (id!=0){
+                // Devolvemos el id del usuario
+                return id
+            }
+        }
+        return 0
+    }
     fun logoutAccount() : Boolean{
         val accounts = accMan.getAccountsByType("com.techsphere.asociaplan.account")
         // Se asume que solo existe una cuenta registrada en el telefono
