@@ -10,6 +10,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import android.content.Intent
+import com.techsphere.asociaplan.auth.AuthHelper
 import kotlinx.coroutines.withContext
 import com.techsphere.asociaplan.controller.registerCollabInBD
 
@@ -17,14 +18,15 @@ class register_collaborator : AppCompatActivity() {
     private lateinit var txtContacto : EditText
     private lateinit var txtDescripcion : EditText
     private lateinit var btnRegis : Button
-    var Id = 0
+    private var Id : Int? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_collaborator)
 
-        Id = (intent?.extras?.getInt("Id")) as Int
+        Id = (intent?.extras?.getInt("Id"))
+        Id = AuthHelper(this).getAccountId()
         txtContacto = findViewById(R.id.contact)
         txtDescripcion = findViewById(R.id.description)
         btnRegis = findViewById(R.id.button_register)
@@ -50,8 +52,7 @@ class register_collaborator : AppCompatActivity() {
 
         Toast.makeText(this, "Registrando la colaborador", Toast.LENGTH_SHORT).show()
         CoroutineScope(Dispatchers.IO).launch {
-            val res = registerCollabInBD(Descripcion, Contacto, Id
-            )
+            val res = registerCollabInBD(Descripcion, Contacto, Id!!)
             if (res == 1){
                 val intent = Intent(this@register_collaborator,menu::class.java)
                 startActivity(intent)

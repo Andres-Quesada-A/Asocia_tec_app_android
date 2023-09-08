@@ -107,4 +107,28 @@ class Administrador {
         }
     }
 
+    suspend fun inscribirEstudianteEvento(idEvento: Int, idEstudiante: Int): Int{
+        var connection : Connection? = null
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            connection = DriverManager.getConnection(connectionString)
+            val sp = connection.prepareCall("{call InscribirEvento @inIdEvento=?, @inIdEstudiante=?," +
+                    "@outCodeResult=?}")
+            sp.setInt(1, idEvento)
+            sp.setInt(2, idEstudiante)
+            sp.registerOutParameter(3, Types.INTEGER)
+            sp.execute()
+            return sp.getInt(3)
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return 0
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return 0
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return 0
+        }
+    }
+
 }

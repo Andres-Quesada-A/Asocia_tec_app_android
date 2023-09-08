@@ -1,5 +1,6 @@
 package com.techsphere.asociaplan.UI.adapters
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +20,7 @@ class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
                 val duracionText: TextView
                 val moreInfoButton: Button
                 val meInteresaButton: Button
-                //val evento: Eventos
+                lateinit var evento: Eventos
                 init {
                     nombreText=view.findViewById(R.id.txt_title)
                     fechaText=view.findViewById(R.id.txt_date)
@@ -27,17 +28,28 @@ class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
                     moreInfoButton=view.findViewById(R.id.button_details)
                     meInteresaButton=view.findViewById(R.id.button_interest)
                     moreInfoButton.setOnClickListener {
-                        view.context.startActivity(Intent(view.context, EventInscriptionActivity::class.java))
-                    }
-                    meInteresaButton.setOnClickListener {
+                        showMoreInfo(view.context)
 
                     }
+                    meInteresaButton.setOnClickListener {
+                        showNotificationDialog(view.context)
+                    }
+                }
+                private fun showMoreInfo(context: Context){
+                    val intent = Intent(context, EventInscriptionActivity::class.java)
+                    intent.putExtra("Evento", evento)
+                    //Iniciamos la actividad pero no cerramos la del calendario
+                    context.startActivity(intent)
+                }
+                private fun showNotificationDialog(context: Context){
+                    //TODO
                 }
 
             }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val evento: Eventos = eventos.get(position)
+        holder.evento=evento
         holder.nombreText.text="Nombre: ${evento.getTitulo()}"
         holder.duracionText.text="Duracion: ${evento.getDuracion()} horas"
         holder.fechaText.text="Fecha: ${evento.getFecha()}"

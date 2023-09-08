@@ -106,6 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:text="Capacidad:"
             android:textColor="@color/black"
@@ -179,7 +180,7 @@
             app:layout_constraintTop_toBottomOf="@+id/requirements" />
 
         <Button
-            android:id="@+id/button_back"
+            android:id="@+id/button_cancel_inscription"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_marginStart="32dp"
@@ -189,10 +190,10 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_back2" />
+            app:layout_constraintTop_toBottomOf="@+id/button_subscription" />
 
         <Button
-            android:id="@+id/button_back2"
+            android:id="@+id/button_subscription"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_marginStart="32dp"

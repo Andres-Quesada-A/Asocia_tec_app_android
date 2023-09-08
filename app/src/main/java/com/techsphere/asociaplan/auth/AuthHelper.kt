@@ -94,7 +94,7 @@ class AuthHelper(context: Context) {
         // Si solo hay una
         if (accounts.size==1){
             // Obtenemos el id, y lo convertimos de nuevo en un int
-            val id = accMan.getUserData(accounts[0], "id") as Int
+            val id = accMan.getUserData(accounts[0], "id").toInt()
             if (id!=0){
                 // Devolvemos el id del usuario
                 return id

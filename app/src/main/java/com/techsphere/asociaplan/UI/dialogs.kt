@@ -89,6 +89,44 @@ class dialogs (context: Context) {
         builder.setCancelable(false)
         builder.create().show()
     }
+    fun showSuccessDialog(type: Int){
+        val builder = AlertDialog.Builder(context)
+        // Es un numero arbitrario, luego se puede cambiar
+        if (type==17){
+            builder.setTitle("Inscripcion a eventos")
+            builder.setMessage("Se ha inscrito al evento de forma exitosa")
+        } else{
+            builder.setTitle("Exito")
+            builder.setMessage("La accion se llevo a cabo de manera exitosa")
+        }
+        builder.setPositiveButton("Aceptar",
+            DialogInterface.OnClickListener { dialog, id ->
+                (context as Activity).finish()
+            }
+        )
+        builder.setCancelable(false)
+        builder.create().show()
+    }
+    fun showErrorDialog(type: Int){
+        val builder = AlertDialog.Builder(context)
+        // Es un numero arbitrario, luego se puede cambiar
+        if (type==17){
+            builder.setTitle("Inscripcion a eventos")
+            builder.setMessage("No se pudo inscribir al evento\n" +
+                    "Por favor, intentelo mas tarde")
+        } else{
+            builder.setTitle("Error")
+            builder.setMessage("Ocurrio un error inesperado\n" +
+                    "Por favor, intentelo mas tarde")
+        }
+        builder.setPositiveButton("Aceptar",
+            DialogInterface.OnClickListener { dialog, id ->
+                (context as Activity).finish()
+            }
+        )
+        builder.setCancelable(false)
+        builder.create().show()
+    }
     fun showNoPermissions(){
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Error")
