@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
-//import com.techsphere.asociaplan.controller.eliminarApartadoBD
+import com.techsphere.asociaplan.controller.deleteAsociacionBD
 import com.techsphere.asociaplan.models.Asociacion
 import com.techsphere.asociaplan.view.RegisterAsociationActivity
 import com.techsphere.asociaplan.view.agregar_miembros
@@ -67,7 +67,25 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
         }
 
         fun eliminarAsociacion() {
-            ///
+            val dialog = AlertDialog.Builder(vista)
+            val inflater = LayoutInflater.from(vista)
+            val view = inflater.inflate(R.layout.dialog_delete_asociacion, null)
+            dialog.setView(view)
+            dialog.setCancelable(true)
+            val btnDelete = view.findViewById<Button>(R.id.eliminarAsociacionBoton)
+            val btnCancel = view.findViewById<Button>(R.id.cancelarEliminarAsociacionBoton)
+            val d = dialog.create()
+            d.show()
+            btnDelete.setOnClickListener {
+                deleteAsociacionBD(id)
+                d.dismiss()
+                val intent = Intent(view.context,asociaciones::class.java)
+                this.vista.startActivity(intent)
+                (this.vista as Activity).finish()
+            }
+            btnCancel.setOnClickListener {
+                d.dismiss()
+            }
         }
 
         fun VerMiembros() {

@@ -1,6 +1,9 @@
 package com.techsphere.asociaplan.controller
 
 import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.sql.*
 
 private const val connectionString : String = "jdbc:jtds:sqlserver://serverapp-ap.database.windows.net;databaseName=BDAppAP;"+
@@ -62,6 +65,38 @@ suspend fun EditarAsocInBD(id: Int, Nombre : String, Contacto : String, Codigo :
         var result = cs.getInt(9)
         Log.i("SP OutCode", "Resultado: "+result.toString())
         return result
+    }catch (ex: SQLException){
+        Log.e("Error SQL Exception: ", ex.message.toString())
+        return 0
+    }catch (ex1: ClassNotFoundException){
+        Log.e("Error Class Not Found: ", ex1.message.toString())
+        return 0
+    }catch (ex2: Exception) {
+        Log.e("Error Exception: ", ex2.message.toString())
+        return 0
+    }
+}
+
+fun deleteAsociacionBD(codigo: Int){
+    CoroutineScope(Dispatchers.IO).launch {
+        eliminarAsociacion(codigo)
+    }
+}
+
+suspend fun eliminarAsociacion(codigo: Int) : Int{
+    var conn : Connection? = null
+    try {
+        Class.forName("net.sourceforge.jtds.jdbc.Driver")
+        conn = DriverManager.getConnection(connectionString)
+        var cs = conn.prepareCall("{call EliminarAsociacion @inIdAsociacion=?, @outCodeResult=?}")
+        // Asumimos que se nos pasa un valor no vacio
+        cs.setInt(1, codigo)
+        // Le indicamos el parametro de salida y su tipo
+        cs.registerOutParameter(2, Types.INTEGER)
+        // Se ejecuta la query
+        cs.execute()
+        Log.i("SP OutCode", "Resultado: "+cs.getInt(2).toString())
+        return cs.getInt(2)
     }catch (ex: SQLException){
         Log.e("Error SQL Exception: ", ex.message.toString())
         return 0
