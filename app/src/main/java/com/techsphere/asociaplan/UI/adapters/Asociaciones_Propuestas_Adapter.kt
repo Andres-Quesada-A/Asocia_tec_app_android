@@ -21,7 +21,6 @@ import com.techsphere.asociaplan.view.menu_estudiante
 
 class Asociaciones_Propuestas_Adapter (private val dataSet: MutableList<Asociacion>) :
     RecyclerView.Adapter<Asociaciones_Propuestas_Adapter.ViewHolder>() {
-
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtNombreAsociacion: TextView
         val txtCodigo: TextView
@@ -39,6 +38,7 @@ class Asociaciones_Propuestas_Adapter (private val dataSet: MutableList<Asociaci
             this.vista = view.context
             btnEnviar.setOnClickListener {
                 val intent = Intent(view.context, enviar_propuesta::class.java)
+                intent.putExtra("id",id.toInt())
                 this.vista.startActivity(intent)
             }
         }

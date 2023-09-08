@@ -26,7 +26,6 @@ class menu_admin : AppCompatActivity() {
         estudiantes = findViewById(R.id.button_estudiantes)
         foro = findViewById(R.id.button_foro)
         cerrarSesion = findViewById(R.id.button_cerrar_sesion)
-
         asociaciones.setOnClickListener {
             val intent = Intent(this, asociaciones::class.java)
             startActivity(intent)

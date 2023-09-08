@@ -37,7 +37,6 @@ class asociaciones_propuesta : AppCompatActivity() {
         rv = findViewById<RecyclerView>(R.id.rvAsociacionPropuesta)
 
         progressBar = findViewById(R.id.progBarCubiEst)
-
         cargarAsociacionesPropuesta(this)
         BuscarButton.setOnClickListener {
             BuscarAsociacionPropuesta(this)
