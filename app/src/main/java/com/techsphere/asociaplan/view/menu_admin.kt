@@ -1,10 +1,15 @@
 package com.techsphere.asociaplan.view
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import com.techsphere.asociaplan.R
+import com.techsphere.asociaplan.auth.AuthHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class menu_admin : AppCompatActivity() {
     private lateinit var asociaciones : Button
@@ -39,8 +44,16 @@ class menu_admin : AppCompatActivity() {
             //startActivity(intent)
         }
         cerrarSesion.setOnClickListener {
-            //val intent = Intent(this, EventCalendarActivity::class.java)
-            //startActivity(intent)
+            logout(this)
+        }
+    }
+    fun logout(view: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val res = AuthHelper(view).logoutAccount()
+            if (res) {
+                startActivity(Intent(view, LoginActivity::class.java))
+                finish()
+            }
         }
     }
 }
