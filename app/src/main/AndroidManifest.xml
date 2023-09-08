@@ -16,6 +16,9 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
+            android:name=".view.EventInscriptionActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.write_proposal"
             android:exported="false" />
         <activity

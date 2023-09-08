@@ -1,5 +1,6 @@
 package com.techsphere.asociaplan.UI.adapters
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.models.Eventos
+import com.techsphere.asociaplan.view.EventInscriptionActivity
 
 class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
         RecyclerView.Adapter<Eventos_Calendario_Adapter.ViewHolder>(){
@@ -25,7 +27,7 @@ class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
                     moreInfoButton=view.findViewById(R.id.button_details)
                     meInteresaButton=view.findViewById(R.id.button_interest)
                     moreInfoButton.setOnClickListener {
-
+                        view.context.startActivity(Intent(view.context, EventInscriptionActivity::class.java))
                     }
                     meInteresaButton.setOnClickListener {
 
