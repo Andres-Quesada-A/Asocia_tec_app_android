@@ -25,7 +25,6 @@ class register_collaborator : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_collaborator)
 
-        Id = (intent?.extras?.getInt("Id"))
         Id = AuthHelper(this).getAccountId()
         txtContacto = findViewById(R.id.contact)
         txtDescripcion = findViewById(R.id.description)
@@ -54,7 +53,7 @@ class register_collaborator : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val res = registerCollabInBD(Descripcion, Contacto, Id!!)
             if (res == 1){
-                val intent = Intent(this@register_collaborator,menu::class.java)
+                val intent = Intent(this@register_collaborator,menu_estudiante::class.java)
                 startActivity(intent)
                 finish()
             } else {
