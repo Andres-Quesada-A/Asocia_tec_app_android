@@ -1,22 +1,28 @@
 package com.techsphere.asociaplan.models
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 
-class Eventos (titulo: String, descripcion: String, fecha: LocalDateTime, lugar: String, duracion: Int,
-               requisitos: String){
+class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, lugar: String, duracion: Int,
+               requisitos: String, categoria: String){
+    private var id: Int
     private var titulo: String
     private var descripcion: String
-    private var fecha: LocalDateTime
+    private var fecha: LocalDate
     private var lugar: String
     private var duracion: Int
-    //private var requisitos: String
+    private var requisitos: String
+    private var categoria: String
 
     init {
+        this.id=id
         this.titulo=titulo
         this.descripcion=descripcion
         this.fecha=fecha
         this.lugar=lugar
         this.duracion=duracion
+        this.requisitos=requisitos
+        this.categoria=categoria
     }
 
     fun getTitulo(): String {
@@ -27,7 +33,7 @@ class Eventos (titulo: String, descripcion: String, fecha: LocalDateTime, lugar:
         return descripcion
     }
 
-    fun getFecha(): LocalDateTime {
+    fun getFecha(): LocalDate {
         return fecha
     }
 
