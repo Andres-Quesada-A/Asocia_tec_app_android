@@ -99,6 +99,9 @@
         <activity
             android:name=".view.menu_estudiante"
             android:exported="false" />
+        <activity
+            android:name=".view.menu_asociacion"
+            android:exported="false" />
         <!--
         <activity
             android:name=".view.LoginActivity"

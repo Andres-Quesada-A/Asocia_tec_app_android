@@ -7,6 +7,8 @@ import android.widget.Toast
 import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
 import com.techsphere.asociaplan.view.menu
+import com.techsphere.asociaplan.view.menu_admin
+import com.techsphere.asociaplan.view.menu_asociacion
 import com.techsphere.asociaplan.view.menu_estudiante
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,11 +35,11 @@ class AuthController(context: Context) {
                     val userType = authHelper.getAccountType()
                     var mainIntent : Intent
                     if(userType==1){
-                        mainIntent = Intent(context, menu::class.java)
+                        mainIntent = Intent(context, menu_admin::class.java)
                     } else if (userType==2){
                         mainIntent = Intent(context, menu_estudiante::class.java)
                     } else{
-                        mainIntent = Intent(context, menu::class.java)
+                        mainIntent = Intent(context, menu_asociacion::class.java)
                     }
                     withContext(Main){
                         carga.dismiss()
