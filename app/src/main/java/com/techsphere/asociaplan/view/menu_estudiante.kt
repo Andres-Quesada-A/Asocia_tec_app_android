@@ -40,7 +40,8 @@ class menu_estudiante : AppCompatActivity() {
 
         }
         CrearPropuesta.setOnClickListener {
-
+            val intent = Intent(this,asociaciones_propuesta::class.java)
+            startActivity(intent)
         }
         Foro.setOnClickListener {
 

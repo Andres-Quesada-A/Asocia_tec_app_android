@@ -102,6 +102,12 @@
         <activity
             android:name=".view.menu_asociacion"
             android:exported="false" />
+        <activity
+            android:name=".view.asociaciones_propuesta"
+            android:exported="false" />
+        <activity
+            android:name=".view.enviar_propuesta"
+            android:exported="false" />
         <!--
         <activity
             android:name=".view.LoginActivity"
