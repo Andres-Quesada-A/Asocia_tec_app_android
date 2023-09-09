@@ -48,30 +48,7 @@
             android:textStyle="bold"
             />
 
-        <TextView
-            android:id="@+id/label_nombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="10sp"
-            android:text="Nombre"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/nombre_colaborador"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
-            android:hint="Nombre"
-            android:inputType="text"
-            android:padding="2dp"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/label_contacto"

@@ -35,8 +35,9 @@ class menu_asociacion : AppCompatActivity() {
         Foro = findViewById<Button>(R.id.button_foro)
         CerrarSesion = findViewById<Button>(R.id.button_cerrar_sesion)
         miembros.setOnClickListener {
-            val intent = Intent(this,register_collaborator::class.java)
-            startActivity(intent)
+            val intent = Intent(this,agregar_miembros::class.java)
+            intent.putExtra("id", AuthHelper(this).getAccountId().toInt())
+            this.startActivity(intent)
         }
         eventos.setOnClickListener {
             val intent = Intent(this,EventCalendarActivity::class.java)

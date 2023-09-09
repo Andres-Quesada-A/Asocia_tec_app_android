@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.UI.adapters.Colaboradores_Adapter
-import com.techsphere.asociaplan.controller.getAllAsociacionesBD
-import com.techsphere.asociaplan.controller.getAsociacionesBusqueda
+import com.techsphere.asociaplan.controller.getColaboradoresBusqueda
+import com.techsphere.asociaplan.controller.getAllColaboradoresBD
 import com.techsphere.asociaplan.models.Asociacion
 import com.techsphere.asociaplan.models.Estudiantes
 import kotlinx.coroutines.CoroutineScope
@@ -28,7 +28,6 @@ class collaborator_list : AppCompatActivity() {
     private lateinit var editTextNombre : EditText
     private lateinit var BuscarButton : Button
     private lateinit var registerButton : Button
-    private var eventosArray = arrayOf<Estudiantes>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,26 +39,23 @@ class collaborator_list : AppCompatActivity() {
         rv = findViewById<RecyclerView>(R.id.rvColaboradores)
 
         progressBar = findViewById(R.id.progBarCubiEst)
-        val evento1 = Estudiantes("Evento 1", "Descripción 1", "Lugar 1")
-        val evento2 = Estudiantes("Evento 2", "Descripción 2", "Lugar 2")
-        eventosArray = arrayOf(evento1, evento2)
 
 
-        cargarAsociaciones(this)
+        cargarColaboradores(this)
         BuscarButton.setOnClickListener {
-            BuscarAsociacion(this)
+            BuscarColaborador(this)
         }
         registerButton.setOnClickListener {
             val intent = Intent(this,RegisterAsociationActivity::class.java)
             startActivity(intent)
         }
     }
-    fun cargarAsociaciones(view: Context){
+    fun cargarColaboradores(view: Context){
         progressBar.visibility = View.VISIBLE
         CoroutineScope(Dispatchers.IO).launch{
-            //val colaboradores = getAllColaboradoresBD()
+            val colaboradores = getAllColaboradoresBD()
             withContext(Dispatchers.Main){
-                adap = Colaboradores_Adapter(eventosArray)
+                adap = Colaboradores_Adapter(colaboradores)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE
@@ -67,12 +63,12 @@ class collaborator_list : AppCompatActivity() {
             }
         }
 
-        fun BuscarAsociacion(view: Context){
+        fun BuscarColaborador(view: Context){
             progressBar.visibility = View.VISIBLE
             CoroutineScope(Dispatchers.IO).launch{
-                //val colaboradores = getColaboradoresBusqueda(editTextNombre.text.toString())
+                val colaboradores = getColaboradoresBusqueda(editTextNombre.text.toString())
                 withContext(Dispatchers.Main){
-                    adap = Colaboradores_Adapter(eventosArray)
+                    adap = Colaboradores_Adapter(colaboradores)
                     rv.adapter=adap
                     rv.layoutManager = LinearLayoutManager(view)
                     progressBar.visibility= View.GONE

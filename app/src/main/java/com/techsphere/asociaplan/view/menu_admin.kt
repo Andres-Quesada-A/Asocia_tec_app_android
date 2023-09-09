@@ -12,7 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class menu_admin : AppCompatActivity() {
-    private lateinit var asociaciones : Button
+    private lateinit var Asociaciones : Button
     private lateinit var colaboradores : Button
     private lateinit var estudiantes : Button
     private lateinit var cerrarSesion : Button
@@ -21,12 +21,12 @@ class menu_admin : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_admin)
-        asociaciones = findViewById(R.id.button_asociaciones)
+        Asociaciones = findViewById(R.id.button_asociaciones)
         colaboradores = findViewById(R.id.button_colaboradores)
         estudiantes = findViewById(R.id.button_estudiantes)
         foro = findViewById(R.id.button_foro)
         cerrarSesion = findViewById(R.id.button_cerrar_sesion)
-        asociaciones.setOnClickListener {
+        Asociaciones.setOnClickListener {
             val intent = Intent(this, asociaciones::class.java)
             startActivity(intent)
         }
