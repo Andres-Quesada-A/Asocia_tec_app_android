@@ -50,9 +50,9 @@ class Colaboradores_Adapter (private val dataSet: MutableList<Colaborador>) :
                 eliminarColaborador()
             }
             btnVerDetalles.setOnClickListener {
-                //val intent = Intent(view.context,agregar_miembros::class.java)
-                //intent.putExtra("correo", correo.toString())
-                //this.vista.startActivity(intent)
+                val intent = Intent(view.context,collaborator_details::class.java)
+                intent.putExtra("nombre", nombre.toString())
+                this.vista.startActivity(intent)
             }
         }
 
