@@ -3,6 +3,7 @@ package com.techsphere.asociaplan.models
 import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.util.Date
 
 class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, lugar: String, duracion: Int,
                requisitos: String, categoria: String): Serializable {

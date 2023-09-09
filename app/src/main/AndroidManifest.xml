@@ -111,6 +111,12 @@
         <activity
             android:name=".view.enviar_propuesta"
             android:exported="false" />
+        <activity
+            android:name=".view.eventos_evaluar"
+            android:exported="false" />
+        <activity
+            android:name=".view.evaluar_evento"
+            android:exported="false" />
         <!--
         <activity
             android:name=".view.LoginActivity"
