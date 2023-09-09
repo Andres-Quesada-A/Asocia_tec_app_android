@@ -85,16 +85,6 @@
             android:text="Buscar"
             android:textColor="@color/white" />
 
-        <Button
-            android:id="@+id/button_registrar"
-            android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="32dp"
-            android:backgroundTint="@color/blue"
-            android:text="Registrar colaborador"
-            android:textColor="@color/white" />
 
     </LinearLayout>
 

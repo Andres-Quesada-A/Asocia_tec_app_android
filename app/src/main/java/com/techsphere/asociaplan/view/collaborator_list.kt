@@ -1,7 +1,6 @@
 package com.techsphere.asociaplan.view
 
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,8 +13,6 @@ import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.UI.adapters.Colaboradores_Adapter
 import com.techsphere.asociaplan.controller.getColaboradoresBusqueda
 import com.techsphere.asociaplan.controller.getAllColaboradoresBD
-import com.techsphere.asociaplan.models.Asociacion
-import com.techsphere.asociaplan.models.Estudiantes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,14 +24,12 @@ class collaborator_list : AppCompatActivity() {
     private lateinit var progressBar : ProgressBar
     private lateinit var editTextNombre : EditText
     private lateinit var BuscarButton : Button
-    private lateinit var registerButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_collaborator_list)
         editTextNombre = findViewById<EditText>(R.id.nombre_colaborador)
         BuscarButton = findViewById<Button>(R.id.button_buscar)
-        registerButton = findViewById<Button>(R.id.button_registrar)
 
         rv = findViewById<RecyclerView>(R.id.rvColaboradores)
 
@@ -44,10 +39,6 @@ class collaborator_list : AppCompatActivity() {
         cargarColaboradores(this)
         BuscarButton.setOnClickListener {
             BuscarColaborador(this)
-        }
-        registerButton.setOnClickListener {
-            val intent = Intent(this,RegisterAsociationActivity::class.java)
-            startActivity(intent)
         }
     }
     fun cargarColaboradores(view: Context){
