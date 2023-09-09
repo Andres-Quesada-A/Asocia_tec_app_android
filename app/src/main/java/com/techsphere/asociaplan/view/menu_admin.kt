@@ -39,8 +39,8 @@ class menu_admin : AppCompatActivity() {
             startActivity(intent)
         }
         foro.setOnClickListener {
-            //val intent = Intent(this, EventCalendarActivity::class.java)
-            //startActivity(intent)
+            val intent = Intent(this, forum_main_view::class.java)
+            startActivity(intent)
         }
         cerrarSesion.setOnClickListener {
             logout(this)

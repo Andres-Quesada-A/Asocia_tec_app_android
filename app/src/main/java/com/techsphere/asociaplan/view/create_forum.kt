@@ -1,5 +1,6 @@
 package com.techsphere.asociaplan.view
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,11 @@ class create_forum : AppCompatActivity() {
         btnPublicar = findViewById(R.id.button_post)
         btnCancelar = findViewById(R.id.button_cancel)
 
+        btnCancelar.setOnClickListener{
+            val intent = Intent(this,forum_main_view::class.java)
+            this.startActivity(intent)
+            (this as Activity).finish()
+        }
         btnPublicar.setOnClickListener {
             Publicar()
         }
@@ -42,11 +48,11 @@ class create_forum : AppCompatActivity() {
         txtTitulo.error=null
         txtCuerpo.error=null
         if (Titulo.isEmpty()||Titulo.isBlank()){
-            txtTitulo.error="Por favor introduzca el nombre"
+            txtTitulo.error="Por favor introduzca el Titulo"
             return
         }
         if (Cuerpo.isEmpty()||Cuerpo.isBlank()){
-            txtCuerpo.error="Por favor introduzca el contacto"
+            txtCuerpo.error="Por favor introduzca la redacción"
             return
         }
 

@@ -1,13 +1,13 @@
 package com.techsphere.asociaplan.models
 
-class ForoItem (Titulo: String, Cuerpo: String, idMensaje: Int) {
+class ForoItem (id: Int, Titulo: String, Cuerpo: String) {
     private var titulo : String
     private var cuerpo : String
     private var idmensaje : Int
     init {
         this.titulo=Titulo
         this.cuerpo=Cuerpo
-        this.idmensaje=idMensaje
+        this.idmensaje=id
     }
     fun getTitulo(): String{
         return titulo

@@ -50,7 +50,8 @@ class menu_estudiante : AppCompatActivity() {
             startActivity(intent)
         }
         Foro.setOnClickListener {
-
+            val intent = Intent(this, forum_main_view::class.java)
+            startActivity(intent)
         }
         CerrarSesion.setOnClickListener {
             logout(this)

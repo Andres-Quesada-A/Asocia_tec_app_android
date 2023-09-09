@@ -16,15 +16,46 @@ suspend fun getAllForoItemsBD() : MutableList<ForoItem>{
         conn = DriverManager.getConnection(connectionString)
         var cs = conn.prepareCall("{call TomarComentarios @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
-        cs.setNull(1, Types.VARCHAR)
+        cs.registerOutParameter(1, Types.INTEGER)
+        var recordSets = cs.executeQuery()
+        // Creamos la lista que contendra las asociaciones
+        var items = mutableListOf<ForoItem>()
+        while (recordSets.next()){
+            // Creamos una nueva asociacion
+            var item = ForoItem(recordSets.getInt("id"),recordSets.getString("Titulo"), recordSets.getString("Cuerpo")
+                )
+            // Lo añadimos a la lista
+            items.add(item)
+        }
+        return items
+    }catch (ex: SQLException){
+        Log.e("Error SQL Exception: ", ex.message.toString())
+        return mutableListOf()
+    }catch (ex1: ClassNotFoundException){
+        Log.e("Error Class Not Found: ", ex1.message.toString())
+        return mutableListOf()
+    }catch (ex2: Exception) {
+        Log.e("Error Exception: ", ex2.message.toString())
+        return mutableListOf()
+    }
+}
+
+suspend fun getForoItemsBD(id : Int) : MutableList<ForoItem>{
+    var conn : Connection? = null
+    try {
+        Class.forName("net.sourceforge.jtds.jdbc.Driver")
+        conn = DriverManager.getConnection(connectionString)
+        var cs = conn.prepareCall("{call TomarComentarioId @idMensaje=?, @outCodeResult=?}")
+        // Asumimos que se nos pasan valores no nulos
+        cs.setInt(1, id)
         cs.registerOutParameter(2, Types.INTEGER)
         var recordSets = cs.executeQuery()
         // Creamos la lista que contendra las asociaciones
         var items = mutableListOf<ForoItem>()
         while (recordSets.next()){
             // Creamos una nueva asociacion
-            var item = ForoItem(recordSets.getString("Titulo"), recordSets.getString("Cuerpo"),
-                recordSets.getInt("idMensaje"))
+            var item = ForoItem(recordSets.getInt("id"),recordSets.getString("Titulo"), recordSets.getString("Cuerpo")
+            )
             // Lo añadimos a la lista
             items.add(item)
         }
@@ -46,7 +77,7 @@ suspend fun getAllForoRespuestasBD(id : Int) : MutableList<ForoRespuesta>{
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
-        var cs = conn.prepareCall("{call TomarComentarios @inId=?, @outCodeResult=?}")
+        var cs = conn.prepareCall("{call TomarRespeustas @idMensaje=?, @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
         cs.setInt(1, id)
         cs.registerOutParameter(2, Types.INTEGER)
@@ -55,7 +86,7 @@ suspend fun getAllForoRespuestasBD(id : Int) : MutableList<ForoRespuesta>{
         var Respuestas = mutableListOf<ForoRespuesta>()
         while (recordSets.next()){
             // Creamos una nueva asociacion
-            var respuesta = ForoRespuesta(recordSets.getString("Titulo"), recordSets.getString("Cuerpo"))
+            var respuesta = ForoRespuesta(recordSets.getInt("id"), recordSets.getString("Cuerpo"),recordSets.getInt("idMensaje"))
             // Lo añadimos a la lista
             Respuestas.add(respuesta)
         }

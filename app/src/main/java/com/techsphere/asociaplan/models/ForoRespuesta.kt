@@ -1,16 +1,21 @@
 package com.techsphere.asociaplan.models
 
-class ForoRespuesta (Titulo: String, Cuerpo: String) {
-    private var titulo : String
+class ForoRespuesta (id: Int, Cuerpo: String, idMensaje: Int) {
+    private var Id : Int
     private var cuerpo : String
+    private var idmensaje : Int
     init {
-        this.titulo=Titulo
+        this.Id=id
         this.cuerpo=Cuerpo
+        this.idmensaje=idMensaje
     }
-    fun getTitulo(): String{
-        return titulo
+    fun getid(): Int{
+        return Id
     }
     fun getCuerpo(): String{
         return cuerpo
+    }
+    fun getidMensaje(): Int{
+        return idmensaje
     }
 }
