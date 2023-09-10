@@ -33,14 +33,25 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button_miembros"
+            android:id="@+id/button_ver_miembros"
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_marginVertical="5dp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/blue"
-            android:text="Miembros"
+            android:text="ver_Miembros"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/button_agregar_miembros"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/blue"
+            android:text="agregar_Miembros"
             android:textColor="@color/white" />
 
         <Button

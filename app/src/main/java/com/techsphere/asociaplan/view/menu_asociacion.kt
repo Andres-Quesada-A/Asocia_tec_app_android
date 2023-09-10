@@ -12,7 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class menu_asociacion : AppCompatActivity() {
-    private lateinit var miembros : Button
+    private lateinit var ver_miembros : Button
+    private lateinit var agregar_miembros : Button
     private lateinit var eventos : Button
     private lateinit var actividades : Button
     private lateinit var capacidad : Button
@@ -25,7 +26,8 @@ class menu_asociacion : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu_asociacion)
-        miembros = findViewById<Button>(R.id.button_miembros)
+        ver_miembros = findViewById<Button>(R.id.button_ver_miembros)
+        agregar_miembros = findViewById<Button>(R.id.button_agregar_miembros)
         eventos = findViewById<Button>(R.id.button_eventos)
         actividades = findViewById<Button>(R.id.button_actividades)
         capacidad = findViewById<Button>(R.id.button_capacidad)
@@ -34,7 +36,12 @@ class menu_asociacion : AppCompatActivity() {
         estadisticas = findViewById<Button>(R.id.button_estadisticas)
         Foro = findViewById<Button>(R.id.button_foro)
         CerrarSesion = findViewById<Button>(R.id.button_cerrar_sesion)
-        miembros.setOnClickListener {
+        ver_miembros.setOnClickListener {
+            val intent = Intent(this,ver_miembros::class.java)
+            intent.putExtra("id", AuthHelper(this).getAccountId().toInt())
+            this.startActivity(intent)
+        }
+        agregar_miembros.setOnClickListener {
             val intent = Intent(this,agregar_miembros::class.java)
             intent.putExtra("id", AuthHelper(this).getAccountId().toInt())
             this.startActivity(intent)
