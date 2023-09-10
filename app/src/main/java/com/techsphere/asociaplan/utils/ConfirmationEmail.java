@@ -19,7 +19,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 public class ConfirmationEmail {
-    public void sendEmail(String receiverEmail, String subject, String messageContent, String imageFilePath, String pdfFilePath) {
+    public void sendEmail(String receiverEmail, String subject, String messageContent, String imageFilePath) {
         try {
             String host = "smtp.gmail.com";
             String stringSenderEmail = "asociaplan@gmail.com";
@@ -50,15 +50,15 @@ public class ConfirmationEmail {
             imageBodyPart.setFileName(imageSource.getName());
 
             // Adjuntar PDF al mensaje
-            MimeBodyPart pdfBodyPart = new MimeBodyPart();
-            DataSource pdfSource = new FileDataSource(pdfFilePath);
-            pdfBodyPart.setDataHandler(new DataHandler(pdfSource));
-            pdfBodyPart.setFileName(pdfSource.getName());
+//            MimeBodyPart pdfBodyPart = new MimeBodyPart();
+//            DataSource pdfSource = new FileDataSource(pdfFilePath);
+//            pdfBodyPart.setDataHandler(new DataHandler(pdfSource));
+//            pdfBodyPart.setFileName(pdfSource.getName());
 
             // Crear el Multipart y agregar las partes
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(imageBodyPart);
-            multipart.addBodyPart(pdfBodyPart);
+//            multipart.addBodyPart(pdfBodyPart);
 
             // Establecer el contenido del mensaje
             MimeBodyPart messageBodyPart = new MimeBodyPart();

@@ -11,6 +11,9 @@ import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
 import com.techsphere.asociaplan.controller.Administrador
 import com.techsphere.asociaplan.models.Eventos
+import com.techsphere.asociaplan.utils.ConfirmationEmail
+import com.techsphere.asociaplan.utils.EmailSender
+import com.techsphere.asociaplan.utils.generate_qr_code
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,12 +75,22 @@ class EventInscriptionActivity : AppCompatActivity() {
         val admin: Administrador = Administrador()
         val userId = authHelper.getAccountId()
         val eventId = evento.getId()
+        val emailSender = ConfirmationEmail()
+        val emailAuth = authHelper.getAccountEmail()
+        val contentEmail = "Ha sido inscripto en el evento ${evento.getTitulo()}, que se realizará el ${evento.getFecha()} en ${evento.getLugar()}"
+        val ContentQR = "Evento: ${evento.getTitulo()}, identificadorEvento: ${evento.getId()}, idUser: ${authHelper.getAccountId()}, email: ${authHelper.getAccountEmail()}"
+        
         dialogCarga.show()
         CoroutineScope(Dispatchers.IO).launch {
             val resultSp = admin.inscribirEstudianteEvento(eventId,userId)
             dialogCarga.dismiss()
             withContext(Dispatchers.Main) {
                 if (resultSp != 0) {
+                    if (emailAuth != null){
+                        val QRImage = generate_qr_code(ContentQR)
+                        emailSender.sendEmail(emailAuth, "Notificación de inscripción", contentEmail, QRImage)
+                    }
+
                     dialogs.showSuccessDialog(17)
                 } else {
                     dialogs.showErrorDialog(17)
