@@ -3,6 +3,7 @@ package com.techsphere.asociaplan.controller
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
@@ -31,9 +32,11 @@ class AuthController(context: Context) {
             if (res.isNotEmpty()){
                 val userType : Int = res[0]
                 val userId: Int = res[2]
+                Log.i("Tipo Usuario", "${userType}")
                 var resultAccount = authHelper.registerAccount(email, pass, userType, userId)
                 if (resultAccount) {
                     val userType = authHelper.getAccountType()
+                    Log.i("Tipo Usuario en if", "${userType}")
                     var mainIntent : Intent
                     if(userType==1){
                         mainIntent = Intent(context, menu_admin::class.java)

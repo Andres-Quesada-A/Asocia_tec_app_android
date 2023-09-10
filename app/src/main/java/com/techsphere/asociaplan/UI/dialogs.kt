@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
+import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.techsphere.asociaplan.R
 
@@ -139,5 +141,24 @@ class dialogs (context: Context) {
         )
         builder.setCancelable(false)
         builder.create().show()
+    }
+    fun showNotificationDialog(): AlertDialog{
+        val dialog = AlertDialog.Builder(context)
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.dialog_notificar_evento, null)
+        dialog.setView(view)
+        dialog.setCancelable(true)
+        val btnAceptar = view.findViewById<Button>(R.id.aceptarButton)
+        val btnCancelar = view.findViewById<Button>(R.id.cancelarButton)
+        val d = dialog.create()
+
+        btnAceptar.setOnClickListener {
+            Toast.makeText(context, "Se notificara", Toast.LENGTH_SHORT).show()
+        }
+        btnCancelar.setOnClickListener {
+            d.dismiss()
+        }
+        return d
+
     }
 }

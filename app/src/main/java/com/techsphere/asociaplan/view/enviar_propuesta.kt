@@ -49,7 +49,6 @@ class enviar_propuesta : AppCompatActivity() {
             EnviarPropuesta(idAsociacion, idUsuario)
         }
         volver.setOnClickListener {
-            val intent = Intent(this,asociaciones_propuesta::class.java)
             startActivity(intent)
         }
     }
@@ -84,7 +83,6 @@ class enviar_propuesta : AppCompatActivity() {
                 textoDetalles, idAso, idEven
             )
             if (res == 1){
-                startActivity(Intent(this@enviar_propuesta,enviar_propuesta::class.java))
                 finish()
             } else {
                 // Se le muestra el dialogo al usuario

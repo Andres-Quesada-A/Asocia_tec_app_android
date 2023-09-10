@@ -35,6 +35,7 @@ class forum_main_view : AppCompatActivity() {
         RedactarButton.setOnClickListener {
             val intent = Intent(this,create_forum::class.java)
             startActivity(intent)
+            finish()
         }
     }
     fun cargarItems(view: Context){

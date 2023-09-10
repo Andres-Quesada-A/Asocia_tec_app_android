@@ -46,8 +46,7 @@ class evaluar_evento : AppCompatActivity() {
             EvaluarEvento(idEvento, idUsuario)
         }
         volver.setOnClickListener {
-            val intent = Intent(this,eventos_evaluar::class.java)
-            startActivity(intent)
+            finish()
         }
     }
     fun EvaluarEvento(idEven: Int, idUsu: Int){
@@ -62,7 +61,6 @@ class evaluar_evento : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val res = EnviarEvaluacionDB(textoComentario, textCalificacion, idEven, idUsu)
             if (res == 1){
-                startActivity(Intent(this@evaluar_evento, evaluar_evento::class.java))
                 finish()
             } else {
                 // Se le muestra el dialogo al usuario
