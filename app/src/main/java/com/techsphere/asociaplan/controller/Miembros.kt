@@ -4,6 +4,9 @@ import android.util.Log
 import com.techsphere.asociaplan.models.Asociacion
 import com.techsphere.asociaplan.models.Estudiantes
 import com.techsphere.asociaplan.models.Miembro
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.sql.*
 
 private const val connectionString : String = "jdbc:jtds:sqlserver://serverapp-ap.database.windows.net;databaseName=BDAppAP;"+
@@ -185,5 +188,37 @@ suspend fun getEstudiantesMiembrosBusqueda(Id:Int, Nombre: String) : MutableList
     }catch (ex2: Exception) {
         Log.e("Error Exception: ", ex2.message.toString())
         return mutableListOf()
+    }
+}
+
+fun deleteMiembroBD(codigo: Int){
+    CoroutineScope(Dispatchers.IO).launch {
+        eliminarMiembroBD(codigo)
+    }
+}
+
+suspend fun eliminarMiembroBD(codigo: Int) : Int{
+    var conn : Connection? = null
+    try {
+        Class.forName("net.sourceforge.jtds.jdbc.Driver")
+        conn = DriverManager.getConnection(connectionString)
+        var cs = conn.prepareCall("{call EliminarMiembro @inIdmiembro=?, @outCodeResult=?}")
+        // Asumimos que se nos pasa un valor no vacio
+        cs.setInt(1, codigo)
+        // Le indicamos el parametro de salida y su tipo
+        cs.registerOutParameter(2, Types.INTEGER)
+        // Se ejecuta la query
+        cs.execute()
+        Log.i("SP OutCode", "Resultado: "+cs.getInt(2).toString())
+        return cs.getInt(2)
+    }catch (ex: SQLException){
+        Log.e("Error SQL Exception: ", ex.message.toString())
+        return 0
+    }catch (ex1: ClassNotFoundException){
+        Log.e("Error Class Not Found: ", ex1.message.toString())
+        return 0
+    }catch (ex2: Exception) {
+        Log.e("Error Exception: ", ex2.message.toString())
+        return 0
     }
 }

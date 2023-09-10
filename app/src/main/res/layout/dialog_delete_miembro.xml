@@ -37,7 +37,7 @@
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Si eliminas la asociación se perdera el acceso al mismo."
+                android:text="Si eliminas al miembro este no no formara parte de la asociación."
                 android:textAlignment="textStart"
                 android:textColor="?attr/colorOnPrimary"
                 android:textSize="16dp"
@@ -55,7 +55,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:text="¿Quieres eliminar a la asociación?"
+                android:text="¿Quieres eliminar al miembro?"
                 android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textColor="?attr/colorOnPrimary"
@@ -66,7 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/eliminarAsociacionBoton"
+                android:id="@+id/eliminarMiembroBoton"
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtServCub3" />
 
             <Button
-                android:id="@+id/cancelarEliminarAsociacionBoton"
+                android:id="@+id/cancelarEliminarMiembroBoton"
                 android:layout_width="120dp"
                 android:layout_height="48dp"
                 android:layout_alignParentStart="true"

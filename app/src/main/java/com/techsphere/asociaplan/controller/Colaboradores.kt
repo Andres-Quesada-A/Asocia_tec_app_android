@@ -11,11 +11,6 @@ import java.sql.*
 private const val connectionString : String = "jdbc:jtds:sqlserver://serverapp-ap.database.windows.net;databaseName=BDAppAP;"+
         "user=adminEvenAP;password=EventosAP1;ssl=require"
 
-suspend fun AgregarColaboradorBD(Codigo: String) : MutableList<Colaborador> {
-    var conn: Connection? = null
-    var estudiantes = mutableListOf<Colaborador>()
-    return estudiantes
-}
 suspend fun getAllColaboradoresBD() : MutableList<Colaborador>{
         var conn : Connection? = null
         try {

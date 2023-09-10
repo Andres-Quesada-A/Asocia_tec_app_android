@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.controller.deleteAsociacionBD
 import com.techsphere.asociaplan.models.Asociacion
-import com.techsphere.asociaplan.view.RegisterAsociationActivity
+import com.techsphere.asociaplan.view.ver_miembros
 import com.techsphere.asociaplan.view.agregar_miembros
 import com.techsphere.asociaplan.view.asociaciones
 import com.techsphere.asociaplan.view.editar_asociacion
@@ -57,7 +57,9 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
                 eliminarAsociacion()
             }
             btnMiembros.setOnClickListener {
-                VerMiembros()
+                val intent = Intent(view.context,ver_miembros::class.java)
+                intent.putExtra("id", id.toInt())
+                this.vista.startActivity(intent)
             }
             btnAgregar.setOnClickListener {
                 val intent = Intent(view.context,agregar_miembros::class.java)
@@ -86,10 +88,6 @@ class Asociaciones_Adapter (private val dataSet: MutableList<Asociacion>) :
             btnCancel.setOnClickListener {
                 d.dismiss()
             }
-        }
-
-        fun VerMiembros() {
-            ///
         }
     }
 
