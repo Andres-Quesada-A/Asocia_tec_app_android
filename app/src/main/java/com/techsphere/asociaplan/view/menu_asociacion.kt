@@ -49,8 +49,8 @@ class menu_asociacion : AppCompatActivity() {
             this.startActivity(intent)
         }
         eventos.setOnClickListener {
-            val intent = Intent(this,EventCalendarActivity::class.java)
-            startActivity(intent)
+            val intent = Intent(this,events::class.java)
+            this.startActivity(intent)
         }
         actividades.setOnClickListener {
 
