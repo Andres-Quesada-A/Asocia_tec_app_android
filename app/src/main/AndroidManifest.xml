@@ -121,6 +121,12 @@
         <activity
             android:name=".view.evaluar_evento"
             android:exported="false" />
+        <activity
+            android:name=".view.gestion_propuestas"
+            android:exported="false" />
+        <activity
+            android:name=".view.informacion_propuesta"
+            android:exported="false" />
         <!--
         <activity
             android:name=".view.LoginActivity"
