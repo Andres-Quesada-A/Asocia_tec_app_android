@@ -8,14 +8,16 @@
     android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/linearLayout13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="5dp"
         android:gravity="end"
-        android:paddingRight="20sp">
+        android:orientation="horizontal"
+        android:paddingRight="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/button_Menu"
@@ -30,9 +32,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="89dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout13"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -45,8 +49,7 @@
             android:text="Redactar"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/label_title"
@@ -94,16 +97,16 @@
             android:background="@drawable/border_input"
             android:ems="10"
             android:hint="Redación"
-            android:inputType="text"
+            android:inputType="textMultiLine|text"
             android:padding="2dp"
             android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
 
             >
 

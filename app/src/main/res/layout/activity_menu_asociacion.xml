@@ -99,6 +99,17 @@
             android:textColor="@color/white" />
 
         <Button
+            android:id="@+id/button_gestion_propuestas"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:layout_marginVertical="5dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/blue"
+            android:text="Gestion propuestas"
+            android:textColor="@color/white" />
+
+        <Button
             android:id="@+id/button_informes"
             android:layout_width="match_parent"
             android:layout_height="50sp"

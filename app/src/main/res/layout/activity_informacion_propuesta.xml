@@ -4,20 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.enviar_propuesta"
+    tools:context=".view.informacion_propuesta"
     android:background="@color/white">
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
         android:orientation="horizontal"
-        android:paddingRight="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="153dp"
+        tools:layout_editor_absoluteY="5dp"
+        android:gravity="end"
+        android:paddingRight="20sp">
 
         <Button
             android:id="@+id/button_Menu"
@@ -33,11 +31,10 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="68dp">
 
         <TextView
             android:id="@+id/titleView"
@@ -46,37 +43,61 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="20sp"
-            android:text="Evaluar Evento"
+            android:text="Detalles de la propuesta"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/label_nombre"
+            android:id="@+id/label_promotor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10sp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Nombre:"
+            android:text="Promotor:"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
-
 
         <TextView
-            android:id="@+id/label_comentario"
+            android:id="@+id/label_tematica"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10sp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Comentario"
+            android:text="Tematica"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <EditText
+        <TextView
+            android:id="@+id/tematica"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border_input"
+            android:ems="10"
+            android:hint="Tematica"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/label_objetivos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="Objetivos"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/objetivos"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -84,7 +105,7 @@
             android:layout_marginEnd="32dp"
             android:background="@drawable/border_input"
             android:ems="10"
-            android:hint="Comentario"
+            android:hint="Objetivos"
             android:inputType="text"
             android:padding="2dp"
             android:textColor="@color/black" />
@@ -96,39 +117,85 @@
             android:layout_marginVertical="10sp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:text="Calificacion"
+            android:text="Actividades"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <NumberPicker
-            android:id="@+id/calificacion"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
+        <TextView
+            android:id="@+id/actividades"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border_input"
+            android:ems="10"
+            android:hint="Actividades"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/label_detalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:text="Detalles"
             android:textColor="@color/black"
-            android:textStyle="bold"
-            android:layout_marginStart="32dp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-
+        <TextView
+            android:id="@+id/detalles"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@drawable/border_input"
+            android:ems="10"
+            android:hint="Detalles"
+            android:inputType="text"
+            android:padding="2dp"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_enviar"
+        android:id="@+id/button_descartar"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="220dp"
+        android:layout_marginStart="224dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/blue"
-        android:text="Enviar"
+        android:backgroundTint="@color/red"
+        android:text="Descartar"
         android:textColor="@color/white"
         android:textSize="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.063" />
+
+    <Button
+        android:id="@+id/button_aceptar"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/green"
+        android:text="Aceptar"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.063" />
 
     <Button
         android:id="@+id/button_volver"
@@ -136,7 +203,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="144dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:backgroundTint="@color/blue"
@@ -146,6 +213,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.789" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

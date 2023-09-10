@@ -49,8 +49,7 @@ class eventos_evaluar : AppCompatActivity() {
             BuscarEventosEvaluar(this, idUsuario)
         }
         volver.setOnClickListener {
-            val intent = Intent(this,menu_estudiante::class.java)
-            startActivity(intent)
+            finish()
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)

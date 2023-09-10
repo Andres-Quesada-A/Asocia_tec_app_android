@@ -34,8 +34,8 @@ class create_forum : AppCompatActivity() {
 
         btnCancelar.setOnClickListener{
             val intent = Intent(this,forum_main_view::class.java)
-            this.startActivity(intent)
-            (this as Activity).finish()
+            startActivity(intent)
+            finish()
         }
         btnPublicar.setOnClickListener {
             Publicar()

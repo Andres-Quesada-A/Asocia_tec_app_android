@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
+import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.models.Eventos
 import com.techsphere.asociaplan.view.EventInscriptionActivity
 
@@ -21,6 +22,7 @@ class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
                 val moreInfoButton: Button
                 val meInteresaButton: Button
                 lateinit var evento: Eventos
+                private var dialog = dialogs(view.context)
                 init {
                     nombreText=view.findViewById(R.id.txt_title)
                     fechaText=view.findViewById(R.id.txt_date)
@@ -42,7 +44,8 @@ class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
                     context.startActivity(intent)
                 }
                 private fun showNotificationDialog(context: Context){
-                    //TODO
+                    val notificationDialog = dialog.showNotificationDialog()
+                    notificationDialog.show()
                 }
 
             }
