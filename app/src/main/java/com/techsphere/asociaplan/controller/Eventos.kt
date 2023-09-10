@@ -81,7 +81,7 @@ suspend fun getEventosBusqueda(Nombre: String, id: Int) : MutableList<Eventos_As
     }
 }
 
-suspend fun registerEventoInBD(Descripcion: String, Contacto : String, Id: Int
+suspend fun registerEventoInBD(Id:Int,Nombre:String,Fecha:Date,Descripcion:String,Lugar:String,Duracion:Int,Requerimientos:String,Categoria:String
 ) : Int{
     var conn : Connection? = null
     try {
@@ -89,14 +89,19 @@ suspend fun registerEventoInBD(Descripcion: String, Contacto : String, Id: Int
         conn = DriverManager.getConnection(connectionString)
         var cs = conn.prepareCall("{call RegistrarEvento @inIdAsociacion=?, @inTitulo=?, @inFecha=?,@inDescripcion=?, @inLugar=?, @inDuracion=?,@inRequisitos=?, @inIdCategoria=?, @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
-        cs.setString(1, Descripcion)
-        cs.setString(2, Contacto)
-        cs.setInt(3, Id)
+        cs.setInt(1, Id)
+        cs.setString(2, Nombre)
+        cs.setDate(3, Fecha)
+        cs.setString(4, Descripcion)
+        cs.setString(5, Lugar)
+        cs.setInt(6, Duracion)
+        cs.setString(7, Requerimientos)
+        cs.setString(8, Categoria)
         // Le indicamos el parametro de salida y su tipo
-        cs.registerOutParameter(4, Types.INTEGER)
+        cs.registerOutParameter(9, Types.INTEGER)
         // Se ejecuta la query
         cs.execute()
-        var result = cs.getInt(4)
+        var result = cs.getInt(9)
         Log.i("SP OutCode", "Resultado: "+result.toString())
         return result
     }catch (ex: SQLException){

@@ -1,19 +1,22 @@
 package com.techsphere.asociaplan.view
 
 import android.content.Intent
-import android.graphics.Paint.Cap
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.auth.AuthHelper
-import com.techsphere.asociaplan.controller.registerCollabInBD
+import com.techsphere.asociaplan.UI.fragments.DatePickerFragment
+import com.techsphere.asociaplan.controller.registerEventoInBD
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 import java.util.Locale.Category
 
 class register_event : AppCompatActivity() {
@@ -26,6 +29,7 @@ class register_event : AppCompatActivity() {
     private lateinit var txtRequerimientos : EditText
     private lateinit var txtDescripcion : EditText
     private lateinit var btnRegis : Button
+    private var fecha: java.util.Date? =null
     private var Id : Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +46,10 @@ class register_event : AppCompatActivity() {
         txtDescripcion = findViewById(R.id.description)
         btnRegis = findViewById(R.id.button_register)
 
+        txtFecha.setOnClickListener {
+            showDatePickerDialog()
+        }
+
         btnRegis.setOnClickListener {
             Registrar()
         }
@@ -55,6 +63,7 @@ class register_event : AppCompatActivity() {
             val Capacidad = txtCapacidad.text.toString()
             val Requerimientos = txtRequerimientos.text.toString()
             val Descripcion = txtDescripcion.text.toString()
+
             txtDescripcion.error=null
             txtNombre.error=null
             txtFecha.error=null
@@ -98,7 +107,7 @@ class register_event : AppCompatActivity() {
 
             Toast.makeText(this, "Registrando el evento", Toast.LENGTH_SHORT).show()
             CoroutineScope(Dispatchers.IO).launch {
-                val res = registerEventoInBD(Descripcion, Contacto, Id!!)
+                val res = registerEventoInBD(Id!!,Nombre,fecha as java.sql.Date,Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
                 if (res == 1){
                     val intent = Intent(this@register_event,events::class.java)
                     startActivity(intent)
@@ -112,4 +121,13 @@ class register_event : AppCompatActivity() {
                 }
             }
         }
+    private fun showDatePickerDialog() {
+        val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year) }
+        datePicker.show(supportFragmentManager, "datePicker")
+    }
+    fun onDateSelected(day: Int, month: Int, year: Int){
+        txtFecha.setText("$day/${month+1}/$year")
+        txtFecha.setText("Hola")
+        fecha = GregorianCalendar(year, month, day).getTime()
+    }
 }

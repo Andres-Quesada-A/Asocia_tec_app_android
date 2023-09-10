@@ -7,6 +7,7 @@
     tools:context=".view.register_event"
     android:background="@color/white">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,6 +29,18 @@
         </Button>
     </LinearLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,6 +48,8 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="89dp"
         tools:ignore="MissingConstraints">
+
+
 
         <TextView
             android:id="@+id/titleView"
@@ -254,6 +269,7 @@
             android:text="Registrar Evento"
             android:textColor="@color/white"/>
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
