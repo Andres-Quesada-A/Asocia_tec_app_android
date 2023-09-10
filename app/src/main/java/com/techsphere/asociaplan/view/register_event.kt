@@ -127,7 +127,6 @@ class register_event : AppCompatActivity() {
     }
     fun onDateSelected(day: Int, month: Int, year: Int){
         txtFecha.setText("$day/${month+1}/$year")
-        txtFecha.setText("Hola")
         fecha = GregorianCalendar(year, month, day).getTime()
     }
 }
