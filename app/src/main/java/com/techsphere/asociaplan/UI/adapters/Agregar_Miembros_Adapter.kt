@@ -12,12 +12,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.controller.AgregarMiembroBD
-import com.techsphere.asociaplan.models.Asociacion
 import com.techsphere.asociaplan.models.Miembro
-import com.techsphere.asociaplan.view.RegisterAsociationActivity
 import com.techsphere.asociaplan.view.agregar_miembros
-import com.techsphere.asociaplan.view.asociaciones
-import com.techsphere.asociaplan.view.editar_asociacion
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch

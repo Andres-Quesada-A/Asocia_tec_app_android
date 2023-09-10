@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.UI.adapters.Agregar_Miembros_Adapter
-import com.techsphere.asociaplan.UI.adapters.Asociaciones_Adapter
+import com.techsphere.asociaplan.UI.adapters.Ver_Miembros_Adapter
 import com.techsphere.asociaplan.controller.getAllEstudiantesMiembrosBD
 import com.techsphere.asociaplan.controller.getEstudiantesMiembrosBusqueda
-import com.techsphere.asociaplan.models.Estudiantes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,7 +22,7 @@ import kotlinx.coroutines.withContext
 
 class ver_miembros : AppCompatActivity() {
     private lateinit var rv : RecyclerView
-    private lateinit var adap : Agregar_Miembros_Adapter
+    private lateinit var adap : Ver_Miembros_Adapter
     private lateinit var progressBar : ProgressBar
     private lateinit var editTextNombre : EditText
     var id = 0
@@ -49,7 +48,7 @@ class ver_miembros : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch{
             val Estudiantes = getAllEstudiantesMiembrosBD(id)
             withContext(Dispatchers.Main){
-                adap = Agregar_Miembros_Adapter(Estudiantes)
+                adap = Ver_Miembros_Adapter(Estudiantes)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE
@@ -62,7 +61,7 @@ class ver_miembros : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch{
             val Estudiantes = getEstudiantesMiembrosBusqueda(id, editTextNombre.text.toString())
             withContext(Dispatchers.Main){
-                adap = Agregar_Miembros_Adapter(Estudiantes)
+                adap = Ver_Miembros_Adapter(Estudiantes)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(view)
                 progressBar.visibility= View.GONE

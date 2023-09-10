@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
+import com.techsphere.asociaplan.auth.AuthHelper
 import com.techsphere.asociaplan.controller.deleteMiembroBD
 import com.techsphere.asociaplan.models.Miembro
 import com.techsphere.asociaplan.view.*
@@ -52,6 +53,7 @@ class Ver_Miembros_Adapter (private val dataSet: MutableList<Miembro>) :
                     deleteMiembroBD(Id)
                     d.dismiss()
                     val intent = Intent(view.context, ver_miembros::class.java)
+                    intent.putExtra("id", IdAsociacion)
                     this.vista.startActivity(intent)
                     (this.vista as Activity).finish()
                 }

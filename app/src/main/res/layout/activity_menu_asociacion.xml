@@ -40,7 +40,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/blue"
-            android:text="ver_Miembros"
+            android:text="ver Miembros"
             android:textColor="@color/white" />
 
         <Button
@@ -51,7 +51,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/blue"
-            android:text="agregar_Miembros"
+            android:text="agregar Miembros"
             android:textColor="@color/white" />
 
         <Button
