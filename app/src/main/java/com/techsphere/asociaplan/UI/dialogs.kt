@@ -91,41 +91,82 @@ class dialogs (context: Context) {
         builder.setCancelable(false)
         builder.create().show()
     }
-    fun showSuccessDialog(type: Int){
+    fun showSuccessDialog(type: Int, finish: Boolean=true){
         val builder = AlertDialog.Builder(context)
         // Es un numero arbitrario, luego se puede cambiar
-        if (type==17){
-            builder.setTitle("Inscripcion a eventos")
-            builder.setMessage("Se ha inscrito al evento de forma exitosa")
-        } else{
-            builder.setTitle("Exito")
-            builder.setMessage("La accion se llevo a cabo de manera exitosa")
-        }
-        builder.setPositiveButton("Aceptar",
-            DialogInterface.OnClickListener { dialog, id ->
-                (context as Activity).finish()
+        when (type){
+            17 -> {
+                builder.setTitle("Inscripcion a eventos")
+                builder.setMessage("Se ha inscrito al evento de forma exitosa")
             }
-        )
+            20 ->{
+                builder.setTitle("Confirmacion de asistencia")
+                builder.setMessage("Se confirmo la asistencia al evento de manera exitosa")
+            }
+            21 ->{
+                builder.setTitle("Cancelar inscripcion")
+                builder.setMessage("Se cancelo la inscripcion al evento en forma exitosa")
+            }
+            else -> {
+                builder.setTitle("Exito")
+                builder.setMessage("La accion se llevo a cabo de manera exitosa")
+            }
+        }
+        if (finish){
+            builder.setPositiveButton("Aceptar",
+                DialogInterface.OnClickListener { dialog, id ->
+                    (context as Activity).finish()
+                }
+            )
+        } else{
+            builder.setPositiveButton("Aceptar",
+                DialogInterface.OnClickListener { dialog, id ->
+                    dialog.dismiss()
+                }
+            )
+        }
         builder.setCancelable(false)
         builder.create().show()
     }
-    fun showErrorDialog(type: Int){
+    fun showErrorDialog(type: Int, finish: Boolean=true){
         val builder = AlertDialog.Builder(context)
         // Es un numero arbitrario, luego se puede cambiar
-        if (type==17){
-            builder.setTitle("Inscripcion a eventos")
-            builder.setMessage("No se pudo inscribir al evento\n" +
-                    "Por favor, intentelo mas tarde")
-        } else{
-            builder.setTitle("Error")
-            builder.setMessage("Ocurrio un error inesperado\n" +
-                    "Por favor, intentelo mas tarde")
-        }
-        builder.setPositiveButton("Aceptar",
-            DialogInterface.OnClickListener { dialog, id ->
-                (context as Activity).finish()
+        when (type){
+            17 -> {
+                builder.setTitle("Inscripcion a eventos")
+                builder.setMessage("No se pudo inscribir al evento\n" +
+                        "Por favor, intentelo mas tarde")
             }
-        )
+            20 ->{
+                builder.setTitle("Confirmacion de asistencia")
+                builder.setMessage("No se pudo confirmar la asistencia al evento\n" +
+                        "Por favor, intentelo mas tarde")
+            }
+            21 ->{
+                builder.setTitle("Cancelar inscripcion")
+                builder.setMessage("No se pudo cancelar la inscripcion al evento\n" +
+                        "Por favor, intentelo mas tarde")
+            }
+            else -> {
+                builder.setTitle("Error")
+                builder.setMessage("Ocurrio un error inesperado\n" +
+                        "Por favor, intentelo mas tarde")
+            }
+        }
+
+        if (finish){
+            builder.setPositiveButton("Aceptar",
+                DialogInterface.OnClickListener { dialog, id ->
+                    (context as Activity).finish()
+                }
+            )
+        } else{
+            builder.setPositiveButton("Aceptar",
+                DialogInterface.OnClickListener { dialog, id ->
+                    dialog.dismiss()
+                }
+            )
+        }
         builder.setCancelable(false)
         builder.create().show()
     }

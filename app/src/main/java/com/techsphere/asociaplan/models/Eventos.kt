@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 import java.util.Date
 
 class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, lugar: String, duracion: Int,
-               requisitos: String, categoria: String): Serializable {
+               requisitos: String, categoria: String, estado: Int=2): Serializable {
     private var id: Int
     private var titulo: String
     private var descripcion: String
@@ -15,6 +15,7 @@ class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, l
     private var duracion: Int
     private var requisitos: String
     private var categoria: String
+    private var estado: Int
 
     init {
         this.id=id
@@ -25,6 +26,7 @@ class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, l
         this.duracion=duracion
         this.requisitos=requisitos
         this.categoria=categoria
+        this.estado=estado
     }
 
     fun getId(): Int{
@@ -56,5 +58,11 @@ class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, l
     }
     fun getRequisitos(): String{
         return requisitos
+    }
+    fun getEstado(): Int {
+        return estado
+    }
+    fun setEstado(estado: Int){
+        this.estado=estado
     }
 }

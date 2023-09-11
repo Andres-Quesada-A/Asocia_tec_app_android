@@ -130,5 +130,90 @@ class Administrador {
             return 0
         }
     }
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getInscripcionesEstudiante(id: Int, nombre: String=""): MutableList<Eventos>{
+        var connection : Connection? = null
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            connection = DriverManager.getConnection(connectionString)
+            val sp = connection.prepareCall("{call BuscarEventoInscrito @inIdEstudiante=?, @inNombre=?," +
+                    "@outCodeResult=?}")
+            sp.setInt(1, id)
+            if (nombre.isEmpty()||nombre.isBlank()){
+                sp.setNull(2,Types.VARCHAR)
+            } else{
+                sp.setString(2, nombre)
+            }
+            sp.registerOutParameter(3, Types.INTEGER)
+            var rSet = sp.executeQuery()
+            var eventos = mutableListOf<Eventos>()
+            while (rSet.next()){
+                var evento = Eventos(rSet.getInt("id"), rSet.getString("Titulo"), rSet.getString("Descripcion"),
+                    rSet.getDate("Fecha").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                    rSet.getString("Lugar"), rSet.getInt("Duracion"), rSet.getString("Requisitos"),
+                    rSet.getString("Categoria"), rSet.getInt("Estado"))
+                eventos.add(evento)
+            }
+            return eventos
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return mutableListOf()
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return mutableListOf()
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return mutableListOf()
+        }
+    }
+    suspend fun confirmAssistance(idEstudiante: Int, idEvento: Int): Int{
+        var connection : Connection? = null
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            connection = DriverManager.getConnection(connectionString)
+            val sp = connection.prepareCall("{call ConfirmarInscripcion @inIdEstudiante=?, @inIdEvento=?," +
+                    "@outCodeResult=?}")
+            sp.setInt(1, idEstudiante)
+            sp.setInt(2, idEvento)
+            sp.registerOutParameter(3, Types.INTEGER)
+            val rs = sp.executeQuery()
+            while (rs.next()){
 
+            }
+            Log.i("SP Result", "${sp.getInt(3)}")
+            return sp.getInt(3)
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return 0
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return 0
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return 0
+        }
+    }
+    suspend fun cancelAssistance(idEstudiante: Int, idEvento: Int): Int{
+        var connection : Connection? = null
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            connection = DriverManager.getConnection(connectionString)
+            val sp = connection.prepareCall("{call EliminarInscripcion @inIdEstudiante=?, @inIdEvento=?," +
+                    "@outCodeResult=?}")
+            sp.setInt(1, idEstudiante)
+            sp.setInt(2, idEvento)
+            sp.registerOutParameter(3, Types.INTEGER)
+            sp.execute()
+            return sp.getInt(3)
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return 0
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return 0
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return 0
+        }
+    }
 }

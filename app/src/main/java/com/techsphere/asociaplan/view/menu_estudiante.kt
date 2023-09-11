@@ -39,7 +39,8 @@ class menu_estudiante : AppCompatActivity() {
             startActivity(intent)
         }
         Inscripciones.setOnClickListener {
-
+            val intent = Intent(this, InscripcionesEventosActivity::class.java)
+            startActivity(intent)
         }
         EvaluarEvento.setOnClickListener {
             val intent = Intent(this,eventos_evaluar::class.java)
