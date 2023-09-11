@@ -3,7 +3,11 @@ package com.techsphere.asociaplan.UI
 import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -178,6 +182,23 @@ class dialogs (context: Context) {
         builder.setPositiveButton("Aceptar",
             DialogInterface.OnClickListener { dialog, id ->
                 (context as Activity).finish()
+            }
+        )
+        builder.setCancelable(false)
+        builder.create().show()
+    }
+    fun showSpecialStoragePermissions(){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Permiso requerido")
+        builder.setMessage("Esta funcion requiere acceder al almacenamiento del dispositivo." +
+                        "\nPara poder activar el permiso busca el nombre del app, y activa el permiso")
+        builder.setPositiveButton("Activar permiso",
+            DialogInterface.OnClickListener { dialog, id ->
+                val intent = Intent()
+                intent.action = Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION
+                val uri: Uri = Uri.fromParts("package", context.packageName, null)
+                intent.data = uri
+                (context as Activity).startActivity(intent)
             }
         )
         builder.setCancelable(false)

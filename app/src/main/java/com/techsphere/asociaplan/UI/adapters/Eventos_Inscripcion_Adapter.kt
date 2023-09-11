@@ -96,6 +96,8 @@ class Eventos_Inscripcion_Adapter(private val eventos: MutableList<Eventos>):
                                 dialog.showSuccessDialog(21, false)
                                 cancelButton.isClickable=false
                                 cancelButton.backgroundTintList=context.getColorStateList(R.color.gray)
+                                confirmButton.isClickable=false
+                                confirmButton.backgroundTintList=context.getColorStateList(R.color.gray)
                                 evento.setEstado(1)
                             } else{
                                 dialog.showErrorDialog(21, false)

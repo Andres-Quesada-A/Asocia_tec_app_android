@@ -2,16 +2,17 @@ package com.techsphere.asociaplan.utils
 
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.os.Build
 import android.os.Environment
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
+import com.techsphere.asociaplan.models.Eventos
 import java.io.File
 import java.io.FileOutputStream
 
 public suspend fun generate_qr_code (datosString: String) : String {
-
     val writer = QRCodeWriter()
     try {
         val bitMatrix: BitMatrix = writer.encode(datosString, BarcodeFormat.QR_CODE, 512, 512)
