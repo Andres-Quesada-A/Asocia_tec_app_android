@@ -13,14 +13,14 @@ private const val connectionString : String = "jdbc:jtds:sqlserver://serverapp-a
         "user=adminEvenAP;password=EventosAP1;ssl=require"
 
 @RequiresApi(Build.VERSION_CODES.O)
-suspend fun getAllEventosBD(id:Int) : MutableList<Eventos_Asociacion>{
+suspend fun getEventosBusqueda(Nombre: String, id: Int) : MutableList<Eventos_Asociacion>{
     var conn : Connection? = null
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
         var cs = conn.prepareCall("{call BuscarEventoaAsociacion @inNombre=?,@inIdAsociacion=?, @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
-        cs.setNull(1, Types.VARCHAR)
+        cs.setString(1, Nombre)
         cs.setInt(2, id)
         cs.registerOutParameter(3, Types.INTEGER)
         var recordSets = cs.executeQuery()
@@ -47,14 +47,14 @@ suspend fun getAllEventosBD(id:Int) : MutableList<Eventos_Asociacion>{
     }
 }
 @RequiresApi(Build.VERSION_CODES.O)
-suspend fun getEventosBusqueda(Nombre: String, id: Int) : MutableList<Eventos_Asociacion>{
+suspend fun getAllEventosBD(id:Int) : MutableList<Eventos_Asociacion>{
     var conn : Connection? = null
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
         var cs = conn.prepareCall("{call BuscarEventoaAsociacion @inNombre=?,@inIdAsociacion=?, @outCodeResult=?}")
         // Asumimos que se nos pasan valores no nulos
-        cs.setString(1, Nombre)
+        cs.setNull(1, Types.VARCHAR)
         cs.setInt(2, id)
         cs.registerOutParameter(3, Types.INTEGER)
         var recordSets = cs.executeQuery()

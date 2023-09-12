@@ -5,6 +5,7 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.techsphere.asociaplan.models.Eventos
+import com.techsphere.asociaplan.models.Eventos_Asociacion
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -152,6 +153,45 @@ class Administrador {
                     rSet.getDate("Fecha").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
                     rSet.getString("Lugar"), rSet.getInt("Duracion"), rSet.getString("Requisitos"),
                     rSet.getString("Categoria"), rSet.getInt("Estado"))
+                eventos.add(evento)
+            }
+            return eventos
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return mutableListOf()
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return mutableListOf()
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return mutableListOf()
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun getAllEventosAsociation(id:Int, nombre: String="") : MutableList<Eventos>{
+        var conn : Connection? = null
+        try {
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            conn = DriverManager.getConnection(connectionString)
+            var sp = conn.prepareCall("{call BuscarEventoGestion @inNombre=?,@inIdAsociacion=?, @outCodeResult=?}")
+            // Asumimos que se nos pasan valores no nulos
+            if (nombre.isEmpty()||nombre.isBlank()){
+                sp.setNull(1,Types.VARCHAR)
+            } else{
+                sp.setString(1, nombre)
+            }
+            sp.setInt(2, id)
+            sp.registerOutParameter(3, Types.INTEGER)
+            var rSet = sp.executeQuery()
+            // Creamos la lista que contendra las asociaciones
+            var eventos = mutableListOf<Eventos>()
+            while (rSet.next()){
+                // Creamos una nuevo evento
+                var evento = Eventos(rSet.getInt("id"), rSet.getString("Titulo"), rSet.getString("Descripcion"),
+                    rSet.getDate("Fecha").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                    rSet.getString("Lugar"), rSet.getInt("Duracion"), rSet.getString("Requisitos"),
+                    rSet.getString("Categoria"))
+                // Lo añadimos a la lista
                 eventos.add(evento)
             }
             return eventos

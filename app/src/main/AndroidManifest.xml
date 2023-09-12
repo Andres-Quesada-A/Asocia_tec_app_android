@@ -19,6 +19,12 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
+            android:name=".view.EventCapacityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EditEventCapacityActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.EventInfoActivity"
             android:exported="false" />
         <activity

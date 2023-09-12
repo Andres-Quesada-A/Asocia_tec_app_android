@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.agregar_miembros"
+    tools:context=".view.eventos_evaluar"
     android:background="@color/white">
 
     <LinearLayout
-        android:id="@+id/linearLayout15"
+        android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
@@ -37,7 +37,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout15"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout10"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -47,26 +47,26 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="20sp"
-            android:text="Agregar Miembros"
+            android:text="Gestionar Capacidad De Eventos"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/label_carnet"
+            android:id="@+id/label_nombre_asociacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="10sp"
-            android:text="Nombre del estudiante"
+            android:text="Nombre del evento"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
 
         <EditText
-            android:id="@+id/nombre_asociacion"
+            android:id="@+id/nombre_evento"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="32dp"
@@ -89,14 +89,16 @@
             android:text="Buscar"
             android:textColor="@color/white" />
 
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvMiembros"
+        android:id="@+id/rvEventoEvaluar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginHorizontal="0sp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -109,10 +111,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
-        app:layout_constraintBottom_toBottomOf="@+id/rvMiembros"
-        app:layout_constraintTop_toTopOf="@+id/rvMiembros"
+        app:layout_constraintBottom_toBottomOf="@+id/rvEventoEvaluar"
+        app:layout_constraintTop_toTopOf="@+id/rvEventoEvaluar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:layout_editor_absoluteX="181dp" />
+
+    <Button
+        android:id="@+id/button_volver"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="144dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/blue"
+        android:text="Volver"
+        android:textColor="@color/white"
+        android:textSize="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvEventoEvaluar"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

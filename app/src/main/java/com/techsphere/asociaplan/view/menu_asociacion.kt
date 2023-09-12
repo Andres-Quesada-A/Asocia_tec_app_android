@@ -56,7 +56,7 @@ class menu_asociacion : AppCompatActivity() {
 
         }
         capacidad.setOnClickListener {
-
+            startActivity(Intent(this, EventCapacityActivity::class.java))
         }
         colaboradores.setOnClickListener {
 

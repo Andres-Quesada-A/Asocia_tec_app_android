@@ -49,7 +49,6 @@ class RegisterActivity : AppCompatActivity() {
         var isPassEmpty = false
         var isPassConfEmpty = false
         var isValidEmail = true
-        Log.i("Dominio", email.split("@")[1])
         if(name.isEmpty()||name.isBlank()){
             isNombreEmpty = true
         }
