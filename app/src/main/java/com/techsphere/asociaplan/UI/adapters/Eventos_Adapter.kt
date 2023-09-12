@@ -11,7 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
-import com.techsphere.asociaplan.controller.deleteAsociacionBD
+import com.techsphere.asociaplan.controller.deleteEventoBD
 import com.techsphere.asociaplan.models.Eventos_Asociacion
 import com.techsphere.asociaplan.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -46,6 +46,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
             btnEditar.setOnClickListener {
                 val intent = Intent(view.context,edit_event::class.java)
                 intent.putExtra("id", id.toInt())
+                intent.putExtra("nombre", nombre.toString())
                 this.vista.startActivity(intent)
             }
             btnEliminar.setOnClickListener {
@@ -54,6 +55,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
             btnDetalles.setOnClickListener {
                 val intent = Intent(view.context,event_details::class.java)
                 intent.putExtra("id", id.toInt())
+                intent.putExtra("nombre", nombre.toString())
                 this.vista.startActivity(intent)
             }
         }
@@ -69,7 +71,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
             val d = dialog.create()
             d.show()
             btnDelete.setOnClickListener {
-                deleteAsociacionBD(id)
+                deleteEventoBD(id)
                 d.dismiss()
                 val intent = Intent(view.context,events::class.java)
                 this.vista.startActivity(intent)
@@ -94,9 +96,10 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var eventos: Eventos_Asociacion = dataSet.get(position)
         holder.txtTitulo.text = "Titulo: ${eventos.getTitulo()}"
-        //holder.txtCategoria.text = "Categoria: ${eventos.getCategoria()}"
+        holder.txtCategoria.text = "Categoria: ${eventos.getCategoria()}"
         holder.txtFecha.text="Fecha: ${eventos.getFecha()}"
         holder.id = eventos.getId()
+        holder.nombre = eventos.getTitulo()
     }
 
     override fun getItemCount(): Int {

@@ -25,11 +25,10 @@ class register_event : AppCompatActivity() {
     private lateinit var txtLugar : EditText
     private lateinit var txtDuracion : EditText
     private lateinit var txtCategoria : EditText
-    private lateinit var txtCapacidad : EditText
     private lateinit var txtRequerimientos : EditText
     private lateinit var txtDescripcion : EditText
     private lateinit var btnRegis : Button
-    private var fecha: java.util.Date? =null
+    private var fecha: Date? =null
     private var Id : Int? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +39,7 @@ class register_event : AppCompatActivity() {
         txtFecha = findViewById(R.id.date)
         txtLugar = findViewById(R.id.place)
         txtDuracion = findViewById(R.id.duration)
-        txtCategoria = findViewById(R.id.category)
-        txtCapacidad = findViewById(R.id.capacity)
+        txtCategoria = findViewById(R.id.categoria)
         txtRequerimientos = findViewById(R.id.requirements)
         txtDescripcion = findViewById(R.id.description)
         btnRegis = findViewById(R.id.button_register)
@@ -60,7 +58,6 @@ class register_event : AppCompatActivity() {
             val Lugar = txtLugar.text.toString()
             val Duracion = txtDuracion.text.toString()
             val Categoria = txtCategoria.text.toString()
-            val Capacidad = txtCapacidad.text.toString()
             val Requerimientos = txtRequerimientos.text.toString()
             val Descripcion = txtDescripcion.text.toString()
 
@@ -70,7 +67,6 @@ class register_event : AppCompatActivity() {
             txtLugar.error=null
             txtDuracion.error=null
             txtCategoria.error=null
-            txtCapacidad.error=null
             txtRequerimientos.error=null
             if (Nombre.isEmpty()||Nombre.isBlank()){
                 txtNombre.error="Por favor introduzca el nombre"
@@ -96,10 +92,6 @@ class register_event : AppCompatActivity() {
                 txtRequerimientos.error="Por favor introduzca los requerimientos"
                 return
             }
-            if (Capacidad.isEmpty()||Capacidad.isBlank()){
-                txtCapacidad.error="Por favor introduzca la capacidad"
-                return
-            }
             if (Descripcion.isEmpty()||Descripcion.isBlank()){
                 txtDescripcion.error="Por favor introduzca la descripcion"
                 return
@@ -107,7 +99,7 @@ class register_event : AppCompatActivity() {
 
             Toast.makeText(this, "Registrando el evento", Toast.LENGTH_SHORT).show()
             CoroutineScope(Dispatchers.IO).launch {
-                val res = registerEventoInBD(Id!!,Nombre,fecha as java.sql.Date,Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
+                val res = registerEventoInBD(Id!!,Nombre,java.sql.Date((fecha as Date).time) ,Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
                 if (res == 1){
                     val intent = Intent(this@register_event,events::class.java)
                     startActivity(intent)

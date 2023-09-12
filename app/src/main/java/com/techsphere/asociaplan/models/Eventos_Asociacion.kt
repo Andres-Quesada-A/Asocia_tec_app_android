@@ -36,7 +36,7 @@ class Eventos_Asociacion (id: Int, titulo: String, descripcion: String, fecha: L
     fun getId(): Int{
         return id
     }
-    fun getnombre(): String {
+    fun getCategoria(): String {
         return nombre
     }
     fun getDisponibilidad(): String {
