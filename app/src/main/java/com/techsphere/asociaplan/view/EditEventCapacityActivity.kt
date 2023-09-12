@@ -35,7 +35,7 @@ class EditEventCapacityActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_event)
+        setContentView(R.layout.activity_edit_event_capacity)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
             evento = intent.getSerializableExtra("Evento", Eventos::class.java)!!
         } else evento = (intent.getSerializableExtra("Evento") as Eventos)
@@ -85,7 +85,8 @@ class EditEventCapacityActivity : AppCompatActivity() {
             }
         }
         if (isCapacityANumber && !isCapacityEmpty){
-            val dialog = dialogs(this).showLoadingDialog()
+            val diag= dialogs(this)
+            val dialog = diag.showLoadingDialog()
             val userId = AuthHelper(this).getAccountId()
             val eventoId= evento.getId()
             CoroutineScope(Dispatchers.Main).launch {
@@ -95,8 +96,10 @@ class EditEventCapacityActivity : AppCompatActivity() {
                     res = Administrador().manageCapacity(userId,eventoId,nuevaCapacidad.toInt())
                 }
                 dialog.dismiss()
-                if (res!=0){
-                    finish()
+                if (res==1){
+                    diag.showSuccessDialog(22, true)
+                } else{
+                    diag.showErrorDialog(22, true)
                 }
             }
         } else{

@@ -211,15 +211,6 @@ class Administrador {
         try{
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             connection = DriverManager.getConnection(connectionString)
-            /*
-            GestionEvento]
-(
-    -- Parametros de entrada
-	@inIdAsociacion INT,
-	@inIdEvento INT,
-	@inParticipantes INT,
-	@outCodeResult INT OUTPUT
-             */
             val sp = connection.prepareCall("{call GestionEvento @inIdAsociacion=?, @inIdEvento=?," +
                     "@inParticipantes=?, @outCodeResult=?}")
             sp.setInt(1, idAsociacion)

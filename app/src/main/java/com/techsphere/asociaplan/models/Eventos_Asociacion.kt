@@ -1,5 +1,7 @@
 package com.techsphere.asociaplan.models
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -45,6 +47,16 @@ class Eventos_Asociacion (id: Int, titulo: String, descripcion: String, fecha: L
 
     fun getTitulo(): String {
         return titulo
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getFechaToString(): String {
+        var day = fecha.dayOfMonth.toString()
+        if (fecha.dayOfMonth<10){
+            day="0"+day
+        }
+        val month = fecha.monthValue
+        val year = fecha.year
+        return "${day}/${month}/${year}"
     }
 
     fun getDescripcion(): String {

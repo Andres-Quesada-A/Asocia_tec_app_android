@@ -34,6 +34,8 @@ class event_details : AppCompatActivity() {
     private lateinit var txtRequerimientos : MaterialTextView
     private lateinit var txtDescripcion : MaterialTextView
     private lateinit var btnBack : Button
+    private lateinit var btnShare : Button
+    private lateinit var eventoAso: Eventos_Asociacion
     private var fecha: java.util.Date? =null
     private var Id : Int? = null
     private var IdEvento : Int? = null
@@ -61,6 +63,7 @@ class event_details : AppCompatActivity() {
         txtDescripcion = findViewById(R.id.description)
         txtDescripcion.setEnabled(false);
         btnBack = findViewById(R.id.button_back)
+        btnShare = findViewById(R.id.button_share)
 
 
         cargarEvento()
@@ -70,6 +73,9 @@ class event_details : AppCompatActivity() {
             val intent = Intent(this,events::class.java)
             this.startActivity(intent)
             (this as Activity).finish()
+        }
+        btnShare.setOnClickListener {
+            shareEvent()
         }
     }
 
@@ -88,6 +94,7 @@ class event_details : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (evento[0] != null) {
                     // Update the UI with the fetched assignment details
+                    eventoAso=evento[0]
                     txtNombre.setText("Titulo: ${evento[0].getTitulo()}")
                     txtFecha.setText("Fecha: ${evento[0].getFecha().toString()}")
                     txtLugar.setText("Lugar del evento: ${evento[0].getLugar()}")
@@ -102,5 +109,31 @@ class event_details : AppCompatActivity() {
                 }
             }
         }
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun shareEvent(){
+        val eventoString = """
+        ¡No te pierdas nuestro próximo evento!
+    
+        Título: ${eventoAso.getTitulo()}
+        Descripción: ${eventoAso.getDescripcion()}
+        Fecha: ${eventoAso.getFecha()}
+        Lugar: ${eventoAso.getLugar()}
+        Duración: ${eventoAso.getDuracion()} horas
+        Requisitos: ${eventoAso.getRequisitos()}
+        
+        Este evento es de cupo limitado, ¡asegura tu lugar!
+        
+        ¡Te esperamos!
+        """.trimIndent()
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, eventoString)
+            putExtra(Intent.EXTRA_TITLE, "Compartir Evento")
+            putExtra(Intent.EXTRA_SUBJECT, "Compartir Evento")
+            type = "text/plain"
+        }
+        val shareIntent = Intent.createChooser(intent, null)
+        startActivity(shareIntent)
     }
 }

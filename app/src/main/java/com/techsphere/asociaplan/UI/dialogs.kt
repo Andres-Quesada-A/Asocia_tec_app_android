@@ -111,6 +111,11 @@ class dialogs (context: Context) {
                 builder.setTitle("Cancelar inscripcion")
                 builder.setMessage("Se cancelo la inscripcion al evento en forma exitosa")
             }
+            22 ->{
+                builder.setTitle("Gestionar capacidad")
+                builder.setMessage("Se modifico el numero maximo de inscripciones para el evento en " +
+                        "forma exitosa")
+            }
             else -> {
                 builder.setTitle("Exito")
                 builder.setMessage("La accion se llevo a cabo de manera exitosa")
@@ -149,6 +154,11 @@ class dialogs (context: Context) {
             21 ->{
                 builder.setTitle("Cancelar inscripcion")
                 builder.setMessage("No se pudo cancelar la inscripcion al evento\n" +
+                        "Por favor, intentelo mas tarde")
+            }
+            22 ->{
+                builder.setTitle("Gestionar capacidad")
+                builder.setMessage("No se pudo modificar el numero maximo de inscripciones para el evento.\n" +
                         "Por favor, intentelo mas tarde")
             }
             else -> {
