@@ -56,9 +56,9 @@ class collaborator_details : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (asig[0] != null) {
                     // Update the UI with the fetched assignment details
-                    txtNombre.setText(asig[0].getNombre())
-                    txtContacto.setText(asig[0].getContacto())
-                    txtDescripcion.setText(asig[0].getDescripcion())
+                    txtNombre.setText("Nombre: ${asig[0].getNombre()}")
+                    txtContacto.setText("Contacto: ${asig[0].getContacto()}")
+                    txtDescripcion.setText("Descripción: ${asig[0].getDescripcion()}")
 
                 } else {
                     // Handle the case when the assignment is not found

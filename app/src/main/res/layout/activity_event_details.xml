@@ -94,17 +94,6 @@
             android:textSize="16sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/capacity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="15sp"
-            android:text="Capacidad:"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-        <TextView
             android:id="@+id/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
