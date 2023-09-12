@@ -22,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.sql.Date
+import java.time.ZoneId
 import java.util.*
 
 class edit_event : AppCompatActivity() {
@@ -37,6 +38,7 @@ class edit_event : AppCompatActivity() {
     private var Id : Int? = null
     private var IdEvento : Int? = null
     private var NombreEvento : String? = null
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_event)
@@ -53,6 +55,8 @@ class edit_event : AppCompatActivity() {
         txtDescripcion = findViewById(R.id.description)
         btnUpdate = findViewById(R.id.button_update)
 
+
+        cargarEvento()
         txtFecha.setOnClickListener {
             showDatePickerDialog()
         }
@@ -73,7 +77,7 @@ class edit_event : AppCompatActivity() {
 
         Toast.makeText(this, "Registrando el evento", Toast.LENGTH_SHORT).show()
         CoroutineScope(Dispatchers.IO).launch {
-            val res = EditarEventoInBD(Id!!,IdEvento!!,Nombre,fecha as Date,Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
+            val res = EditarEventoInBD(Id!!,IdEvento!!,Nombre,java.sql.Date((fecha as java.util.Date).time),Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
             if (res == 1){
                 val intent = Intent(this@edit_event,events::class.java)
                 startActivity(intent)
@@ -110,9 +114,10 @@ class edit_event : AppCompatActivity() {
                 if (evento[0] != null) {
                     // Update the UI with the fetched assignment details
                     txtNombre.setText(evento[0].getTitulo())
-                    txtFecha.setText(evento[0].getFecha() as String)
+                    txtFecha.setText(evento[0].getFecha().toString())
+                    fecha = Date.from(evento[0].getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant())
                     txtLugar.setText(evento[0].getLugar())
-                    txtDuracion.setText(evento[0].getDuracion())
+                    txtDuracion.setText(evento[0].getDuracion().toString())
                     txtCategoria.setText(evento[0].getCategoria())
                     txtRequerimientos.setText(evento[0].getRequisitos())
                     txtDescripcion.setText(evento[0].getDescripcion())

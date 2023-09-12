@@ -165,8 +165,9 @@ suspend fun EditarEventoInBD(Id:Int,IdEvento:Int, Nombre:String,Fecha:Date,Descr
     try {
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
         conn = DriverManager.getConnection(connectionString)
-        var cs = conn.prepareCall("{call ModificarEvento @inIdAsociacion=?, @inIdEvento, @inTitulo=?, @inFecha=?,@inDescripcion=?, @inLugar=?, @inDuracion=?,@inRequisitos=?, inCategoria=?, @outCodeResult=?}")
-        // Asumimos que se nos pasan valores no nulos
+        var cs = conn.prepareCall("{call ModificarEvento @inIdAsociacion=?, @inIdEvento=?, @inTituloNuevo=?, @inFecha=?, @inDescripcion=?, @inLugar=?, @inDuracion=?, @inRequisitos=?, @inCategoria=?, @outCodeResult=?}")
+
+// Asumimos que se nos pasan valores no nulos
         cs.setInt(1, Id)
         cs.setInt(2, IdEvento)
         cs.setString(3, Nombre)
@@ -176,12 +177,13 @@ suspend fun EditarEventoInBD(Id:Int,IdEvento:Int, Nombre:String,Fecha:Date,Descr
         cs.setInt(7, Duracion)
         cs.setString(8, Requerimientos)
         cs.setString(9, Categoria)
-        // Le indicamos el parametro de salida y su tipo
+
+// Le indicamos el parametro de salida y su tipo
         cs.registerOutParameter(10, Types.INTEGER)
-        // Se ejecuta la query
         cs.execute()
+
         var result = cs.getInt(10)
-        Log.i("SP OutCode", "Resultado: "+result.toString())
+        Log.i("SP OutCode", "Resultado: " + result.toString())
         return result
     }catch (ex: SQLException){
         Log.e("Error SQL Exception: ", ex.message.toString())
