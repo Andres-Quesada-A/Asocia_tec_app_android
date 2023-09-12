@@ -10,8 +10,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.techsphere.asociaplan.R
+import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
+import com.techsphere.asociaplan.controller.Administrador
 import com.techsphere.asociaplan.models.Eventos
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.regex.Pattern
 
 class EditEventCapacityActivity : AppCompatActivity() {
@@ -67,8 +73,6 @@ class EditEventCapacityActivity : AppCompatActivity() {
         }
     }
     private fun actualizarCapacidad(){
-        val userId = AuthHelper(this).getAccountId()
-        val eventoId= evento.getId()
         var isCapacityEmpty = false
         var isCapacityANumber = true
         val nuevaCapacidad = capacityText.text.toString()
@@ -81,7 +85,20 @@ class EditEventCapacityActivity : AppCompatActivity() {
             }
         }
         if (isCapacityANumber && !isCapacityEmpty){
-
+            val dialog = dialogs(this).showLoadingDialog()
+            val userId = AuthHelper(this).getAccountId()
+            val eventoId= evento.getId()
+            CoroutineScope(Dispatchers.Main).launch {
+                dialog.show()
+                var res: Int
+                withContext(Dispatchers.IO){
+                    res = Administrador().manageCapacity(userId,eventoId,nuevaCapacidad.toInt())
+                }
+                dialog.dismiss()
+                if (res!=0){
+                    finish()
+                }
+            }
         } else{
             if (isCapacityEmpty){
                 capacityText.error="Por favor indique una capacidad valida"

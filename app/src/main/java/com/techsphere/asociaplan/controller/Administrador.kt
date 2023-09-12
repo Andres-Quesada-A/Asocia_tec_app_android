@@ -206,6 +206,40 @@ class Administrador {
             return mutableListOf()
         }
     }
+    suspend fun manageCapacity(idAsociacion: Int, idEvento: Int, numParticipantes: Int): Int{
+        var connection : Connection? = null
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            connection = DriverManager.getConnection(connectionString)
+            /*
+            GestionEvento]
+(
+    -- Parametros de entrada
+	@inIdAsociacion INT,
+	@inIdEvento INT,
+	@inParticipantes INT,
+	@outCodeResult INT OUTPUT
+             */
+            val sp = connection.prepareCall("{call GestionEvento @inIdAsociacion=?, @inIdEvento=?," +
+                    "@inParticipantes=?, @outCodeResult=?}")
+            sp.setInt(1, idAsociacion)
+            sp.setInt(2, idEvento)
+            sp.setInt(3, numParticipantes)
+            sp.registerOutParameter(4, Types.INTEGER)
+            val rs = sp.execute()
+            Log.i("SP Result", "${sp.getInt(4)}")
+            return sp.getInt(4)
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return 0
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return 0
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return 0
+        }
+    }
     suspend fun confirmAssistance(idEstudiante: Int, idEvento: Int): Int{
         var connection : Connection? = null
         try{
