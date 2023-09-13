@@ -8,14 +8,16 @@
     android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/linearLayout31"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="5dp"
         android:gravity="end"
-        android:paddingRight="20sp">
+        android:orientation="horizontal"
+        android:paddingRight="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/button_Menu"
@@ -30,9 +32,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="41dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="89dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout31"
         tools:ignore="MissingConstraints">
 
         <TextView
@@ -45,8 +49,7 @@
             android:text="Programación de actividades"
             android:textColor="@color/black"
             android:textSize="20sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/event_title"
@@ -58,8 +61,8 @@
             android:text="Título del evento:"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/event_duration"
             android:layout_width="match_parent"
@@ -70,8 +73,8 @@
             android:text="Duración:"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/event_capacity"
             android:layout_width="match_parent"
@@ -82,8 +85,7 @@
             android:text="Capacidad:"
             android:textColor="@color/black"
             android:textSize="16sp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/label_activity_name"
@@ -139,9 +141,9 @@
             android:id="@+id/label_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginVertical="10sp"
             android:text="Ubicación/ubicaciones"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -164,9 +166,9 @@
             android:id="@+id/label_resources"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="10sp"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginVertical="10sp"
             android:text="Recursos necesarios"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -190,11 +192,11 @@
             android:layout_width="match_parent"
             android:layout_height="50sp"
             android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
             android:layout_marginTop="36dp"
+            android:layout_marginEnd="32dp"
             android:backgroundTint="@color/blue"
             android:text="Registrar actividad"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

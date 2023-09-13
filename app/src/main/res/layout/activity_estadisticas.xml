@@ -14,9 +14,10 @@
         android:gravity="end"
         android:orientation="horizontal"
         android:paddingRight="20sp"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="5dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/button_Menu"
@@ -30,16 +31,13 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="41dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout20"
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
@@ -219,8 +217,8 @@
                 android:id="@+id/grafico2"
                 android:layout_width="301dp"
                 android:layout_height="458dp"
-                android:clickable="false"
                 android:layout_marginStart="32dp"
+                android:clickable="false"
                 tools:layout_editor_absoluteX="55dp"
                 tools:layout_editor_absoluteY="70dp" />
 

@@ -7,14 +7,16 @@
     tools:context=".view.add_to_event_activity">
 
     <LinearLayout
+        android:id="@+id/linearLayout21"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="5dp"
         android:gravity="end"
-        android:paddingRight="20sp">
+        android:orientation="horizontal"
+        android:paddingRight="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/button_Menu"
@@ -30,10 +32,11 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout21"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="91dp">
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/titleView"
@@ -62,13 +65,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginTop="20sp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="10sp"
-            android:layout_marginTop="20sp"
             android:text="Datos del colaborador"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/label_collaborator_name"
             android:layout_width="match_parent"
@@ -80,6 +84,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/label_collaborator_contact"
             android:layout_width="match_parent"
@@ -91,6 +96,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/label_activity"
             android:layout_width="match_parent"
@@ -126,7 +132,7 @@
             android:layout_marginEnd="32dp"
             android:backgroundTint="@color/blue"
             android:text="Añadir colaborador"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
 
     </LinearLayout>
