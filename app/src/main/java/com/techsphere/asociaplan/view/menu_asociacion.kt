@@ -20,7 +20,7 @@ class menu_asociacion : AppCompatActivity() {
     private lateinit var colaboradores : Button
     private lateinit var propuestas : Button
     private lateinit var informes : Button
-    private lateinit var estadisticas : Button
+    private lateinit var estadisticasB : Button
     private lateinit var Foro : Button
     private lateinit var CerrarSesion : Button
 
@@ -35,7 +35,7 @@ class menu_asociacion : AppCompatActivity() {
         colaboradores = findViewById<Button>(R.id.button_gestion_colaborador)
         propuestas = findViewById<Button>(R.id.button_gestion_propuestas)
         informes = findViewById<Button>(R.id.button_informes)
-        estadisticas = findViewById<Button>(R.id.button_estadisticas)
+        estadisticasB = findViewById<Button>(R.id.button_estadisticas)
         Foro = findViewById<Button>(R.id.button_foro)
         CerrarSesion = findViewById<Button>(R.id.button_cerrar_sesion)
         verMiembros.setOnClickListener {
@@ -69,8 +69,9 @@ class menu_asociacion : AppCompatActivity() {
             val intent = Intent(this,eventos_informe::class.java)
             startActivity(intent)
         }
-        estadisticas.setOnClickListener {
-
+        estadisticasB.setOnClickListener {
+            val intent = Intent(this,estadisticas::class.java)
+            startActivity(intent)
         }
         Foro.setOnClickListener {
             val intent = Intent(this, forum_main_view::class.java)

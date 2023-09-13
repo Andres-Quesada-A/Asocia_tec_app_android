@@ -147,6 +147,9 @@
         <activity
             android:name=".view.informe"
             android:exported="false" />
+        <activity
+            android:name=".view.estadisticas"
+            android:exported="false" />
         <!--
         <activity
             android:name=".view.LoginActivity"
