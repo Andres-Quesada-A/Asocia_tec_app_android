@@ -24,9 +24,10 @@ class Foro_Respuestas_Adapter (private val dataSet: MutableList<ForoRespuesta>) 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtRespuesta: TextView
-
+        val txtAutor: TextView
         init {
             txtRespuesta = view.findViewById(R.id.txt_respuesta)
+            txtAutor= view.findViewById(R.id.txtAutor)
         }
     }
 
@@ -43,6 +44,7 @@ class Foro_Respuestas_Adapter (private val dataSet: MutableList<ForoRespuesta>) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var Foro: ForoRespuesta = dataSet.get(position)
         holder.txtRespuesta.text = Foro.getCuerpo()
+        holder.txtAutor.text = "${Foro.getAutor()} respondio:"
     }
 
     override fun getItemCount(): Int {

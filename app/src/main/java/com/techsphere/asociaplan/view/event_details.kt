@@ -126,6 +126,7 @@ class event_details : AppCompatActivity() {
         
         ¡Te esperamos!
         """.trimIndent()
+
         val intent = Intent().apply {
             action = Intent.ACTION_SEND
             putExtra(Intent.EXTRA_TEXT, eventoString)

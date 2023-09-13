@@ -22,8 +22,8 @@ suspend fun getAllForoItemsBD() : MutableList<ForoItem>{
         var items = mutableListOf<ForoItem>()
         while (recordSets.next()){
             // Creamos una nueva asociacion
-            var item = ForoItem(recordSets.getInt("id"),recordSets.getString("Titulo"), recordSets.getString("Cuerpo")
-                )
+            var item = ForoItem(recordSets.getInt("id"),recordSets.getString("Titulo"),
+                recordSets.getString("Cuerpo"), recordSets.getString("Nombre"))
             // Lo añadimos a la lista
             items.add(item)
         }
@@ -54,8 +54,8 @@ suspend fun getForoItemsBD(id : Int) : MutableList<ForoItem>{
         var items = mutableListOf<ForoItem>()
         while (recordSets.next()){
             // Creamos una nueva asociacion
-            var item = ForoItem(recordSets.getInt("id"),recordSets.getString("Titulo"), recordSets.getString("Cuerpo")
-            )
+            var item = ForoItem(recordSets.getInt("id"),recordSets.getString("Titulo"),
+                recordSets.getString("Cuerpo"), recordSets.getString("Nombre"))
             // Lo añadimos a la lista
             items.add(item)
         }
@@ -86,7 +86,8 @@ suspend fun getAllForoRespuestasBD(id : Int) : MutableList<ForoRespuesta>{
         var Respuestas = mutableListOf<ForoRespuesta>()
         while (recordSets.next()){
             // Creamos una nueva asociacion
-            var respuesta = ForoRespuesta(recordSets.getInt("id"), recordSets.getString("Cuerpo"),recordSets.getInt("idMensaje"))
+            var respuesta = ForoRespuesta(recordSets.getInt("id"), recordSets.getString("Cuerpo"),
+                recordSets.getInt("idMensaje"), recordSets.getString("Nombre"))
             // Lo añadimos a la lista
             Respuestas.add(respuesta)
         }

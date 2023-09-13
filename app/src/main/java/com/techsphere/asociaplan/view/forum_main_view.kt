@@ -25,9 +25,9 @@ class forum_main_view : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forum_main_view)
-        RedactarButton = findViewById<Button>(R.id.button_redactar)
+        RedactarButton = findViewById(R.id.button_redactar)
 
-        rv = findViewById<RecyclerView>(R.id.rv_foro)
+        rv = findViewById(R.id.rv_foro)
 
         progressBar = findViewById(R.id.progBarCubiEst)
 

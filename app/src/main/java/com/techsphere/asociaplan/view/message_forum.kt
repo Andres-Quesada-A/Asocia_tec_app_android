@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
@@ -24,6 +26,7 @@ import kotlinx.coroutines.withContext
 class message_forum : AppCompatActivity() {
     private lateinit var txtTitulo : MaterialTextView
     private lateinit var txtCuerpo : MaterialTextView
+    private lateinit var txtAutor: TextView
     private lateinit var rv : RecyclerView
     private lateinit var adap : Foro_Respuestas_Adapter
     private lateinit var progressBar : ProgressBar
@@ -34,7 +37,7 @@ class message_forum : AppCompatActivity() {
         setContentView(R.layout.activity_message_forum)
         id = (intent?.extras?.getInt("id")) as Int
         RedactarButton = findViewById<Button>(R.id.button_reply)
-
+        txtAutor = findViewById(R.id.txtAutor)
         rv = findViewById<RecyclerView>(R.id.rv_replies)
 
         progressBar = findViewById(R.id.progBarCubiEst)
@@ -42,9 +45,7 @@ class message_forum : AppCompatActivity() {
         txtTitulo.setEnabled(false);
         txtCuerpo = findViewById(R.id.content_forum)
         txtCuerpo.setEnabled(false);
-
         cargarRedaccion()
-        cargarItems(this)
         RedactarButton.setOnClickListener {
             val intent = Intent(this,create_reply::class.java)
             intent.putExtra("id", id.toInt())
@@ -76,9 +77,11 @@ class message_forum : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 if (asig[0] != null) {
                     // Update the UI with the fetched assignment details
-                    txtTitulo.setText(asig[0].getTitulo())
-                    txtCuerpo.setText(asig[0].getCuerpo())
-
+                    val post = asig[0]
+                    txtTitulo.setText(post.getTitulo())
+                    txtCuerpo.setText(post.getCuerpo())
+                    txtAutor.setText(post.getAutor()+" publico:")
+                    cargarItems(this@message_forum)
                 } else {
                     // Handle the case when the assignment is not found
                     // Show an error message or take appropriate action

@@ -24,11 +24,13 @@ class Foro_Items_Adapter (private val dataSet: MutableList<ForoItem>) :
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val txtTitulo: TextView
         val btnAmpliar: Button
+        val txtAutor: TextView
         val vista: Context
         var id = 0
 
         init {
             txtTitulo = view.findViewById(R.id.txt_nombre)
+            txtAutor = view.findViewById(R.id.txt_autor)
             btnAmpliar = view.findViewById(R.id.button_see_foro)
             this.vista = view.context
 
@@ -60,6 +62,7 @@ class Foro_Items_Adapter (private val dataSet: MutableList<ForoItem>) :
         var Foro: ForoItem = dataSet.get(position)
         holder.txtTitulo.text = Foro.getTitulo()
         holder.id = Foro.getidMensaje()
+        holder.txtAutor.text="Autor: ${Foro.getAutor()}"
     }
 
     override fun getItemCount(): Int {

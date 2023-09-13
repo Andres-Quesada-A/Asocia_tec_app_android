@@ -94,7 +94,8 @@ fun EnviarEvaluacionDB(Comentario : String, Calificaion : Int, IdEven : Int, IdU
         conn = DriverManager.getConnection(connectionString)
         var cs = conn.prepareCall("{call AgregarCalificacion @inComentario=?, @inCalificacion=?," +
                 " @inIdEstudiante=?,@inIdEvento=?,@outCodeResult=?}")
-        // Asumimos que se nos pasan valores no nulos
+
+        // Asumimos que no se nos pasan valores no nulos
         cs.setString(1, Comentario)
         cs.setInt(2, Calificaion)
         cs.setInt(3, IdUsu)
