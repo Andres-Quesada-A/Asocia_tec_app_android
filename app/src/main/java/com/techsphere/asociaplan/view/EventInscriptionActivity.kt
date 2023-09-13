@@ -12,7 +12,7 @@ import com.techsphere.asociaplan.auth.AuthHelper
 import com.techsphere.asociaplan.controller.Administrador
 import com.techsphere.asociaplan.models.Eventos
 import com.techsphere.asociaplan.utils.ConfirmationEmail
-import com.techsphere.asociaplan.utils.EmailSender
+
 import com.techsphere.asociaplan.utils.generate_qr_code
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

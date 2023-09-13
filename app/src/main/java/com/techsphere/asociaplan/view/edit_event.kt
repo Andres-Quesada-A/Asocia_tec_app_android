@@ -24,6 +24,7 @@ import kotlinx.coroutines.withContext
 import java.sql.Date
 import java.time.ZoneId
 import java.util.*
+import com.techsphere.asociaplan.utils.EmailSender
 
 class edit_event : AppCompatActivity() {
     private lateinit var txtNombre : EditText
@@ -73,12 +74,17 @@ class edit_event : AppCompatActivity() {
         val Categoria = txtCategoria.text.toString()
         val Requerimientos = txtRequerimientos.text.toString()
         val Descripcion = txtDescripcion.text.toString()
+        val emailSender = EmailSender()
 
+        val contentEmail = "Se ha actualizado el evento ${Nombre}, que se realizará el ${Fecha} en ${Lugar}, que tendrá una duración de ${Duracion}"
 
         Toast.makeText(this, "Registrando el evento", Toast.LENGTH_SHORT).show()
         CoroutineScope(Dispatchers.IO).launch {
             val res = EditarEventoInBD(Id!!,IdEvento!!,Nombre,java.sql.Date((fecha as java.util.Date).time),Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
             if (res == 1){
+                //Falta obtener los correos
+                emailSender.sendEmail("andres@gmail.com", "Actualización del evento", contentEmail)
+
                 val intent = Intent(this@edit_event,events::class.java)
                 startActivity(intent)
                 finish()
