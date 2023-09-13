@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.graphics.Color
 import android.widget.TextView
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.YAxis
 
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -82,7 +83,9 @@ class estadisticas : AppCompatActivity() {
         cargarComentarios()
         cargarPromedios()
 
-        grafico1.
+        grafico1.getAxisRight().setEnabled(false)
+        grafico2.getAxisRight().setEnabled(false)
+        grafico1.getXAxis().setEnabled(true)
     }
 
     fun cargarEstadisticas(){
@@ -140,6 +143,7 @@ class estadisticas : AppCompatActivity() {
                 barData1 = BarData(barDataset1)
                 grafico1.data = barData1
                 barDataset1.setColors(ColorTemplate.MATERIAL_COLORS, 250)
+                grafico1.invalidate()
             }
         }
     }
@@ -167,6 +171,7 @@ class estadisticas : AppCompatActivity() {
                 barData2 = BarData(barDataset2)
                 grafico2.data = barData2
                 barDataset2.setColors(ColorTemplate.MATERIAL_COLORS, 250)
+                grafico2.invalidate()
             }
         }
     }
