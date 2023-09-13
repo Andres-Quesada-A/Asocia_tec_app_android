@@ -66,7 +66,8 @@ class menu_asociacion : AppCompatActivity() {
             startActivity(intent)
         }
         informes.setOnClickListener {
-
+            val intent = Intent(this,eventos_informe::class.java)
+            startActivity(intent)
         }
         estadisticas.setOnClickListener {
 

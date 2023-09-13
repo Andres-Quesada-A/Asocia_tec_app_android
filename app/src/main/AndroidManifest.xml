@@ -141,6 +141,12 @@
         <activity
             android:name=".view.informacion_propuesta"
             android:exported="false" />
+        <activity
+            android:name=".view.eventos_informe"
+            android:exported="false" />
+        <activity
+            android:name=".view.informe"
+            android:exported="false" />
         <!--
         <activity
             android:name=".view.LoginActivity"
