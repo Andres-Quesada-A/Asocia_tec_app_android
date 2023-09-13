@@ -199,6 +199,7 @@
                 android:layout_width="301dp"
                 android:layout_height="458dp"
                 android:layout_marginStart="32dp"
+                android:clickable="false"
                 tools:layout_editor_absoluteX="55dp"
                 tools:layout_editor_absoluteY="70dp" />
 
@@ -218,6 +219,7 @@
                 android:id="@+id/grafico2"
                 android:layout_width="301dp"
                 android:layout_height="458dp"
+                android:clickable="false"
                 android:layout_marginStart="32dp"
                 tools:layout_editor_absoluteX="55dp"
                 tools:layout_editor_absoluteY="70dp" />

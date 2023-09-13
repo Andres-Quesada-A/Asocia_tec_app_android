@@ -17,10 +17,13 @@ import com.journeyapps.barcodescanner.ViewfinderView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
+import com.techsphere.asociaplan.controller.getComentariosPorEventoDB
 import com.techsphere.asociaplan.controller.getEstadisticasDB
 import com.techsphere.asociaplan.controller.getEventosBusqueda
+import com.techsphere.asociaplan.controller.getPromedioPorEventoDB
 import com.techsphere.asociaplan.models.Estadisticas
 import com.techsphere.asociaplan.models.Eventos_Asociacion
+import com.techsphere.asociaplan.models.Tablas
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,25 +75,14 @@ class estadisticas : AppCompatActivity() {
         entradas1 = ArrayList()
         entradas2 = ArrayList()
 
-        entradas1.add(BarEntry(0f,45f))
-        entradas2.add(BarEntry(0f,50f))
-
-        barDataset1 = BarDataSet(entradas1,"Comentarios")
-        barDataset2 = BarDataSet(entradas2,"Evaluaciones")
-
-        barData1 = BarData(barDataset1)
-        barData2 = BarData(barDataset2)
-
-        grafico1.data = barData1
-        grafico2.data = barData2
-
-        barDataset1.setColors(ColorTemplate.MATERIAL_COLORS, 250)
-        barDataset2.setColors(ColorTemplate.MATERIAL_COLORS, 250)
-
         val authHelper: AuthHelper = AuthHelper(this)
         idUsuario = authHelper.getAccountId()
 
         cargarEstadisticas()
+        cargarComentarios()
+        cargarPromedios()
+
+        grafico1.
     }
 
     fun cargarEstadisticas(){
@@ -124,5 +116,59 @@ class estadisticas : AppCompatActivity() {
 
     }
 
+    fun cargarComentarios(){
+        val dialogo = dialogs(this).showLoadingDialog()
+        dialogo.show()
+        CoroutineScope(Dispatchers.IO).launch {
+            //Se esta usando una lista para salir del paso y no perder mucho tiempo
+            //modificando el controlador (que esta basado en los otros ya existentes)
+            val tablas : MutableList<Tablas> = getComentariosPorEventoDB(idUsuario)
+            var largo = tablas.size
+            var contador = 0
+            // Update the UI with the fetched assignment details
+            dialogo.dismiss()
+            withContext(Dispatchers.Main) {
+                if (largo!=0){
+                    while (contador<largo) {
+                        entradas1.add(BarEntry(contador.toFloat(),tablas[contador].getCantidad().toFloat()))
+                        contador++
+                    }
+                }else{
+                    entradas1.add(BarEntry(0f,0f))
+                }
+                barDataset1 = BarDataSet(entradas1,"Comentarios")
+                barData1 = BarData(barDataset1)
+                grafico1.data = barData1
+                barDataset1.setColors(ColorTemplate.MATERIAL_COLORS, 250)
+            }
+        }
+    }
+    fun cargarPromedios(){
+        val dialogo = dialogs(this).showLoadingDialog()
+        dialogo.show()
+        CoroutineScope(Dispatchers.IO).launch {
+            //Se esta usando una lista para salir del paso y no perder mucho tiempo
+            //modificando el controlador (que esta basado en los otros ya existentes)
+            val tablas : MutableList<Tablas> = getPromedioPorEventoDB(idUsuario)
+            var largo = tablas.size
+            var contador = 0
+            // Update the UI with the fetched assignment details
+            dialogo.dismiss()
+            withContext(Dispatchers.Main) {
+                if (largo!=0){
+                    while (contador<largo) {
+                        entradas2.add(BarEntry(contador.toFloat(),tablas[contador].getCantidad().toFloat()))
+                        contador++
+                    }
+                }else{
+                    entradas2.add(BarEntry(0f,0f))
+                }
+                barDataset2 = BarDataSet(entradas2,"Promedios")
+                barData2 = BarData(barDataset2)
+                grafico2.data = barData2
+                barDataset2.setColors(ColorTemplate.MATERIAL_COLORS, 250)
+            }
+        }
+    }
 
 }
