@@ -137,9 +137,10 @@ fun deleteEventoBD(codigo: Int, titulo: String, fecha: String){
             val contentEmail = "El evento:${titulo} que estaba programado para la fecha ${fecha} ha sido cancelado"
             // Le pedimos a la BD que nos devuelvan los correos
             val correos = Administrador().getInteresadosEvento(codigo)
+            val formatEmails = correos.joinToString(",")
             // Revisamos si obtuvimos al menos un correo
             if (correos.size!=0) {
-                emailSender.sendEmail(correos[0], "Evento Cancelado", contentEmail)
+                emailSender.sendEmail(formatEmails, "Evento Cancelado", contentEmail)
             }
         }
     }
