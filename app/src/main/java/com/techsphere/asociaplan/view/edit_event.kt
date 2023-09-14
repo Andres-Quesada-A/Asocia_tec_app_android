@@ -91,7 +91,6 @@ class edit_event : AppCompatActivity() {
                     withContext(Dispatchers.Main){
                         load.dismiss()
                     }
-                    //Falta obtener los correos
                     emailSender.sendEmail(correos[0], "Actualización del evento", contentEmail)
                     withContext(Dispatchers.Main){
                         diag.showSuccessDialog(23, true)

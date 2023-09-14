@@ -15,6 +15,7 @@ import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.auth.AuthHelper
 import com.techsphere.asociaplan.controller.Administrador
 import com.techsphere.asociaplan.models.Eventos
+import com.techsphere.asociaplan.utils.EmailSender
 import com.techsphere.asociaplan.view.EventInfoActivity
 import com.techsphere.asociaplan.view.EventInscriptionActivity
 import kotlinx.coroutines.CoroutineScope
@@ -93,6 +94,10 @@ class Eventos_Inscripcion_Adapter(private val eventos: MutableList<Eventos>):
                             }
                             cargaDialog.dismiss()
                             if (res==1){
+                                val emailSender = EmailSender()
+                                val contentEmail = "Ha cancelado su inscripción al evento ${evento.getTitulo()} que se realizará el día ${evento.getFecha()}"
+                                val email = authHelper.getAccountEmail()
+                                emailSender.sendEmail(email, "Inscripción cancelada", contentEmail)
                                 dialog.showSuccessDialog(21, false)
                                 cancelButton.isClickable=false
                                 cancelButton.backgroundTintList=context.getColorStateList(R.color.gray)
