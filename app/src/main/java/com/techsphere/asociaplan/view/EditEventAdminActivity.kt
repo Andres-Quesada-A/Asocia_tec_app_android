@@ -27,7 +27,8 @@ import java.time.ZoneId
 import java.util.*
 import com.techsphere.asociaplan.utils.EmailSender
 
-class edit_event : AppCompatActivity() {
+class EditEventAdminActivity : AppCompatActivity() {
+    private lateinit var evento: Eventos_Asociacion
     private lateinit var txtNombre : EditText
     private lateinit var txtFecha : EditText
     private lateinit var txtLugar : EditText
@@ -37,17 +38,22 @@ class edit_event : AppCompatActivity() {
     private lateinit var txtDescripcion : EditText
     private lateinit var btnUpdate : Button
     private var fecha: java.util.Date? =null
-    private var Id : Int? = null
-    private var IdEvento : Int? = null
-    private var NombreEvento : String? = null
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_event)
 
-        Id = AuthHelper(this).getAccountId()
-        IdEvento = (intent?.extras?.getInt("id")) as Int
-        NombreEvento = (intent?.extras?.getString("nombre")) as String
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            evento = intent.getSerializableExtra("Evento", Eventos_Asociacion::class.java)!!
+        } else evento = (intent.getSerializableExtra("Evento") as Eventos_Asociacion)
+        getButtonsAndText()
+        setEventInfo()
+
+        //cargarEvento()
+    }
+
+    fun getButtonsAndText(){
         txtNombre = findViewById(R.id.event_name)
         txtFecha = findViewById(R.id.date)
         txtLugar = findViewById(R.id.place)
@@ -56,17 +62,14 @@ class edit_event : AppCompatActivity() {
         txtRequerimientos = findViewById(R.id.requirements)
         txtDescripcion = findViewById(R.id.description)
         btnUpdate = findViewById(R.id.button_update)
-
-
-        cargarEvento()
         txtFecha.setOnClickListener {
             showDatePickerDialog()
         }
-
         btnUpdate.setOnClickListener {
             Actualizar()
         }
     }
+
     fun Actualizar() {
         val Nombre = txtNombre.text.toString()
         val Fecha = txtFecha.text.toString()
@@ -82,15 +85,16 @@ class edit_event : AppCompatActivity() {
         val load = diag.showLoadingDialog()
         load.show()
         CoroutineScope(Dispatchers.IO).launch {
-            val res = EditarEventoInBD(Id!!,IdEvento!!,Nombre,java.sql.Date((fecha as java.util.Date).time),Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
+            val res = EditarEventoInBD(0,evento.getId(),Nombre,java.sql.Date((fecha as java.util.Date).time),Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
             if (res == 1){
                 // Le pedimos a la BD que nos devuelvan los correos
-                val correos = Administrador().getInteresadosEvento(IdEvento!!)
+                val correos = Administrador().getInteresadosEvento(evento.getId())
                 // Revisamos si obtuvimos al menos un correo
                 if (correos.size!=0){
                     withContext(Dispatchers.Main){
                         load.dismiss()
                     }
+                    //Falta obtener los correos
                     emailSender.sendEmail(correos[0], "Actualización del evento", contentEmail)
                     withContext(Dispatchers.Main){
                         diag.showSuccessDialog(23, true)
@@ -111,6 +115,7 @@ class edit_event : AppCompatActivity() {
             }
         }
     }
+
     private fun showDatePickerDialog() {
         val datePicker = DatePickerFragment { day, month, year -> onDateSelected(day, month, year) }
         datePicker.show(supportFragmentManager, "datePicker")
@@ -121,39 +126,15 @@ class edit_event : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun cargarEvento(){
-        val diag = dialogs(this)
-        val dialogo = diag.showLoadingDialog()
-        dialogo.show()
-        CoroutineScope(Dispatchers.IO).launch {
-            //Se esta usando una lista para salir del paso y no perder mucho tiempo
-            //modificando el controlador (que esta basado en los otros ya existentes)
-            val evento : MutableList<Eventos_Asociacion> = getEventosBusqueda(NombreEvento!!,Id!!)
-            // Update the UI with the fetched assignment details
-            dialogo.dismiss()
-            withContext(Dispatchers.Main) {
-                if (evento.size!=0){
-                    if (evento[0] != null) {
-                        // Update the UI with the fetched assignment details
-                        txtNombre.setText(evento[0].getTitulo())
-                        txtFecha.setText(evento[0].getFechaToString())
-                        fecha = Date.from(evento[0].getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant())
-                        txtLugar.setText(evento[0].getLugar())
-                        txtDuracion.setText(evento[0].getDuracion().toString())
-                        txtCategoria.setText(evento[0].getCategoria())
-                        txtRequerimientos.setText(evento[0].getRequisitos())
-                        txtDescripcion.setText(evento[0].getDescripcion())
+    fun setEventInfo(){
+        txtNombre.setText(evento.getTitulo())
+        txtFecha.setText(evento.getFechaToString())
 
-                    } else {
-                        // Handle the case when the assignment is not found
-                        // Show an error message or take appropriate action
-                        diag.showErrorDialog(99)
-                    }
-                } else {
-                    diag.showErrorDialog(99)
-                }
-
-            }
-        }
+        fecha=Date.from(evento.getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant())
+        txtLugar.setText(evento.getLugar())
+        txtDuracion.setText("${evento.getDuracion()}")
+        txtCategoria.setText(evento.getCategoria())
+        txtRequerimientos.setText(evento.getRequisitos())
+        txtDescripcion.setText(evento.getDescripcion())
     }
 }

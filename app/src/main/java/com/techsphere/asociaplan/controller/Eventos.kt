@@ -86,6 +86,46 @@ suspend fun getEventosBusqueda(Nombre: String, id: Int) : MutableList<Eventos_As
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+suspend fun getAllEventsAdmin(nombreEvento: String=""): MutableList<Eventos_Asociacion>{
+    var conn : Connection? = null
+    try {
+        Class.forName("net.sourceforge.jtds.jdbc.Driver")
+        conn = DriverManager.getConnection(connectionString)
+        var cs = conn.prepareCall("{call BuscarEvento @inNombre=?, @outCodeResult=?}")
+        // Asumimos que se nos pasan valores no nulos
+        if (nombreEvento.isBlank()||nombreEvento.isEmpty()){
+            cs.setNull(1, Types.VARCHAR)
+        } else{
+            cs.setString(1, nombreEvento)
+        }
+        cs.registerOutParameter(2, Types.INTEGER)
+        var recordSets = cs.executeQuery()
+        // Creamos la lista que contendra las asociaciones
+        var eventos = mutableListOf<Eventos_Asociacion>()
+        while (recordSets.next()){
+            // Creamos una nueva asociacion
+            var evento = Eventos_Asociacion(recordSets.getInt("id"),recordSets.getString("Titulo"),
+                recordSets.getString("Descripcion"),
+                recordSets.getDate("Fecha").toInstant().atZone(ZoneId.systemDefault()).toLocalDate(),
+                recordSets.getString("Lugar"), recordSets.getInt("Duracion"),recordSets.getString("Requisitos"),
+                recordSets.getString("Nombre"),recordSets.getString("Capacidad"),recordSets.getString("Disponibilidad"))
+            // Lo añadimos a la lista
+            eventos.add(evento)
+        }
+        return eventos
+    }catch (ex: SQLException){
+        Log.e("Error SQL Exception: ", ex.message.toString())
+        return mutableListOf()
+    }catch (ex1: ClassNotFoundException){
+        Log.e("Error Class Not Found: ", ex1.message.toString())
+        return mutableListOf()
+    }catch (ex2: Exception) {
+        Log.e("Error Exception: ", ex2.message.toString())
+        return mutableListOf()
+    }
+}
+
 suspend fun registerEventoInBD(Id:Int,Nombre:String,Fecha:Date,Descripcion:String,Lugar:String,Duracion:Int,Requerimientos:String,Categoria:String
 ) : Int{
     var conn : Connection? = null

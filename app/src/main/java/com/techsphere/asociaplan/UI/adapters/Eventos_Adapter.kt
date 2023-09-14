@@ -9,8 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
+import com.techsphere.asociaplan.auth.AuthHelper
 import com.techsphere.asociaplan.controller.deleteEventoBD
 import com.techsphere.asociaplan.models.Eventos_Asociacion
 import com.techsphere.asociaplan.view.*
@@ -32,6 +34,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
         val btnEliminar: Button
         val btnEditar: Button
         val vista: Context
+        lateinit var event: Eventos_Asociacion
         var id = 0
         var nombre = ""
 
@@ -44,19 +47,29 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
             btnEliminar = view.findViewById(R.id.button_eliminar)
             this.vista = view.context
             btnEditar.setOnClickListener {
-                val intent = Intent(view.context,edit_event::class.java)
-                intent.putExtra("id", id.toInt())
-                intent.putExtra("nombre", nombre.toString())
-                this.vista.startActivity(intent)
+                if (AuthHelper(vista).getAccountType()==3){
+                    val intent = Intent(view.context,edit_event::class.java)
+                    intent.putExtra("id", id.toInt())
+                    intent.putExtra("nombre", nombre.toString())
+                    this.vista.startActivity(intent)
+                } else{
+                    val intent = Intent(vista, EditEventAdminActivity::class.java)
+                    intent.putExtra("Evento",event )
+                    vista.startActivity(intent)
+                }
             }
             btnEliminar.setOnClickListener {
                 eliminarEvento()
             }
             btnDetalles.setOnClickListener {
                 val intent = Intent(view.context,event_details::class.java)
-                intent.putExtra("id", id.toInt())
-                intent.putExtra("nombre", nombre.toString())
-                this.vista.startActivity(intent)
+                if (AuthHelper(vista).getAccountType()==3){
+                    intent.putExtra("id", id.toInt())
+                    intent.putExtra("nombre", nombre.toString())
+                } else{
+                    intent.putExtra("Evento",event )
+                }
+                vista.startActivity(intent)
             }
         }
 
@@ -73,9 +86,14 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
             btnDelete.setOnClickListener {
                 deleteEventoBD(id, txtTitulo.toString(), txtFecha.toString())
                 d.dismiss()
-                val intent = Intent(view.context,events::class.java)
-                this.vista.startActivity(intent)
-                (this.vista as Activity).finish()
+                var intent: Intent
+                if (AuthHelper(vista).getAccountType()==3){
+                    intent = Intent(view.context,events::class.java)
+                } else{
+                    intent = Intent(view.context,EventsAdminActivity::class.java)
+                }
+                vista.startActivity(intent)
+                (vista as Activity).finish()
             }
             btnCancel.setOnClickListener {
                 d.dismiss()
@@ -100,6 +118,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
         holder.txtFecha.text="Fecha: ${eventos.getFecha()}"
         holder.id = eventos.getId()
         holder.nombre = eventos.getTitulo()
+        holder.event=eventos
     }
 
     override fun getItemCount(): Int {

@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 import java.util.Date
 
 class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, lugar: String, duracion: Int,
-               requisitos: String, categoria: String, estado: Int=2): Serializable {
+               requisitos: String, categoria: String, estado: Int=2, capacidad: Int=1): Serializable {
     private var id: Int
     private var titulo: String
     private var descripcion: String
@@ -18,6 +18,7 @@ class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, l
     private var requisitos: String
     private var categoria: String
     private var estado: Int
+    private var capacidad: Int
 
     init {
         this.id=id
@@ -29,6 +30,7 @@ class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, l
         this.requisitos=requisitos
         this.categoria=categoria
         this.estado=estado
+        this.capacidad=capacidad
     }
 
     fun getId(): Int{
@@ -76,5 +78,8 @@ class Eventos (id: Int, titulo: String, descripcion: String, fecha: LocalDate, l
     }
     fun setEstado(estado: Int){
         this.estado=estado
+    }
+    fun getCapacidad(): Int{
+        return capacidad
     }
 }

@@ -36,7 +36,7 @@ class event_details : AppCompatActivity() {
     private lateinit var btnBack : Button
     private lateinit var btnShare : Button
     private lateinit var eventoAso: Eventos_Asociacion
-    private var fecha: java.util.Date? =null
+
     private var Id : Int? = null
     private var IdEvento : Int? = null
     private var NombreEvento : String? = null
@@ -44,10 +44,6 @@ class event_details : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_details)
-
-        Id = AuthHelper(this).getAccountId()
-        IdEvento = (intent?.extras?.getInt("id")) as Int
-        NombreEvento = (intent?.extras?.getString("nombre")) as String
         txtNombre = findViewById(R.id.title)
         txtNombre.setEnabled(false);
         txtFecha = findViewById(R.id.date)
@@ -65,8 +61,18 @@ class event_details : AppCompatActivity() {
         btnBack = findViewById(R.id.button_back)
         btnShare = findViewById(R.id.button_share)
 
+        Id = AuthHelper(this).getAccountId()
+        if (AuthHelper(this).getAccountType()==3){
+            IdEvento = (intent?.extras?.getInt("id")) as Int
+            NombreEvento = (intent?.extras?.getString("nombre")) as String
+            cargarEvento()
+        } else{
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+                eventoAso = intent.getSerializableExtra("Evento", Eventos_Asociacion::class.java)!!
+            } else eventoAso = (intent.getSerializableExtra("Evento") as Eventos_Asociacion)
+            cargarEventoAdmin()
+        }
 
-        cargarEvento()
 
 
         btnBack.setOnClickListener {
@@ -79,7 +85,15 @@ class event_details : AppCompatActivity() {
         }
     }
 
-
+    fun cargarEventoAdmin(){
+        txtNombre.setText("Titulo: ${eventoAso.getTitulo()}")
+        txtFecha.setText("Fecha: ${eventoAso.getFecha().toString()}")
+        txtLugar.setText("Lugar del evento: ${eventoAso.getLugar()}")
+        txtDuracion.setText("Duración: ${eventoAso.getDuracion().toString()}")
+        txtCategoria.setText("Categoría: ${eventoAso.getCategoria()}")
+        txtRequerimientos.setText("Requerimientos: ${eventoAso.getRequisitos()}")
+        txtDescripcion.setText("Descripción: ${eventoAso.getDescripcion()}")
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun cargarEvento(){

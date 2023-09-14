@@ -19,6 +19,12 @@
         android:theme="@style/Theme.AsociaPlan"
         tools:targetApi="31">
         <activity
+            android:name=".view.EditEventAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.EventsAdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.estudiante_details"
             android:exported="false" />
         <activity

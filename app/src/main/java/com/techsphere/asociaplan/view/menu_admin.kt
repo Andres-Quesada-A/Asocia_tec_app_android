@@ -37,7 +37,8 @@ class menu_admin : AppCompatActivity() {
             startActivity(intent)
         }
         eventos.setOnClickListener {
-
+            val intent = Intent(this, EventsAdminActivity::class.java)
+            startActivity(intent)
         }
         estudiantes.setOnClickListener {
             val intent = Intent(this, estudiantes_list::class.java)

@@ -13,7 +13,7 @@ class EventInfoActivity : AppCompatActivity() {
     private lateinit var titleText: TextView
     private lateinit var dateText: TextView
     private lateinit var durationText: TextView
-    //private lateinit var capacityText: TextView
+    private lateinit var capacityText: TextView
     private lateinit var categoryText: TextView
     private lateinit var placeText: TextView
     private lateinit var reqText: TextView
@@ -38,6 +38,7 @@ class EventInfoActivity : AppCompatActivity() {
         placeText = findViewById(R.id.place)
         reqText = findViewById(R.id.requirements)
         descriptionText = findViewById(R.id.description)
+        capacityText=findViewById(R.id.capacity)
         cancelButton = findViewById(R.id.button_volver)
         cancelButton.setOnClickListener {
             finish()
@@ -51,5 +52,6 @@ class EventInfoActivity : AppCompatActivity() {
         placeText.text="Lugar del evento: ${evento.getLugar()}"
         reqText.text="Requisitos especiales: ${evento.getRequisitos()}"
         descriptionText.text="Descripcion: ${evento.getDescripcion()}"
+        capacityText.text="Cupos Limitados"
     }
 }

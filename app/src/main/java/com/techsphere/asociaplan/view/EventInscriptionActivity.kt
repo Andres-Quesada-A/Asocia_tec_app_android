@@ -25,7 +25,7 @@ class EventInscriptionActivity : AppCompatActivity() {
     private lateinit var titleText: TextView
     private lateinit var dateText: TextView
     private lateinit var durationText: TextView
-    //private lateinit var capacityText: TextView
+    private lateinit var capacityText: TextView
     private lateinit var categoryText: TextView
     private lateinit var placeText: TextView
     private lateinit var reqText: TextView
@@ -52,6 +52,7 @@ class EventInscriptionActivity : AppCompatActivity() {
         descriptionText = findViewById(R.id.description)
         cancelButton= findViewById(R.id.button_cancel_inscription)
         inscribeButton= findViewById(R.id.button_subscription)
+        capacityText= findViewById(R.id.capacity)
         cancelButton.setOnClickListener {
             finish()
         }
@@ -67,6 +68,7 @@ class EventInscriptionActivity : AppCompatActivity() {
         placeText.text="Lugar del evento: ${evento.getLugar()}"
         reqText.text="Requisitos especiales: ${evento.getRequisitos()}"
         descriptionText.text="Descripcion: ${evento.getDescripcion()}"
+        capacityText.text="Cupos Limitados"
     }
     private fun registerUserInActivity(){
         val dialogs= dialogs(this)
