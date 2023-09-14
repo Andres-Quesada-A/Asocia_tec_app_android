@@ -148,3 +148,41 @@ suspend fun eliminarColaborador(codigo: Int) : Int{
         return 0
     }
 }
+
+suspend fun getCorreosColaboradoresEvento(Nombre: String, idEvento: Int) : String{
+    var conn : Connection? = null
+    try {
+        Class.forName("net.sourceforge.jtds.jdbc.Driver")
+        conn = DriverManager.getConnection(connectionString)
+        var cs = conn.prepareCall("{call BuscarColaboradoresEvento @inIdEvento=?, @inNombre=?, @outCodeResult=?}")
+        // Aqui revisamos si tenemos que pasarle un parametro nulo
+        cs.setInt(1, idEvento)
+        if (Nombre.isBlank()){
+            cs.setNull(2, Types.VARCHAR)
+        } else{
+            cs.setString(2, Nombre)
+        }
+        // Le indicamos el parametro de salida y su tipo
+        cs.registerOutParameter(3, Types.INTEGER)
+        // Se ejecuta la query
+        var recordSets = cs.executeQuery()
+        // Creamos la lista que contendra los estudiantes
+        var correos = ""
+        while (recordSets.next()){
+            correos = correos + ", "+ recordSets.getString("Correro")
+        }
+        /*
+        */
+        Log.i("SP OutCode", "Resultado: "+cs.getInt(2).toString())
+        return correos
+    }catch (ex: SQLException){
+        Log.e("Error SQL Exception: ", ex.message.toString())
+        return ""
+    }catch (ex1: ClassNotFoundException){
+        Log.e("Error Class Not Found: ", ex1.message.toString())
+        return ""
+    }catch (ex2: Exception) {
+        Log.e("Error Exception: ", ex2.message.toString())
+        return ""
+    }
+}
