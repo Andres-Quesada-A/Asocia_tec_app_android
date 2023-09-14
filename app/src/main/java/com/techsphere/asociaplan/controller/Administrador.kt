@@ -338,4 +338,59 @@ class Administrador {
             return mutableListOf()
         }
     }
+
+    suspend fun ConsultarCapacidadEvento(idEvento: Int): Int{
+        var conn : Connection? = null
+        try {
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            conn = DriverManager.getConnection(connectionString)
+            var cs = conn.prepareCall("{call BuscarCapacidadEvento @inIdEvento=?, @outCodeResult=?}")
+            // Asumimos que se nos pasan valores no nulos
+            cs.setInt(1, idEvento)
+            cs.registerOutParameter(2, Types.INTEGER)
+            var recordSet = cs.executeQuery()
+            var campos = 1
+            while (recordSet.next()){
+                // Creamos una nueva asociacion
+                campos = recordSet.getInt("Campos")
+            }
+            return campos
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return 1
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return 1
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return 1
+        }
+    }
+    suspend fun getAsociationEmail(idEvento: Int): String{
+        var conn : Connection? = null
+        try {
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            conn = DriverManager.getConnection(connectionString)
+            var cs = conn.prepareCall("{call BuscarCorreoAsociacionEvento @inIdEvento=?, @outCodeResult=?}")
+            // Asumimos que se nos pasan valores no nulos
+            cs.setInt(1, idEvento)
+            cs.registerOutParameter(2, Types.INTEGER)
+            var recordSet = cs.executeQuery()
+            var correo = ""
+            while (recordSet.next()){
+                // Creamos una nueva asociacion
+                correo = recordSet.getString("Correo")
+            }
+            return correo
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return ""
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return ""
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return ""
+        }
+    }
 }

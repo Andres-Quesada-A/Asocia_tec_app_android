@@ -86,12 +86,14 @@ class edit_event : AppCompatActivity() {
             if (res == 1){
                 // Le pedimos a la BD que nos devuelvan los correos
                 val correos = Administrador().getInteresadosEvento(IdEvento!!)
+                val formatEmails = correos.joinToString(",")
+
                 // Revisamos si obtuvimos al menos un correo
                 if (correos.size!=0){
                     withContext(Dispatchers.Main){
                         load.dismiss()
                     }
-                    emailSender.sendEmail(correos[0], "Actualización del evento", contentEmail)
+                    emailSender.sendEmail(formatEmails, "Actualización del evento", contentEmail)
                     withContext(Dispatchers.Main){
                         diag.showSuccessDialog(23, true)
                     }
