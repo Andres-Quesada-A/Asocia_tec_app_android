@@ -32,6 +32,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
         val txtCategoria: TextView
         val btnDetalles: Button
         val btnEliminar: Button
+        val btnColaboradores: Button
         val btnEditar: Button
         val vista: Context
         lateinit var event: Eventos_Asociacion
@@ -45,6 +46,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
             btnDetalles = view.findViewById(R.id.button_details)
             btnEditar = view.findViewById(R.id.button_editar)
             btnEliminar = view.findViewById(R.id.button_eliminar)
+            btnColaboradores = view.findViewById(R.id.button_list_collaborator)
             this.vista = view.context
             btnEditar.setOnClickListener {
                 if (AuthHelper(vista).getAccountType()==3){
@@ -71,8 +73,16 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
                 }
                 vista.startActivity(intent)
             }
+            btnColaboradores.setOnClickListener {
+                mostrarColaboradores()
+            }
         }
-
+        fun mostrarColaboradores(){
+            val intent = Intent(vista, EventCollaboratorActivity::class.java)
+            intent.putExtra("id", id)
+            intent.putExtra("nombre", nombre)
+            vista.startActivity(intent)
+        }
         fun eliminarEvento() {
             val dialog = AlertDialog.Builder(vista)
             val inflater = LayoutInflater.from(vista)

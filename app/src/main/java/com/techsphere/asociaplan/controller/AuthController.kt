@@ -30,30 +30,48 @@ class AuthController(context: Context) {
             }
             val res = admin.loginUser(email, pass)
             if (res.isNotEmpty()){
-                val userType : Int = res[0]
-                val userId: Int = res[2]
-                Log.i("Tipo Usuario", "${userType}")
-                var resultAccount = authHelper.registerAccount(email, pass, userType, userId)
-                if (resultAccount) {
-                    val userType = authHelper.getAccountType()
-                    Log.i("Tipo Usuario en if", "${userType}")
-                    var mainIntent : Intent
-                    if(userType==1){
-                        mainIntent = Intent(context, menu_admin::class.java)
-                    } else if (userType==2){
-                        mainIntent = Intent(context, menu_estudiante::class.java)
-                    } else{
-                        mainIntent = Intent(context, menu_asociacion::class.java)
+                val result = res[1]
+                if (result==1){
+                    val userType : Int = res[0]
+                    val userId: Int = res[2]
+                    Log.i("Tipo Usuario", "${userType}")
+                    var resultAccount = authHelper.registerAccount(email, pass, userType, userId)
+                    if (resultAccount) {
+                        val userType = authHelper.getAccountType()
+                        Log.i("Tipo Usuario en if", "${userType}")
+                        var mainIntent : Intent
+                        if(userType==1){
+                            mainIntent = Intent(context, menu_admin::class.java)
+                        } else if (userType==2){
+                            mainIntent = Intent(context, menu_estudiante::class.java)
+                        } else{
+                            mainIntent = Intent(context, menu_asociacion::class.java)
+                        }
+                        withContext(Main){
+                            carga.dismiss()
+                        }
+                        context.startActivity(mainIntent)
+                        (context as Activity).finish()
+                    }else{
+                        withContext(Main) {
+                            carga.dismiss()
+                            dialogs(context).shorErrorLogin(50001)
+                        }
                     }
+                } else if (result==50004){
                     withContext(Main){
                         carga.dismiss()
+                        dialogs(context).shorErrorLogin(50004)
                     }
-                    context.startActivity(mainIntent)
-                    (context as Activity).finish()
-                }else{
-                    withContext(Main) {
+                } else if (result==50005){
+                    withContext(Main){
                         carga.dismiss()
-                        dialogs(context).shorErrorLogin(50001)
+                        dialogs(context).shorErrorLogin(50005)
+                    }
+                } else{
+                    withContext(Main){
+                        carga.dismiss()
+                        dialogs(context).shorErrorLogin(0)
                     }
                 }
             } else {

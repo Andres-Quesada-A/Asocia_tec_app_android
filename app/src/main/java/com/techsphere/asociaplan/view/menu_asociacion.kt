@@ -60,7 +60,7 @@ class menu_asociacion : AppCompatActivity() {
             startActivity(Intent(this, EventCapacityActivity::class.java))
         }
         colaboradores.setOnClickListener {
-
+            startActivity(Intent(this, collaborator_list::class.java))
         }
         propuestas.setOnClickListener {
             val intent = Intent(this,gestion_propuestas::class.java)

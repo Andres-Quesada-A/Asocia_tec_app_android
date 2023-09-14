@@ -12,11 +12,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.auth.AuthHelper
-import com.techsphere.asociaplan.view.editar_actividad
 import com.techsphere.asociaplan.controller.eliminarActividadDBAux
 import com.techsphere.asociaplan.models.Actividad
-import com.techsphere.asociaplan.view.EventsAdminActivity
-import com.techsphere.asociaplan.view.actividades
+import com.techsphere.asociaplan.view.*
 
 class Actividades_Adapter (private val dataSet: MutableList<Actividad>,private val idEvento: Int) :
     RecyclerView.Adapter<Actividades_Adapter.ViewHolder>() {
@@ -27,6 +25,7 @@ class Actividades_Adapter (private val dataSet: MutableList<Actividad>,private v
         val txtUbicacion: TextView
         val btnEditar: Button
         val btnEliminar: Button
+        val btnColaborador: Button
         val vista: Context
         var id = 0
         var nombre = ""
@@ -38,6 +37,7 @@ class Actividades_Adapter (private val dataSet: MutableList<Actividad>,private v
             txtFecha = view.findViewById(R.id.txt_fecha)
             btnEditar = view.findViewById(R.id.button_editar)
             btnEliminar = view.findViewById(R.id.button_eliminar)
+            btnColaborador = view.findViewById(R.id.button_list_collaborator2)
             this.vista = view.context
             btnEditar.setOnClickListener {
                 val intent = Intent(view.context, editar_actividad::class.java)
@@ -45,6 +45,12 @@ class Actividades_Adapter (private val dataSet: MutableList<Actividad>,private v
                 intent.putExtra("idEvento", idEventoH.toInt())
                 intent.putExtra("nombre", nombre.toString())
                 this.vista.startActivity(intent)
+            }
+            btnColaborador.setOnClickListener {
+                val intent = Intent(vista, ActivitesCollaboratorActivity::class.java)
+                intent.putExtra("id", id)
+                intent.putExtra("nombre", nombre)
+                vista.startActivity(intent)
             }
             btnEliminar.setOnClickListener {
                 eliminarActividad()

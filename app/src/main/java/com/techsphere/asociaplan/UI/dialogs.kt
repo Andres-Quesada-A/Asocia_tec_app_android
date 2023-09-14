@@ -47,6 +47,10 @@ class dialogs (context: Context) {
                     builder.setTitle("Error")
                     builder.setMessage("El usuario no se encuentra registrado en el sistema")
                 }
+                50005 ->{
+                    builder.setTitle("Error")
+                    builder.setMessage("La contraseña ingresada es incorrecta")
+                }
                 50001->{
                     builder.setTitle("Error")
                     builder.setMessage("Ocurrio un error al iniciar sesion\nPor favor intentelo mas tarde")
@@ -130,6 +134,10 @@ class dialogs (context: Context) {
                 builder.setTitle("Editar evento")
                 builder.setMessage("El evento se modifico de forma exitosa")
             }
+            28 ->{
+                builder.setTitle("Añadir colaborador")
+                builder.setMessage("Se añadio el colaborador de forma exitosa")
+            }
             else -> {
                 builder.setTitle("Exito")
                 builder.setMessage("La accion se llevo a cabo de manera exitosa")
@@ -183,6 +191,11 @@ class dialogs (context: Context) {
             23 ->{
                 builder.setTitle("Editar evento")
                 builder.setMessage("No se pudo modificar los datos del evento.\n" +
+                        "Por favor, intentelo mas tarde")
+            }
+            28 ->{
+                builder.setTitle("Añadir colaborador")
+                builder.setMessage("No se pudo añadir el colaborador al evento\n" +
                         "Por favor, intentelo mas tarde")
             }
             else -> {
