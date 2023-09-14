@@ -40,7 +40,7 @@ class menu_admin : AppCompatActivity() {
 
         }
         estudiantes.setOnClickListener {
-            val intent = Intent(this, events::class.java)
+            val intent = Intent(this, estudiantes_list::class.java)
             startActivity(intent)
         }
         foro.setOnClickListener {
