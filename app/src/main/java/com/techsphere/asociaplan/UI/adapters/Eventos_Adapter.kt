@@ -71,7 +71,7 @@ class Eventos_Adapter (private val dataSet: MutableList<Eventos_Asociacion>) :
             val d = dialog.create()
             d.show()
             btnDelete.setOnClickListener {
-                deleteEventoBD(id)
+                deleteEventoBD(id, txtTitulo.toString(), txtFecha.toString())
                 d.dismiss()
                 val intent = Intent(view.context,events::class.java)
                 this.vista.startActivity(intent)

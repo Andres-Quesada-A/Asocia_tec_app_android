@@ -6,9 +6,11 @@ import androidx.annotation.RequiresApi
 import com.techsphere.asociaplan.models.Asociacion
 import com.techsphere.asociaplan.models.Eventos
 import com.techsphere.asociaplan.models.Eventos_Asociacion
+import com.techsphere.asociaplan.utils.EmailSender
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.sql.*
 import java.time.ZoneId
 
@@ -127,9 +129,19 @@ suspend fun registerEventoInBD(Id:Int,Nombre:String,Fecha:Date,Descripcion:Strin
     }
 }
 
-fun deleteEventoBD(codigo: Int){
+fun deleteEventoBD(codigo: Int, titulo: String, fecha: String){
     CoroutineScope(Dispatchers.IO).launch {
-        eliminarEvento(codigo)
+        val response = eliminarEvento(codigo)
+        if (response != 0){
+            val emailSender = EmailSender()
+            val contentEmail = "El evento:${titulo} que estaba programado para la fecha ${fecha} ha sido cancelado"
+            // Le pedimos a la BD que nos devuelvan los correos
+            val correos = Administrador().getInteresadosEvento(codigo)
+            // Revisamos si obtuvimos al menos un correo
+            if (correos.size!=0) {
+                emailSender.sendEmail(correos[0], "Evento Cancelado", contentEmail)
+            }
+        }
     }
 }
 
