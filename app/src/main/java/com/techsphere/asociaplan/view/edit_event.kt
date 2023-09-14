@@ -12,6 +12,7 @@ import com.techsphere.asociaplan.R
 import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.UI.fragments.DatePickerFragment
 import com.techsphere.asociaplan.auth.AuthHelper
+import com.techsphere.asociaplan.controller.Administrador
 import com.techsphere.asociaplan.controller.EditarEventoInBD
 import com.techsphere.asociaplan.controller.getEventosBusqueda
 import com.techsphere.asociaplan.models.Colaborador
@@ -77,22 +78,36 @@ class edit_event : AppCompatActivity() {
         val emailSender = EmailSender()
 
         val contentEmail = "Se ha actualizado el evento ${Nombre}, que se realizará el ${Fecha} en ${Lugar}, que tendrá una duración de ${Duracion}"
-
-        Toast.makeText(this, "Registrando el evento", Toast.LENGTH_SHORT).show()
+        val diag = dialogs(this)
+        val load = diag.showLoadingDialog()
+        load.show()
         CoroutineScope(Dispatchers.IO).launch {
             val res = EditarEventoInBD(Id!!,IdEvento!!,Nombre,java.sql.Date((fecha as java.util.Date).time),Descripcion,Lugar,Duracion.toInt(),Requerimientos,Categoria)
             if (res == 1){
-                //Falta obtener los correos
-                emailSender.sendEmail("andres@gmail.com", "Actualización del evento", contentEmail)
-
-                val intent = Intent(this@edit_event,events::class.java)
-                startActivity(intent)
-                finish()
+                // Le pedimos a la BD que nos devuelvan los correos
+                val correos = Administrador().getInteresadosEvento(IdEvento!!)
+                // Revisamos si obtuvimos al menos un correo
+                if (correos.size!=0){
+                    withContext(Dispatchers.Main){
+                        load.dismiss()
+                    }
+                    //Falta obtener los correos
+                    emailSender.sendEmail(correos[0], "Actualización del evento", contentEmail)
+                    withContext(Dispatchers.Main){
+                        diag.showSuccessDialog(23, true)
+                    }
+                } else {
+                    withContext(Dispatchers.Main){
+                        load.dismiss()
+                        // El numero es arbitrario, ya que es un error generico
+                        diag.showErrorDialog(99, false)
+                    }
+                }
             } else {
                 // Se le muestra el dialogo al usuario
                 withContext(Dispatchers.Main){
-                    // El withContext se usa para llamar funciones que solo se pueden llamar
-                    Toast.makeText(this@edit_event,"No se registro el evento.", Toast.LENGTH_SHORT).show()
+                    load.dismiss()
+                    diag.showErrorDialog(23, false)
                 }
             }
         }
@@ -120,7 +135,7 @@ class edit_event : AppCompatActivity() {
                 if (evento[0] != null) {
                     // Update the UI with the fetched assignment details
                     txtNombre.setText(evento[0].getTitulo())
-                    txtFecha.setText(evento[0].getFecha().toString())
+                    txtFecha.setText(evento[0].getFechaToString())
                     fecha = Date.from(evento[0].getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant())
                     txtLugar.setText(evento[0].getLugar())
                     txtDuracion.setText(evento[0].getDuracion().toString())

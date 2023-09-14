@@ -44,7 +44,7 @@ class Eventos_Calendario_Adapter(private val eventos: MutableList<Eventos>):
                     context.startActivity(intent)
                 }
                 private fun showNotificationDialog(context: Context){
-                    val notificationDialog = dialog.showNotificationDialog()
+                    val notificationDialog = dialog.showNotificationEventDialog(evento.getId())
                     notificationDialog.show()
                 }
 

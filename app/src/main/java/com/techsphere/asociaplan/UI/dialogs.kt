@@ -12,6 +12,12 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.techsphere.asociaplan.R
+import com.techsphere.asociaplan.auth.AuthHelper
+import com.techsphere.asociaplan.controller.Administrador
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class dialogs (context: Context) {
     private val context: Context
@@ -103,6 +109,10 @@ class dialogs (context: Context) {
                 builder.setTitle("Inscripcion a eventos")
                 builder.setMessage("Se ha inscrito al evento de forma exitosa")
             }
+            18 ->{
+                builder.setTitle("Notificaciones de eventos")
+                builder.setMessage("Se ha suscrito a las notificaciones de forma exitosa")
+            }
             20 ->{
                 builder.setTitle("Confirmacion de asistencia")
                 builder.setMessage("Se confirmo la asistencia al evento de manera exitosa")
@@ -115,6 +125,10 @@ class dialogs (context: Context) {
                 builder.setTitle("Gestionar capacidad")
                 builder.setMessage("Se modifico el numero maximo de inscripciones para el evento en " +
                         "forma exitosa")
+            }
+            23 ->{
+                builder.setTitle("Editar evento")
+                builder.setMessage("El evento se modifico de forma exitosa")
             }
             else -> {
                 builder.setTitle("Exito")
@@ -146,6 +160,11 @@ class dialogs (context: Context) {
                 builder.setMessage("No se pudo inscribir al evento\n" +
                         "Por favor, intentelo mas tarde")
             }
+            18 ->{
+                builder.setTitle("Notificaciones de eventos")
+                builder.setMessage("No se pudo inscribir a las notificaciones\n" +
+                        "Por favor, intentelo mas tarde")
+            }
             20 ->{
                 builder.setTitle("Confirmacion de asistencia")
                 builder.setMessage("No se pudo confirmar la asistencia al evento\n" +
@@ -159,6 +178,11 @@ class dialogs (context: Context) {
             22 ->{
                 builder.setTitle("Gestionar capacidad")
                 builder.setMessage("No se pudo modificar el numero maximo de inscripciones para el evento.\n" +
+                        "Por favor, intentelo mas tarde")
+            }
+            23 ->{
+                builder.setTitle("Editar evento")
+                builder.setMessage("No se pudo modificar los datos del evento.\n" +
                         "Por favor, intentelo mas tarde")
             }
             else -> {
@@ -214,7 +238,7 @@ class dialogs (context: Context) {
         builder.setCancelable(false)
         builder.create().show()
     }
-    fun showNotificationDialog(): AlertDialog{
+    fun showNotificationEventDialog(idEvento: Int): AlertDialog{
         val dialog = AlertDialog.Builder(context)
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.dialog_notificar_evento, null)
@@ -223,9 +247,22 @@ class dialogs (context: Context) {
         val btnAceptar = view.findViewById<Button>(R.id.aceptarButton)
         val btnCancelar = view.findViewById<Button>(R.id.cancelarButton)
         val d = dialog.create()
-
         btnAceptar.setOnClickListener {
-            Toast.makeText(context, "Se notificara", Toast.LENGTH_SHORT).show()
+            d.dismiss()
+            val load = showLoadingDialog()
+            val userId = AuthHelper(context).getAccountId()
+            load.show()
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = Administrador().registerInterest(idEvento,userId)
+                withContext(Dispatchers.Main){
+                    load.dismiss()
+                    if (res==1){
+                        showSuccessDialog(18, false)
+                    } else{
+                        showErrorDialog(18, false)
+                    }
+                }
+            }
         }
         btnCancelar.setOnClickListener {
             d.dismiss()

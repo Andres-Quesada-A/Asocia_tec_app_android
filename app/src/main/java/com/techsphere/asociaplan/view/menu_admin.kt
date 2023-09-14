@@ -15,6 +15,7 @@ class menu_admin : AppCompatActivity() {
     private lateinit var Asociaciones : Button
     private lateinit var colaboradores : Button
     private lateinit var estudiantes : Button
+    private lateinit var eventos : Button
     private lateinit var cerrarSesion : Button
     private lateinit var foro : Button
 
@@ -24,6 +25,7 @@ class menu_admin : AppCompatActivity() {
         Asociaciones = findViewById(R.id.button_asociaciones)
         colaboradores = findViewById(R.id.button_colaboradores)
         estudiantes = findViewById(R.id.button_estudiantes)
+        eventos = findViewById(R.id.button_eventos)
         foro = findViewById(R.id.button_foro)
         cerrarSesion = findViewById(R.id.button_cerrar_sesion)
         Asociaciones.setOnClickListener {
@@ -33,6 +35,9 @@ class menu_admin : AppCompatActivity() {
         colaboradores.setOnClickListener {
             val intent = Intent(this, collaborator_list::class.java)
             startActivity(intent)
+        }
+        eventos.setOnClickListener {
+
         }
         estudiantes.setOnClickListener {
             val intent = Intent(this, events::class.java)

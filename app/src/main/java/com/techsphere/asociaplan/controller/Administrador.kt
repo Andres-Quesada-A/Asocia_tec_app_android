@@ -281,4 +281,61 @@ class Administrador {
             return 0
         }
     }
+
+    suspend fun registerInterest(idEvento: Int, idEstudiante: Int): Int{
+        var connection : Connection? = null
+        try{
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            connection = DriverManager.getConnection(connectionString)
+            val sp = connection.prepareCall("{call RecordatorioEvento @inIdEvento=?, @inIdEstudiante=?," +
+                    "@outCodeResult=?}")
+            sp.setInt(1, idEvento)
+            sp.setInt(2, idEstudiante)
+            sp.registerOutParameter(3, Types.INTEGER)
+            sp.execute()
+            Log.i("SP Result", "${sp.getInt(3)}")
+            return sp.getInt(3)
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return 0
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return 0
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return 0
+        }
+    }
+    suspend fun getInteresadosEvento(idEvento: Int): MutableList<String>{
+        var conn : Connection? = null
+        try {
+            Log.i("Aqui", "Dento del sp que obtiene los correos")
+            Class.forName("net.sourceforge.jtds.jdbc.Driver")
+            conn = DriverManager.getConnection(connectionString)
+            var sp = conn.prepareCall("{call BuscarInteresadosEvento @inIdEvento=?, @outCodeResult=?}")
+            // Asumimos que se nos pasan valores no nulos
+            sp.setInt(1, idEvento)
+            sp.registerOutParameter(2, Types.INTEGER)
+            var rSet = sp.executeQuery()
+            // Creamos la lista que contendra los correos
+            var correos = mutableListOf<String>()
+            while (rSet.next()){
+                // Creamos una nuevo evento
+                var correo = rSet.getString("Correro")
+                // Lo añadimos a la lista
+                correos.add(correo)
+            }
+            Log.i("SP Result","${sp.getInt(2)}")
+            return correos
+        }catch (ex: SQLException){
+            Log.e("Error SQL Exception: ", ex.message.toString())
+            return mutableListOf()
+        }catch (ex1: ClassNotFoundException){
+            Log.e("Error Class Not Found: ", ex1.message.toString())
+            return mutableListOf()
+        }catch (ex2: Exception) {
+            Log.e("Error Exception: ", ex2.message.toString())
+            return mutableListOf()
+        }
+    }
 }
