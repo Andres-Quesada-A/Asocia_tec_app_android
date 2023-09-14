@@ -53,7 +53,8 @@ class menu_asociacion : AppCompatActivity() {
             this.startActivity(intent)
         }
         actividades.setOnClickListener {
-
+            val intent = Intent(this,eventos_actividad::class.java)
+            this.startActivity(intent)
         }
         capacidad.setOnClickListener {
             startActivity(Intent(this, EventCapacityActivity::class.java))

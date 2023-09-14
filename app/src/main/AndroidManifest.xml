@@ -165,6 +165,18 @@
         <activity
             android:name=".view.estadisticas"
             android:exported="false" />
+        <activity
+            android:name=".view.eventos_actividad"
+            android:exported="false" />
+        <activity
+            android:name=".view.actividades"
+            android:exported="false" />
+        <activity
+            android:name=".view.registrar_actividad"
+            android:exported="false" />
+        <activity
+            android:name=".view.editar_actividad"
+            android:exported="false" />
         <!--
         <activity
             android:name=".view.LoginActivity"

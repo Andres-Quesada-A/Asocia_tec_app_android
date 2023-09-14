@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.editar_actividad"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:id="@+id/layout19"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:paddingRight="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
+
+        <Button
+            android:id="@+id/button_Menu"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/menu_icon"
+            android:padding="0dp">
+
+        </Button>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="47dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout19">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="89dp">
+
+
+            <TextView
+                android:id="@+id/titleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="20sp"
+                android:text="Editar Actividad"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/label_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10sp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="Nombre: "
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/label_event_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10sp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="Nombre de la actividad"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/nombre"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:hint="nombre"
+                android:inputType="text"
+                android:padding="2dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/label_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10sp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="Fecha inicio"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/inicio"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border_input"
+                android:clickable="false"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="dd/mm/yyyy"
+                android:inputType="date"
+                android:padding="2dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/label_dateFin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10sp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="Fecha fin"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/fin"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border_input"
+                android:clickable="false"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="dd/mm/yyyy"
+                android:inputType="date"
+                android:padding="2dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/label_duration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10sp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="Ubicacion"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/ubicaicon"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:hint="Ubicacion"
+                android:inputType="text"
+                android:padding="2dp"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/label_Category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10sp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:text="Recursos"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/recursos"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:hint="Recursos"
+                android:inputType="text"
+                android:padding="2dp"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/button_register"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="32dp"
+                android:backgroundTint="@color/blue"
+                android:text="Editar Actividad"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
