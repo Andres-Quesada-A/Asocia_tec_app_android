@@ -149,6 +149,7 @@ suspend fun eliminarColaborador(codigo: Int) : Int{
         return 0
     }
 }
+
 suspend fun getColaboradoresEvents(idEvento: Int, nombre: String=""): MutableList<Colaborador>{
     var conn : Connection? = null
     try {

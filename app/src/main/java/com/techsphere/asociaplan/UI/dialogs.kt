@@ -138,6 +138,10 @@ class dialogs (context: Context) {
                 builder.setTitle("Añadir colaborador")
                 builder.setMessage("Se añadio el colaborador de forma exitosa")
             }
+            29 ->{
+                builder.setTitle("Eliminar colaborador")
+                builder.setMessage("Se elimino el colaborador de forma exitosa")
+            }
             else -> {
                 builder.setTitle("Exito")
                 builder.setMessage("La accion se llevo a cabo de manera exitosa")
@@ -201,6 +205,11 @@ class dialogs (context: Context) {
             28 ->{
                 builder.setTitle("Añadir colaborador")
                 builder.setMessage("No se pudo añadir el colaborador al evento\n" +
+                        "Por favor, intentelo mas tarde")
+            }
+            29 ->{
+                builder.setTitle("Eliminar colaborador")
+                builder.setMessage("No se pudo eliminar el colaborador al evento\n" +
                         "Por favor, intentelo mas tarde")
             }
             else -> {

@@ -56,7 +56,7 @@ class EventCollaboratorActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val colaboradores = getColaboradoresEvents(idEvento)
             withContext(Dispatchers.Main){
-                adap = Colaboradores_Adapter(colaboradores)
+                adap = Colaboradores_Adapter(colaboradores, idEvento,0, true, true)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(this@EventCollaboratorActivity)
                 progressBar.visibility=View.GONE
@@ -68,7 +68,7 @@ class EventCollaboratorActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val colaboradores = getColaboradoresEvents(idEvento, editTextNombre.text.toString())
             withContext(Dispatchers.Main){
-                adap = Colaboradores_Adapter(colaboradores)
+                adap = Colaboradores_Adapter(colaboradores, idEvento,0, true, true)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(this@EventCollaboratorActivity)
                 progressBar.visibility=View.GONE

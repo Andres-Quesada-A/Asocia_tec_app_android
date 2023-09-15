@@ -110,7 +110,7 @@
             android:background="@drawable/border_input"
             android:ems="10"
             android:hint="Objetivos"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:padding="2dp"
             android:textColor="@color/black" />
 
@@ -135,7 +135,7 @@
             android:background="@drawable/border_input"
             android:ems="10"
             android:hint="Actividades"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:padding="2dp"
             android:textColor="@color/black" />
 
@@ -160,7 +160,7 @@
             android:background="@drawable/border_input"
             android:ems="10"
             android:hint="Detalles"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:padding="2dp"
             android:textColor="@color/black" />
     </LinearLayout>

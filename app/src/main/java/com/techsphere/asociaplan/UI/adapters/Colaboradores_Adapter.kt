@@ -11,16 +11,23 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.techsphere.asociaplan.R
+import com.techsphere.asociaplan.UI.dialogs
 import com.techsphere.asociaplan.controller.deleteColaboradorBD
+import com.techsphere.asociaplan.controller.gestionColaborador
 import com.techsphere.asociaplan.models.Colaborador
 import com.techsphere.asociaplan.view.*
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class Colaboradores_Adapter (private val dataSet: MutableList<Colaborador>) :
+class Colaboradores_Adapter (private val dataSet: MutableList<Colaborador>,
+                             private val eventId: Int=0,
+                             private val activityId: Int=0,
+                             private val isEvent: Boolean=false,
+                             private val isInEventOrActivity: Boolean= false) :
     RecyclerView.Adapter<Colaboradores_Adapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -31,6 +38,10 @@ class Colaboradores_Adapter (private val dataSet: MutableList<Colaborador>) :
         val btnEditar: Button
         val vista: Context
         var id = 0
+        var idEvento = 0
+        var idActivity=0
+        var isEvent = false
+        var isInEventOrActivity = false
         var nombre = ""
 
         init {
@@ -47,7 +58,11 @@ class Colaboradores_Adapter (private val dataSet: MutableList<Colaborador>) :
                 this.vista.startActivity(intent)
             }
             btnEliminar.setOnClickListener {
-                eliminarColaborador()
+                if (isInEventOrActivity){
+                    eliminarColaboradorActividadOEvento()
+                } else{
+                    eliminarColaborador()
+                }
             }
             btnVerDetalles.setOnClickListener {
                 val intent = Intent(view.context,collaborator_details::class.java)
@@ -77,6 +92,29 @@ class Colaboradores_Adapter (private val dataSet: MutableList<Colaborador>) :
                 d.dismiss()
             }
         }
+        fun eliminarColaboradorActividadOEvento(){
+            val diag = dialogs(vista)
+            var tipoGestion: Int = 0
+            if (isEvent==true) {
+                tipoGestion=1
+            } else{
+                tipoGestion=2
+            }
+            val load = diag.showLoadingDialog()
+            load.show()
+            CoroutineScope(Dispatchers.IO).launch {
+                val res = gestionColaborador(0, idEvento, idActivity, tipoGestion,
+                    id)
+                withContext(Dispatchers.Main){
+                    load.dismiss()
+                    if (res==1){
+                        diag.showSuccessDialog(29)
+                    } else{
+                        diag.showErrorDialog(29, false)
+                    }
+                }
+            }
+        }
     }
 
 
@@ -95,6 +133,12 @@ class Colaboradores_Adapter (private val dataSet: MutableList<Colaborador>) :
         holder.txtContacto.text = asoc.getContacto()
         holder.id = asoc.getid()
         holder.nombre = asoc.getNombre()
+        if (isInEventOrActivity){
+            holder.isInEventOrActivity=isInEventOrActivity
+            holder.isEvent=isEvent
+            holder.idActivity=activityId
+            holder.idEvento=eventId
+        }
     }
 
     override fun getItemCount(): Int {

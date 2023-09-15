@@ -59,7 +59,7 @@ class ActivitesCollaboratorActivity : AppCompatActivity() {
             // esto es lo que tengo que cambiar
             val colaboradores = getColaboradoresActividad(idActividad)
             withContext(Dispatchers.Main){
-                adap = Colaboradores_Adapter(colaboradores)
+                adap = Colaboradores_Adapter(colaboradores, 0, idActividad,false, true)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(this@ActivitesCollaboratorActivity)
                 progressBar.visibility=View.GONE
@@ -71,7 +71,7 @@ class ActivitesCollaboratorActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val colaboradores = getColaboradoresActividad(idActividad, editTextNombre.text.toString())
             withContext(Dispatchers.Main){
-                adap = Colaboradores_Adapter(colaboradores)
+                adap = Colaboradores_Adapter(colaboradores, 0, idActividad,false, true)
                 rv.adapter=adap
                 rv.layoutManager = LinearLayoutManager(this@ActivitesCollaboratorActivity)
                 progressBar.visibility=View.GONE
