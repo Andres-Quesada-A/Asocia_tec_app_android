@@ -1,6 +1,7 @@
 package com.techsphere.asociaplan.view
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -24,12 +25,14 @@ class estudiantes_list : AppCompatActivity() {
     private lateinit var progressBar : ProgressBar
     private lateinit var editTextNombre : EditText
     private lateinit var BuscarButton : Button
+    private lateinit var RegistrarButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_estudiantes_list)
         editTextNombre = findViewById<EditText>(R.id.nombre_estudiante)
         BuscarButton = findViewById<Button>(R.id.button_buscar)
+        RegistrarButton = findViewById<Button>(R.id.button_registrar)
 
         rv = findViewById<RecyclerView>(R.id.rvEstudiantes)
 
@@ -40,6 +43,15 @@ class estudiantes_list : AppCompatActivity() {
         BuscarButton.setOnClickListener {
             BuscarEstuadiantes(this)
         }
+
+        RegistrarButton.setOnClickListener {
+            signUpUser()
+        }
+    }
+    fun signUpUser(){
+        // No se finaliza la actividad actual para que cuando se termine de registrar
+        // el usuario vuelva rapidamente al login
+        startActivity(Intent(this, RegisterActivity_Admin::class.java))
     }
     fun cargarEstudiantes(view: Context){
         progressBar.visibility = View.VISIBLE

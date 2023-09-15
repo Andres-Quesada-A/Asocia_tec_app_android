@@ -110,4 +110,31 @@ class AuthController(context: Context) {
         }
     }
 
+    fun registerStudent_Admin (name:String, email: String, carne: String, area: String,
+                         pass: String){
+        val carga = dialogs(context).showLoadingDialog()
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Main){
+                carga.show()
+            }
+            val res = admin.registerStudent(name, email, carne, area, pass)
+            if (res == 1){
+                /*
+                EmailSender().sendEmailRegister(correo)
+                 */
+                val successDiaglog = dialogs(context)
+                withContext(Main){
+                    carga.dismiss()
+                    successDiaglog.showSuccessSignup()
+                }
+            } else {
+                withContext(Main){
+                    carga.dismiss()
+                    dialogs(context).shorErrorLogin(0)
+                }
+                //(context as Activity).finish()
+            }
+        }
+    }
+
 }

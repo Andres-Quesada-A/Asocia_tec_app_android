@@ -187,6 +187,9 @@
             android:name=".view.registrar_actividad"
             android:exported="false" />
         <activity
+            android:name=".view.RegisterActivity_Admin"
+            android:exported="false" />
+        <activity
             android:name=".view.editar_actividad"
             android:exported="false" />
         <!--
