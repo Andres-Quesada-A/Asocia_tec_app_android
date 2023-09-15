@@ -29,6 +29,7 @@ class EventCapacityActivity : AppCompatActivity() {
     private lateinit var progressBar : ProgressBar
     private lateinit var editTextNombre : EditText
     private lateinit var BuscarButton : Button
+    private lateinit var volver : Button
     private var admin = Administrador()
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,14 +37,17 @@ class EventCapacityActivity : AppCompatActivity() {
         setContentView(R.layout.activity_gestionar_capacidad_evento)
         editTextNombre = findViewById(R.id.nombre_evento)
         BuscarButton = findViewById(R.id.button_buscar)
-        //volver = findViewById<Button>(R.id.button_volver)
+        volver = findViewById<Button>(R.id.button_volver)
         rv = findViewById(R.id.rvEventoEvaluar)
         val authHelper: AuthHelper = AuthHelper(this)
         val idUsuario = authHelper.getAccountId()
         progressBar = findViewById(R.id.progBarCubiEst)
         cargarEventosEvaluar()
         BuscarButton.setOnClickListener {
-            //BuscarEventosEvaluar(this)
+            buscarEventosEvaluar()
+        }
+        volver.setOnClickListener {
+            finish()
         }
     }
     @RequiresApi(Build.VERSION_CODES.O)
@@ -60,5 +64,18 @@ class EventCapacityActivity : AppCompatActivity() {
             }
         }
     }
-
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun buscarEventosEvaluar(){
+        val userId = AuthHelper(this).getAccountId()
+        progressBar.visibility = View.VISIBLE
+        CoroutineScope(Dispatchers.IO).launch{
+            val eventos = admin.getAllEventosAsociation(userId, editTextNombre.text.toString())
+            withContext(Dispatchers.Main){
+                adap = Eventos_Capacidad_Adapter(eventos)
+                rv.adapter=adap
+                rv.layoutManager = LinearLayoutManager(this@EventCapacityActivity)
+                progressBar.visibility= View.INVISIBLE
+            }
+        }
+    }
 }

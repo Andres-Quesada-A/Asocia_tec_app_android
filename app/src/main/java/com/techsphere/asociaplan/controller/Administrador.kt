@@ -171,6 +171,7 @@ class Administrador {
     suspend fun getAllEventosAsociation(id:Int, nombre: String="") : MutableList<Eventos>{
         var conn : Connection? = null
         try {
+            Log.i("Nombre", "${nombre}")
             Class.forName("net.sourceforge.jtds.jdbc.Driver")
             conn = DriverManager.getConnection(connectionString)
             var sp = conn.prepareCall("{call BuscarEventoGestion @inNombre=?,@inIdAsociacion=?, @outCodeResult=?}")
@@ -194,6 +195,7 @@ class Administrador {
                 // Lo añadimos a la lista
                 eventos.add(evento)
             }
+            Log.i("Resultado: ","${sp.getInt(3)}")
             return eventos
         }catch (ex: SQLException){
             Log.e("Error SQL Exception: ", ex.message.toString())
