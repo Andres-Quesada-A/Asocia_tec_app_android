@@ -163,6 +163,11 @@ class dialogs (context: Context) {
         val builder = AlertDialog.Builder(context)
         // Es un numero arbitrario, luego se puede cambiar
         when (type){
+            16 -> {
+                builder.setTitle("Inscripcion a eventos")
+                builder.setMessage("No se pudo inscribir al evento\n" +
+                        "No hay cupo disponible")
+            }
             17 -> {
                 builder.setTitle("Inscripcion a eventos")
                 builder.setMessage("No se pudo inscribir al evento\n" +

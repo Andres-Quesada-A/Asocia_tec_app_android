@@ -91,16 +91,17 @@ class EventInscriptionActivity : AppCompatActivity() {
             val resultSp = admin.inscribirEstudianteEvento(eventId,userId)
             dialogCarga.dismiss()
             withContext(Dispatchers.Main) {
-                if (resultSp != 0) {
+                if (resultSp == 1) {
                     if (emailAuth != null){
                         val QRImage = generate_qr_code(ContentQR)
                         emailSender.sendEmail(emailAuth, "Notificación de inscripción", contentEmail, QRImage)
                     }
+                } else if(resultSp==50002){
+                    dialogs.showErrorDialog(16)
                     if (fields == 0 && emailAsociacion != null){
                         emailSenderSimple.sendEmail("emailAsociacion", "Capacidad del evento completa", "El evento ${evento.getTitulo()} ha completado su capacidad de colaboradores")
                     }
-                    dialogs.showSuccessDialog(17)
-                } else {
+                }else{
                     dialogs.showErrorDialog(17)
                 }
             }
